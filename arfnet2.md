@@ -8,8 +8,8 @@ Stage 1, very safe
  - Open following ports
 
 ## Networks
- - DMZ VLAN 4 192.168.4.0/24: Services and management
- - LAN VLAN 5 192.168.5.0/24: Clients
+ - DMZ untagged 192.168.4.0/24: Services and management
+ - LAN VLAN 5   192.168.5.0/24: Clients
 
 ## Hosts
  - server (...)
@@ -41,6 +41,7 @@ RAID attached here (with the grey stuff) (local only)
  - NFS
  - Samba
  - DLNA
+ - qBittorrent-nox
 
 ### wazuh .10
  - SSH
