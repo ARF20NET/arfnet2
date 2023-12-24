@@ -28,43 +28,68 @@ Stage 1, very safe
 ## VMs and services
 All VMs must run the wazuh agent
 
-### OPNSense .1
- - (routing)
+### router .1
+ - (routing/firewalling)
  - SSH
  - DHCP
  - unbound DNS
  - OpenVPN
  - WireGuard
- - IPsec
+ - IPsec*
 
 ### NAS .6
 RAID attached here (with the grey stuff) (local only)
  - SSH
  - NFS
- - Samba SMB
- - MiniDLNA
+ - Samba SMB*
+ - MiniDLNA*
  - qBittorrent-nox
 
 ### web .9
  - SSH
  - nginx (static only site, isolated from NAS)
 
+| vhost | webroot/proxy |
+|-------|---------------|
+| arf20.com | /var/www/arf20.com/html/ |
+| www.arf20.com | <301 redirect arf20.com> |
+| matrix.arf20.com | http://192.168.4.12:8008/_matrix |
+| default | <return 418 im a teapot> |
+
+
 ### wazuh .10
  - SSH
  - wazuh
 
-### comm .11
+### game .11
  - SSH
- - postfix/dovecot mail (not)
+ - grupo4mc
+ - rubenmc
+
+### comm .12
+ - SSH
  - IRC
- - XMPP
- - matrix instance
- - asterisk VoIP SIP
+ - XMPP*
+ - matrix instance*
+ - asterisk VoIP SIP*
+
+*TODO
 
 ## Port forwards
- - SSH -> somewhere possibly not a machine with services just to be sure?
- - OpenVPN -> opnsense
- - HTTP/S -> web
+ | Service | Customer | IPProto | Ext Port | Host | Re Port |
+ |---------|----------|---------|----------|------|---------|
+ | OpenVPN | | TCP | 1194 | router | |
+ | WireGuard | | UDP | 51820 | router | |
+ | Web     | | TCP | 80,443 | web | |
+ | bittorrent | | TCP/UDP | 8999 | nas | |
+ | IRC     | | TCP | 6667 | comm | |
+ | grupo4mc| | TCP | 25565 | game | |
+ | rubenmc | | TCP | 25566 | game | |
+ | 
+ | yero-SSH | yero | TCP | 1511 | yerovps | 22 | |
+ | yero-SQL | yero | TCP | 1512 | yerovps | 3306 |
+ | FiveM SuperioresRP | yero | TCP | 30120,40120 | yerovps | |
+
 
 ## Name and Number Assignation Table
 | A | Host | Name |
@@ -79,4 +104,5 @@ RAID attached here (with the grey stuff) (local only)
 | 8 | desktop | desktop.lan |
 | 9 | webserver | web.lan |
 | 10 | wazuh | wazuh.lan |
-| 11 | comm | comm.lan |
+| 11 | game | game.lan |
+| 12 | comm | comm.lan |
