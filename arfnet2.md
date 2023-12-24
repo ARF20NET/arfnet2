@@ -73,6 +73,11 @@ RAID attached here (with the grey stuff) (local only)
  - matrix instance*
  - asterisk VoIP SIP*
 
+### mail (ARFNET-IONOS) 5.250.186.185
+ - SSH
+ - postfix smtpd, submission, submissions
+ - dovecot imapd
+
 *TODO
 
 ## Port forwards
@@ -91,18 +96,36 @@ RAID attached here (with the grey stuff) (local only)
  | FiveM SuperioresRP | yero | TCP | 30120,40120 | yerovps | |
 
 
-## Name and Number Assignation Table
-| A | Host | Name |
-|---|------|------|
-| 1 | gateway | router.lan |
-| 2 | switch | switch.lan |
-| 3 | wap | wap.lan |
-| 4 | proxmox | proxmox.lan |
-| 5 | R720 iDRAC | idrac.lan |
-| 6 | nas | nas.lan |
-| 7 | printer | printer.lan |
-| 8 | desktop | desktop.lan |
-| 9 | webserver | web.lan |
-| 10 | wazuh | wazuh.lan |
-| 11 | game | game.lan |
-| 12 | comm | comm.lan |
+## Internal Name and Number Assignation Table
+| Addr | Host | Name |
+|------|------|------|
+| DMZ.1 | gateway | router.lan |
+| DMZ.2 | switch | switch.lan |
+| DMZ.3 | wap | wap.lan |
+| DMZ.4 | proxmox | proxmox.lan |
+| DMZ.5 | R720 iDRAC | idrac.lan |
+| DMZ.6 | nas | nas.lan |
+| DMZ.7 | printer | printer.lan |
+| DMZ.8 | desktop | desktop.lan |
+| DMZ.9 | webserver | web.lan |
+| DMZ.10 | wazuh | wazuh.lan |
+| DMZ.11 | game | game.lan |
+| DMZ.12 | comm | comm.lan |
+
+## Public DNS zone
+| Name | Type | Content | Comment |
+|------|------|---------|---------|
+| arf20.com | A | 2.59.235.35 | |
+| arf20.com | MX | mail.arf20.com | |
+| mail | A | 5.250.186.185 | |
+| selector._domainkey | TXT | (DKIM) | DKIM for selector 'selector' |
+| _dmarc | TXT | (DMARC) | |
+| arf20.com | TXT | (SPF) | |
+| www | CNAME | arf20.com |
+| jellyfin | CNAME | arf20.com |
+| irc | CNAME | arf20.com |
+| matrix | CNAME | arf20.com |
+| _acme-challenge.jellyfin | CNAME | (challenge) | |
+| _acme-challenge.irc | CNAME | (challenge) | |
+| _acme-challenge.matrix | CNAME | (challenge) | |
+| _acme-challenge.mail |  CNAME | (challenge) | |
