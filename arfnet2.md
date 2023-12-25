@@ -68,10 +68,13 @@ RAID attached here (with the grey stuff) (local only)
 
 ### comm .12
  - SSH
- - IRC
- - XMPP*
- - matrix instance*
+ - unrealircd IRC
+ - synapse matrix
+ - postgresql
+ - pantalaimon
+ - matterbridge
  - asterisk VoIP SIP*
+ - XMPP*
 
 ### mail (ARFNET-IONOS) 5.250.186.185
  - SSH
@@ -88,6 +91,7 @@ RAID attached here (with the grey stuff) (local only)
  | Web     | | TCP | 80,443 | web | |
  | bittorrent | | TCP/UDP | 8999 | nas | |
  | IRC     | | TCP | 6667 | comm | |
+ | IRCS    | | TCP | 6697 | comm | |
  | grupo4mc| | TCP | 25565 | game | |
  | rubenmc | | TCP | 25566 | game | |
  | | | | | | |
