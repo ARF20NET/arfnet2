@@ -42,8 +42,9 @@ RAID attached here (with the grey stuff) (local only)
  - SSH
  - NFS
  - Samba SMB*
- - MiniDLNA*
  - qBittorrent-nox
+ - MiniDLNA*
+ - jellyfin*
 
 ### web .9
  - SSH
@@ -53,9 +54,8 @@ RAID attached here (with the grey stuff) (local only)
 |-------|---------------|
 | arf20.com | /var/www/arf20.com/html/ |
 | www.arf20.com | <301 redirect arf20.com> |
-| matrix.arf20.com | http://192.168.4.12:8008/_matrix |
+| matrix.arf20.com | http://comm.lan:8008/_matrix |
 | default | <return 418 im a teapot> |
-
 
 ### wazuh .10
  - SSH
@@ -73,8 +73,8 @@ RAID attached here (with the grey stuff) (local only)
  - postgresql
  - pantalaimon
  - matterbridge
+ - prosody XMPP
  - asterisk VoIP SIP*
- - XMPP*
 
 ### mail (ARFNET-IONOS) 5.250.186.185
  - SSH
@@ -86,19 +86,20 @@ RAID attached here (with the grey stuff) (local only)
 ## Port forwards
  | Service | Customer | IPProto | Ext Port | Host | Re Port |
  |---------|----------|---------|----------|------|---------|
- | OpenVPN | | TCP | 1194 | router | |
+ | OpenVPN | | TCP | 1195 | router | |
  | WireGuard | | UDP | 51820 | router | |
  | Web     | | TCP | 80,443 | web | |
  | bittorrent | | TCP/UDP | 8999 | nas | |
  | IRC     | | TCP | 6667 | comm | |
  | IRCS    | | TCP | 6697 | comm | |
+ | XMPP c2s| | TCP | 5222 | comm | |
+ | XMPP s2s| | TCP | 5269 | comm | |
  | grupo4mc| | TCP | 25565 | game | |
  | rubenmc | | TCP | 25566 | game | |
  | | | | | | |
  | yero-SSH | yero | TCP | 1511 | yerovps | 22 | |
  | yero-SQL | yero | TCP | 1512 | yerovps | 3306 |
  | FiveM SuperioresRP | yero | TCP | 30120,40120 | yerovps | |
-
 
 ## Internal Name and Number Assignation Table
 | Addr | Host | Name |
@@ -129,7 +130,10 @@ RAID attached here (with the grey stuff) (local only)
 | jellyfin | CNAME | arf20.com |
 | irc | CNAME | arf20.com |
 | matrix | CNAME | arf20.com |
+| xmpp | CNAME | arf20.com |
+| xmppconf | CNAME | arf20.com |
 | _acme-challenge.jellyfin | CNAME | (challenge) | |
 | _acme-challenge.irc | CNAME | (challenge) | |
 | _acme-challenge.matrix | CNAME | (challenge) | |
 | _acme-challenge.mail |  CNAME | (challenge) | |
+| _acme-challenge.xmpp |  CNAME | (challenge) | |
