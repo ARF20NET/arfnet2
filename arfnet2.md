@@ -13,22 +13,21 @@ Stage 1, very safe
  - VPN LAN      10.5.0.0/24: Wireguard clients
 
 ## Hosts
- - server (...)
- - desktop .8
- - raspi .14
+ - server DMZ(...)
+ - mail (ARFNET-IONOS) 5.250.186.185
 
 ## Management
- - server iDRAC .5
- - Proxmox .4
- - OPNSense .1
- - switch .2
- - WAP .3
- - printer .7
+ - DELL server iDRAC .5
+ - Proxmox hypervisor .4
+ - OPNSense router .1
+ - DELL switch .2
+ - TP-L WAP .3
+ - HP printer .7
 
 ## VMs and services
 All VMs must run the wazuh agent
 
-### router .1
+### router DMZ.1
  - (routing/firewalling)
  - SSH
  - DHCP
@@ -37,7 +36,7 @@ All VMs must run the wazuh agent
  - WireGuard
  - IPsec*
 
-### NAS .6
+### nas DMZ.6
 RAID attached here (with the grey stuff) (local only)
  - SSH
  - NFS
@@ -46,9 +45,11 @@ RAID attached here (with the grey stuff) (local only)
  - MiniDLNA*
  - jellyfin*
 
-### web .9
+### web DMZ.9
  - SSH
  - nginx (static only site, isolated from NAS)
+ - fastcgi PHP*
+ - mariadb SQL
 
 | vhost | webroot/proxy |
 |-------|---------------|
@@ -57,29 +58,36 @@ RAID attached here (with the grey stuff) (local only)
 | matrix.arf20.com | http://comm.lan:8008/_matrix |
 | default | <return 418 im a teapot> |
 
-### wazuh .10
+### wazuh DMZ.10
  - SSH
  - wazuh
 
-### game .11
+### game DMZ.11
  - SSH
  - grupo4mc
  - rubenmc
 
-### comm .12
+### comm DMZ.12
  - SSH
- - unrealircd IRC
- - synapse matrix
- - postgresql
- - pantalaimon
- - matterbridge
- - prosody XMPP
- - asterisk VoIP SIP*
+ - unrealircd - IRC
+ - synapse - matrix
+ - postgresql - DB for synapse
+ - pantalaimon - encrypt matterbridge traffic to matrix
+ - matterbridge - bridge channels with different protocols
+ - prosody - XMPP
+ - coturn - TURN server for matrix and xmpp
+ - asterisk - VoIP SIP*
 
-### mail (ARFNET-IONOS) 5.250.186.185
+### mail 5.250.186.185
  - SSH
- - postfix smtpd, submission, submissions
- - dovecot imapd
+ - postfix - MTA smtpd, submission, submissions
+    [config](https://github.com/ARF20NET/mail-conf)
+ - dovecot - imapd
+
+### yerovps DMZ.192 (yero)
+ - SSH
+ - mariadb
+ - FiveM SuperioresRP
 
 *TODO
 
@@ -94,6 +102,9 @@ RAID attached here (with the grey stuff) (local only)
  | IRCS    | | TCP | 6697 | comm | |
  | XMPP c2s| | TCP | 5222 | comm | |
  | XMPP s2s| | TCP | 5269 | comm | |
+ | TURN STUN| | TCP/UDP | 3478 | comm | |
+ | TURN    | | TCP/UDP | 5349 | comm | |
+ | TURN UDP relay| | TCP/UDP | 49152-50176 | comm | |
  | grupo4mc| | TCP | 25565 | game | |
  | rubenmc | | TCP | 25566 | game | |
  | | | | | | |
@@ -116,6 +127,7 @@ RAID attached here (with the grey stuff) (local only)
 | DMZ.10 | wazuh | wazuh.lan |
 | DMZ.11 | game | game.lan |
 | DMZ.12 | comm | comm.lan |
+| DMZ.192 | yerovps | yero.lan |
 
 ## Public DNS zone
 | Name | Type | Content | Comment |
@@ -132,8 +144,14 @@ RAID attached here (with the grey stuff) (local only)
 | matrix | CNAME | arf20.com |
 | xmpp | CNAME | arf20.com |
 | xmppconf | CNAME | arf20.com |
+| turn | CNAME | arf20.com |
 | _acme-challenge.jellyfin | CNAME | (challenge) | |
 | _acme-challenge.irc | CNAME | (challenge) | |
 | _acme-challenge.matrix | CNAME | (challenge) | |
 | _acme-challenge.mail |  CNAME | (challenge) | |
 | _acme-challenge.xmpp |  CNAME | (challenge) | |
+
+## IONOS zone
+| Name | Type | Content | Comment |
+|------|------|---------|---------|
+| 5.250.186.185 | PTR | mail.arf20.com | |
