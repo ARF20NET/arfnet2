@@ -1,11 +1,25 @@
 # ARFNET2 deployment
+After the disastrous ISP [schism](http://arf20.com/explanation.txt)
 
+## Masterplan
 Stage 1, very safe
  - Close all ports
  - Nuke (or stop) all old VMs (exclude OPNSense)
  - Make DMZ
- - Make the following ones (cloning deb12 template)
- - Open following ports
+ - Make new basic VMs (cloning deb12 template)
+ - Open basic ports
+
+Stage 2, new services
+ - IONOS VPS for mail
+ - Some new very safe services
+
+Stage 3*, finally
+ - Another VPS in unknown provider for
+    - Tor
+    - Reverse-proxying the media library
+ - PHP on main site with more web services from scratch, hopefully secure
+ - More new services
+ - Our own authoritative nameserver for the domain zone
 
 ## Networks
  - DMZ untagged 192.168.4.0/24: Services and management
@@ -25,7 +39,7 @@ Stage 1, very safe
  - HP printer .7
 
 ## VMs and services
-All VMs must run the wazuh agent
+All VMs are Debian 12 (templated) with wazuh agent
 
 ### router DMZ.1
  - (routing/firewalling)
