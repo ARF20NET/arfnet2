@@ -55,22 +55,25 @@ RAID attached here (with the grey stuff) (local only)
  - SSH
  - NFS
  - Samba SMB*
- - qBittorrent-nox
  - MiniDLNA*
+ - qBittorrent-nox
  - jellyfin*
 
 ### web DMZ.9
  - SSH
- - nginx (static only site, isolated from NAS)
- - fastcgi PHP*
+ - cerbot
+ - nginx
+ - fastcgi PHP
  - mariadb SQL
 
 | vhost | webroot/proxy |
 |-------|---------------|
+| default | <return 418 im a teapot> |
 | arf20.com | /var/www/arf20.com/html/ |
 | www.arf20.com | <301 redirect arf20.com> |
 | matrix.arf20.com | http://comm.lan:8008/_matrix |
-| default | <return 418 im a teapot> |
+| webmail.arf20.com | /var/www/webmail.arf20.com/html/ |
+| nextcloud.arf20.com | /var/www/nextcloud.arf20.com/html/ |
 
 ### wazuh DMZ.10
  - SSH
@@ -78,11 +81,16 @@ RAID attached here (with the grey stuff) (local only)
 
 ### game DMZ.11
  - SSH
- - grupo4mc
- - rubenmc
+ - waterfall (minecraft reverse proxy)
+    - mclobby (auth)
+    - mcrubenmc
+    - mcgrupo4*
+    - minepau*
+ - csgo server*
 
 ### comm DMZ.12
  - SSH
+ - cerbot
  - unrealircd - IRC
  - synapse - matrix
  - postgresql - DB for synapse
@@ -92,8 +100,14 @@ RAID attached here (with the grey stuff) (local only)
  - coturn - TURN server for matrix and xmpp
  - asterisk - VoIP SIP*
 
-### mail 5.250.186.185
+### misc (Deb12 LXC) DMZ.13
  - SSH
+ - iperf3
+ - bind9 - authoritative DNS server for arf20.com zone*
+
+### mail (ARFNET-IONOS) 5.250.186.185
+ - SSH
+ - certbot
  - postfix - MTA smtpd, submission, submissions
     [config](https://github.com/ARF20NET/mail-conf)
  - dovecot - imapd
@@ -127,20 +141,22 @@ RAID attached here (with the grey stuff) (local only)
  | FiveM SuperioresRP | yero | TCP | 30120,40120 | yerovps | |
 
 ## Internal Name and Number Assignation Table
-| Addr | Host | Name |
-|------|------|------|
-| DMZ.1 | gateway | router.lan |
-| DMZ.2 | switch | switch.lan |
-| DMZ.3 | wap | wap.lan |
-| DMZ.4 | proxmox | proxmox.lan |
-| DMZ.5 | R720 iDRAC | idrac.lan |
-| DMZ.6 | nas | nas.lan |
-| DMZ.7 | printer | printer.lan |
-| DMZ.8 | desktop | desktop.lan |
-| DMZ.9 | webserver | web.lan |
-| DMZ.10 | wazuh | wazuh.lan |
-| DMZ.11 | game | game.lan |
-| DMZ.12 | comm | comm.lan |
+| Addr | Name |
+|------|------|
+| DMZ.1 |  router.lan |
+| DMZ.2 |  switch.lan |
+| DMZ.3 |  wap.lan |
+| DMZ.4 |  proxmox.lan |
+| DMZ.5 |  idrac.lan |
+| DMZ.6 |  nas.lan |
+| DMZ.7 |  printer.lan |
+| DMZ.8 |  desktop.lan |
+| DMZ.9 |  web.lan |
+| DMZ.10 | wazuh.lan |
+| DMZ.11 | game.lan |
+| DMZ.12 | comm.lan |
+| DMZ.13 | misc.lan |
+| | | |
 | DMZ.192 | yerovps | yero.lan |
 
 ## Public DNS zone
@@ -159,6 +175,8 @@ RAID attached here (with the grey stuff) (local only)
 | xmpp | CNAME | arf20.com |
 | xmppconf | CNAME | arf20.com |
 | turn | CNAME | arf20.com |
+| nextcloud | CNAME | arf20.com |
+| webmail | CNAME | arf20.com |
 | _acme-challenge.jellyfin | CNAME | (challenge) | |
 | _acme-challenge.irc | CNAME | (challenge) | |
 | _acme-challenge.matrix | CNAME | (challenge) | |
