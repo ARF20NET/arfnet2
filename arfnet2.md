@@ -2,24 +2,25 @@
 After the disastrous ISP [schism](http://arf20.com/explanation.txt)
 
 ## Masterplan
-Stage 1, very safe
+Stage 1: very safe
  - Close all ports
  - Nuke (or stop) all old VMs (exclude OPNSense)
  - Make DMZ
  - Make new basic VMs (cloning deb12 template)
  - Open basic ports
 
-Stage 2, new services
+Stage 2: new services
  - IONOS VPS for mail
  - Some new very safe services
+ - HE IPv6 tunnel
+ - Own authoritative nameservers for domain zone
 
-Stage 3*, finally
+Stage 3*: finally
  - Another VPS in unknown provider for
     - Tor
     - Reverse-proxying the media library
  - PHP on main site with more web services from scratch, hopefully secure
  - More new services
- - Our own authoritative nameserver for the domain zone
 
 ## Domain
 arf20.com
