@@ -21,14 +21,33 @@ Stage 3*, finally
  - More new services
  - Our own authoritative nameserver for the domain zone
 
-## Networks
- - DMZ untagged 192.168.4.0/24: Services and management
- - LAN VLAN 5   192.168.5.0/24: Clients
- - VPN LAN      10.5.0.0/24: Wireguard clients
+## Domain
+arf20.com
+
+### Name severs
+ - NS1: ns1.arf20.com   2.59.235.35
+ - NS2: ns2.arf20.com   5.250.186.185
+
+## Networking
+### Public IPs
+ - AVANZA: 2.59.235.35
+ - HE v6 tunnel: 2001:470:1f20:125::2
+ - IONOS VPS: 5.250.186.185  2001:ba0:210:d600::1
+
+
+### Gateways
+ - AVANZA: 2.59.235.1
+ - HE v6: 2001:470:1f20:125::1 via 216.66.87.102
+
+| name | VLAN | net | desc |
+|------|------|-----|------|
+| DMZ  | untagged | 192.168.4.0/24 <br> 2001:470:1f21:125::/64 | Services 
+| LAN  | 5    | 192.168.5.0/24 |  Clients
+| VPN LAN |   | 10.5.0.0/24 | Wireguard clients
 
 ## Hosts
  - server DMZ(...)
- - mail (ARFNET-IONOS) 5.250.186.185
+ - mail (ARFNET-IONOS) 5.250.186.185  2001:ba0:210:d600::1
 
 ## Management
  - DELL server iDRAC .5
@@ -103,14 +122,15 @@ RAID attached here (with the grey stuff) (local only)
 ### misc (Deb12 LXC) DMZ.13
  - SSH
  - iperf3
- - bind9 - authoritative DNS server for arf20.com zone*
+ - bind9 - master authoritative nameserver for arf20.com zone NS1
 
-### mail (ARFNET-IONOS) 5.250.186.185
+### mail (ARFNET-IONOS) 5.250.186.185 2001:ba0:210:d600::1
  - SSH
  - certbot
  - postfix - MTA smtpd, submission, submissions
     [config](https://github.com/ARF20NET/mail-conf)
  - dovecot - imapd
+ - bind9 - slave authoritative nameserver NS2
 
 ### yerovps DMZ.192 (yero)
  - SSH
@@ -125,6 +145,7 @@ RAID attached here (with the grey stuff) (local only)
  | OpenVPN | | TCP | 1195 | router | |
  | WireGuard | | UDP | 51820 | router | |
  | Web     | | TCP | 80,443 | web | |
+ | DNS NS1 | | TCP/UDP | 53 | misc | |
  | bittorrent | | TCP/UDP | 8999 | nas | |
  | IRC     | | TCP | 6667 | comm | |
  | IRCS    | | TCP | 6697 | comm | |
