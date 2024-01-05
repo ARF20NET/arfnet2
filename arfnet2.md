@@ -23,11 +23,14 @@ Stage 3*: finally
  - More new services
 
 ## Domain
-arf20.com
+arf20.com <br>
+Registrar: namecheap
 
-### Name severs
- - NS1: ns1.arf20.com   2.59.235.35
- - NS2: ns2.arf20.com   5.250.186.185
+### Name sever glue records at registrar
+| Nameserver | Name | IP |
+|------------|------|----|
+| NS1 | ns1.arf20.com | 2.59.235.35 <br> 2001:470:1f21:125::13 |
+| NS2 | ns2.arf20.com | 5.250.186.185 <br> 2001:ba0:210:d600::1 |
 
 ## Networking
 ### Public IPs
@@ -47,8 +50,8 @@ arf20.com
 | VPN LAN |   | 10.5.0.0/24 | Wireguard clients
 
 ## Hosts
- - server DMZ(...)
- - mail (ARFNET-IONOS) 5.250.186.185  2001:ba0:210:d600::1
+ - server Proxmox PVE - DMZ...
+ - mail (ARFNET-IONOS) Debian 12 - 5.250.186.185  2001:ba0:210:d600::1
 
 ## Management
  - DELL server iDRAC .5
@@ -58,7 +61,8 @@ arf20.com
  - TP-L WAP .3
  - HP printer .7
 
-## VMs and services
+## server VMs and services
+server runs Proxmox PVE. 
 All VMs are Debian 12 (templated) with wazuh agent
 
 ### router DMZ.1
@@ -133,6 +137,8 @@ RAID attached here (with the grey stuff) (local only)
  - dovecot - imapd
  - bind9 - slave authoritative nameserver NS2
 
+---
+
 ### yerovps DMZ.192 (yero)
  - SSH
  - mariadb
@@ -140,7 +146,8 @@ RAID attached here (with the grey stuff) (local only)
 
 *TODO
 
-## Port forwards
+## Firewall
+### IPv4 NAT Port forwards
  | Service | Customer | IPProto | Ext Port | Host | Re Port |
  |---------|----------|---------|----------|------|---------|
  | OpenVPN | | TCP | 1195 | router | |
@@ -161,6 +168,12 @@ RAID attached here (with the grey stuff) (local only)
  | yero-SSH | yero | TCP | 1511 | yerovps | 22 | |
  | yero-SQL | yero | TCP | 1512 | yerovps | 3306 |
  | FiveM SuperioresRP | yero | TCP | 30120,40120 | yerovps | |
+
+### IPv6 port rules
+ | Service | Customer | IPProto | Host | Port |
+ |---------|----------|---------|------|------|
+ | DNS NS1 | | TCP/UDP | misc | 53 |
+ | Web     | | TCP | web | 80,443 |
 
 ## Internal Name and Number Assignation Table
 | Addr | Name |
@@ -184,9 +197,17 @@ RAID attached here (with the grey stuff) (local only)
 ## Public DNS zone
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
+| arf20.com | NS | ns1.arf20.com | |
+| arf20.com | NS | ns2.arf20.com | |
+| ns1 | A | 2.59.235.35 | |
+| ns1 | AAAA | 2001:470:1f21:125::13 | |
+| ns2 | A | 5.250.186.185 | |
+| ns2 | AAAA | 2001:ba0:210:d600::1 | |
 | arf20.com | A | 2.59.235.35 | |
+| arf20.com | AAAA | 2001:470:1f21:125::9 | |
 | arf20.com | MX | mail.arf20.com | |
 | mail | A | 5.250.186.185 | |
+| mail | AAAA | 2001:ba0:210:d600::1 | |
 | selector._domainkey | TXT | (DKIM) | DKIM for selector 'selector' |
 | _dmarc | TXT | (DMARC) | |
 | arf20.com | TXT | (SPF) | |
