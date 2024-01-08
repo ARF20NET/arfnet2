@@ -47,19 +47,19 @@ Registrar: namecheap
 |------|------|-----|------|
 | DMZ  | untagged | 192.168.4.0/24 <br> 2001:470:1f21:125::/64 | Services 
 | LAN  | 5    | 192.168.5.0/24 |  Clients
-| VPN LAN |   | 10.5.0.0/24 | Wireguard clients
+| VPN  |      | 10.5.0.0/24 | Wireguard clients
 
 ## Hosts
- - server Proxmox PVE - DMZ...
- - mail (ARFNET-IONOS) Debian 12 - 5.250.186.185  2001:ba0:210:d600::1
+ - server - DELL PowerEdge R720 running Proxmox PVE - ...
+ - mail -  IONOS VPS running Debian 12 - 5.250.186.185  2001:ba0:210:d600::1
 
 ## Management
- - DELL server iDRAC .5
- - Proxmox hypervisor .4
- - OPNSense router .1
- - DELL switch .2
- - TP-L WAP .3
- - HP printer .7
+ - OPNSense router DMZ.1
+ - DELL switch DMZ.2
+ - TP-L WAP LAN.3
+ - Proxmox hypervisor DMZ.4
+ - DELL server iDRAC DMZ.5
+ - HP printer DMZ.7
 
 ## server VMs and services
 server runs Proxmox PVE. 
@@ -73,6 +73,7 @@ All VMs are Debian 12 (templated) with wazuh agent
  - OpenVPN
  - WireGuard
  - IPsec*
+ - ntopng :3000
 
 ### nas DMZ.6
 RAID attached here (with the grey stuff) (local only)
@@ -80,24 +81,34 @@ RAID attached here (with the grey stuff) (local only)
  - NFS
  - Samba SMB*
  - MiniDLNA*
+ - FTP
  - qBittorrent-nox
- - jellyfin*
+ - jellyfin
 
 ### web DMZ.9
  - SSH
  - cerbot
- - nginx
+ - nginx (status at :8080)
  - fastcgi PHP
  - mariadb SQL
+ - nginx-prometheus-exporter :9113
+ - prometheus :9090
+ - influxdb
+ - grafana
+ - zabbix*
+ - netbox*
 
-| vhost | webroot/proxy |
-|-------|---------------|
-| default | <return 418 im a teapot> |
-| arf20.com | /var/www/arf20.com/html/ |
-| www.arf20.com | <301 redirect arf20.com> |
-| matrix.arf20.com | http://comm.lan:8008/_matrix |
-| webmail.arf20.com | /var/www/webmail.arf20.com/html/ |
-| nextcloud.arf20.com | /var/www/nextcloud.arf20.com/html/ |
+| vhost | webroot/proxy | Comment |
+|-------|---------------|---------|
+| default | <return 418 im a teapot> | |
+| default:8080 | \<return nstub_status> | |
+| arf20.com | /var/www/arf20.com/html/ | |
+| www.arf20.com | <301 redirect arf20.com> | |
+| matrix.arf20.com | http://comm.lan:8008/_matrix | |
+| webmail.arf20.com | /var/www/webmail.arf20.com/html/ | SquirrelMail |
+| nextcloud.arf20.com | /var/www/nextcloud.arf20.com/html/ | |
+| grafana.arf20.com | http://localhost:3000 | |
+| jellyfin.arf20.com | http://nas.lan:8096 | |
 
 ### wazuh DMZ.10
  - SSH
@@ -128,6 +139,7 @@ RAID attached here (with the grey stuff) (local only)
  - SSH
  - iperf3
  - bind9 - master authoritative nameserver for arf20.com zone NS1
+ - OpenLDAP LDAP*
 
 ### mail (ARFNET-IONOS) 5.250.186.185 2001:ba0:210:d600::1
  - SSH
@@ -143,6 +155,10 @@ RAID attached here (with the grey stuff) (local only)
  - SSH
  - mariadb
  - FiveM SuperioresRP
+
+### exovps DMZ.195 (exo)
+ - SSH
+ - netbox
 
 *TODO
 
@@ -176,6 +192,7 @@ RAID attached here (with the grey stuff) (local only)
  | Web     | | TCP | web | 80,443 |
 
 ## Internal Name and Number Assignation Table
+DMZ IPv4s and IPv6 ends in the same way
 | Addr | Name |
 |------|------|
 | DMZ.1 |  router.lan |
