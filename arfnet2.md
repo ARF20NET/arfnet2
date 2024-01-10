@@ -38,11 +38,11 @@ Registrar: namecheap
  - HE v6 tunnel: 2001:470:1f20:125::2
  - IONOS VPS: 5.250.186.185  2001:ba0:210:d600::1
 
-
 ### Gateways
  - AVANZA: 2.59.235.1
  - HE v6: 2001:470:1f20:125::1 via 216.66.87.102
 
+### Networks
 | name | VLAN | net | desc |
 |------|------|-----|------|
 | DMZ  | untagged | 192.168.4.0/24 <br> 2001:470:1f21:125::/64 | Services 
@@ -64,6 +64,13 @@ Registrar: namecheap
 ## server VMs and services
 server runs Proxmox PVE. 
 All VMs are Debian 12 (templated) with wazuh agent
+
+### proxmox DMZ.4 (hypervisor)
+ - SSH
+ - Proxmox management interface :8006
+ - smartd*
+ - IPMI exporter*
+ - sensor exporter*
 
 ### router DMZ.1
  - (routing/firewalling)
@@ -133,7 +140,7 @@ RAID attached here (with the grey stuff) (local only)
  - matterbridge - bridge channels with different protocols
  - prosody - XMPP
  - coturn - TURN server for matrix and xmpp
- - asterisk - VoIP SIP*
+ - asterisk - VoIP SIP PBX
 
 ### misc (Deb12 LXC) DMZ.13
  - SSH
@@ -210,6 +217,7 @@ DMZ IPv4s and IPv6 ends in the same way
 | DMZ.13 | misc.lan |
 | | | |
 | DMZ.192 | yerovps | yero.lan |
+| DMZ.195 | exovps | exo.lan |
 
 ## Public DNS zone
 | Name | Type | Content | Comment |
