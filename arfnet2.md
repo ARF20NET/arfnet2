@@ -104,6 +104,8 @@ RAID attached here (with the grey stuff) (local only)
  - grafana
  - zabbix*
  - netbox*
+ - fcgiwrap
+ - git-http-backend* - git server
 
 | vhost | webroot/proxy | Comment |
 |-------|---------------|---------|
@@ -116,6 +118,7 @@ RAID attached here (with the grey stuff) (local only)
 | nextcloud.arf20.com | /var/www/nextcloud.arf20.com/html/ | |
 | grafana.arf20.com | http://localhost:3000 | |
 | jellyfin.arf20.com | http://nas.lan:8096 | |
+| git.arf20.com | /srv/git/ | |
 
 ### wazuh DMZ.10
  - SSH
@@ -219,7 +222,7 @@ DMZ IPv4s and IPv6 ends in the same way
 | DMZ.192 | yerovps | yero.lan |
 | DMZ.195 | exovps | exo.lan |
 
-## Public DNS zone
+## Domain DNS zone
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
 | arf20.com | NS | ns1.arf20.com | |
@@ -251,7 +254,13 @@ DMZ IPv4s and IPv6 ends in the same way
 | _acme-challenge.mail |  CNAME | (challenge) | |
 | _acme-challenge.xmpp |  CNAME | (challenge) | |
 
-## IONOS zone
+## HE v6 rDNS zone
+| Name | Type | Content | Comment |
+|------|------|---------|---------|
+| 2001:470:1f21:125::13 | PTR | ns1.arf20.com | |
+| 2001:470:1f21:125::9  | PTR | arf20.com | |
+
+## IONOS rDNS zone
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
 | 5.250.186.185 | PTR | mail.arf20.com | |
