@@ -49,6 +49,26 @@ Registrar: namecheap
 | LAN  | 5    | 192.168.5.0/24 |  Clients
 | VPN  |      | 10.5.0.0/24 | Wireguard clients
 
+### Hardware
+```
+                 +-------------+
+       +-----+   | eno1 server |
+ISP ===| ONT |---|   router    |
+       +-----+   |    eno2     |
+                 +-------------+
+                        |
+                 +-------------+
+                 | DELL 5424   |
+                 +-------------+
+                   |        |
+         5x TP-LINK Sw   Rest of hosts
+              |
+      Living room devices
+                   
+- 1000BASE-T
+= GPON fiber
+```
+
 ## Hosts
  - server - DELL PowerEdge R720 running Proxmox PVE - ...
  - mail -  IONOS VPS running Debian 12 - 5.250.186.185  2001:ba0:210:d600::1
@@ -69,8 +89,10 @@ All VMs are Debian 12 (templated) with wazuh agent
  - SSH
  - Proxmox management interface :8006
  - smartd*
+ - SMART exporter*
  - IPMI exporter*
  - sensor exporter*
+ - NUT - Network UPS TOols daemon (and proper UPS)*
 
 ### router DMZ.1
  - (routing/firewalling)
@@ -105,7 +127,12 @@ RAID attached here (with the grey stuff) (local only)
  - zabbix*
  - netbox*
  - fcgiwrap
- - git-http-backend* - git server
+ - git-http-backend - git smart http server CGI
+ - gitd - git daemon
+ - cgit - web frontend for git
+ - phpBB*
+ - Jekyll*
+ - cloudflare tunnel*
 
 | vhost | webroot/proxy | Comment |
 |-------|---------------|---------|
@@ -151,13 +178,18 @@ RAID attached here (with the grey stuff) (local only)
  - bind9 - master authoritative nameserver for arf20.com zone NS1
  - OpenLDAP LDAP*
 
-### mail (ARFNET-IONOS) 5.250.186.185 2001:ba0:210:d600::1
+### mail (ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1
  - SSH
  - certbot
  - postfix - MTA smtpd, submission, submissions
     [config](https://github.com/ARF20NET/mail-conf)
  - dovecot - imapd
  - bind9 - slave authoritative nameserver NS2
+
+ ### proxy (ARFNET-HOSTMENOW VPS) *
+ - SSH*
+ - IPsec client*
+ - proxy for ftp.arf20.com somehow*
 
 ---
 
@@ -178,8 +210,9 @@ RAID attached here (with the grey stuff) (local only)
  |---------|----------|---------|----------|------|---------|
  | OpenVPN | | TCP | 1195 | router | |
  | WireGuard | | UDP | 51820 | router | |
- | Web     | | TCP | 80,443 | web | |
  | DNS NS1 | | TCP/UDP | 53 | misc | |
+ | Web     | | TCP | 80,443 | web | |
+ | Git     | | TCP | 9418 | web | |
  | bittorrent | | TCP/UDP | 8999 | nas | |
  | IRC     | | TCP | 6667 | comm | |
  | IRCS    | | TCP | 6697 | comm | |
