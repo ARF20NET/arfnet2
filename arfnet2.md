@@ -122,8 +122,12 @@ RAID attached here (with the grey stuff) (local only)
  - mariadb SQL
  - nginx-prometheus-exporter :9113
  - prometheus :9090
- - influxdb
- - grafana
+ - telegraf
+ - influxdb :8086
+ - grafana :3000
+    - Proxmox
+    - nginx
+    - iDRAC
  - zabbix*
  - netbox*
  - fcgiwrap
@@ -131,8 +135,7 @@ RAID attached here (with the grey stuff) (local only)
  - gitd - git daemon
  - cgit - web frontend for git
  - phpBB*
- - Jekyll*
- - cloudflare tunnel*
+ - Jekyll - blog static site generator thing
 
 | vhost | webroot/proxy | Comment |
 |-------|---------------|---------|
@@ -146,6 +149,8 @@ RAID attached here (with the grey stuff) (local only)
 | grafana.arf20.com | http://localhost:3000 | |
 | jellyfin.arf20.com | http://nas.lan:8096 | |
 | git.arf20.com | /srv/git/ | |
+| cgit.arf20.com | fastcgi:/usr/lib/cgit/cgit.cgi | |
+| blog.arf20.com | /var/www/blog.arf20.com/_site/ | |
 
 ### wazuh DMZ.10
  - SSH
