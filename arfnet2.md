@@ -134,7 +134,7 @@ RAID attached here (with the grey stuff) (local only)
  - git-http-backend - git smart http server CGI
  - gitd - git daemon
  - cgit - web frontend for git
- - phpBB*
+ - phpBB - forum software
  - Jekyll - blog static site generator thing
 
 | vhost | webroot/proxy | Comment |
@@ -151,6 +151,7 @@ RAID attached here (with the grey stuff) (local only)
 | git.arf20.com | /srv/git/ | |
 | cgit.arf20.com | fastcgi:/usr/lib/cgit/cgit.cgi | |
 | blog.arf20.com | /var/www/blog.arf20.com/_site/ | |
+| forum.arf20.com | /var/www/forum.arf20.com/html/ | |
 
 ### wazuh DMZ.10
  - SSH
