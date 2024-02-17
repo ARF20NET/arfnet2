@@ -45,29 +45,49 @@ Registrar: namecheap
 ### Networks
 | name | VLAN | net | desc |
 |------|------|-----|------|
-| DMZ  | untagged | 192.168.4.0/24 <br> 2001:470:1f21:125::/64 | Services 
-| LAN  | 5    | 192.168.5.0/24 |  Clients
-| VPN  |      | 10.5.0.0/24 | Wireguard clients
+| WAN  | 2    |     |      |
+| DMZ  | 4    | 192.168.4.0/24 <br> 2001:470:1f21:125::/64 | Services |
+| LAN  | 5    | 192.168.5.0/24 |  Clients |
+| VPN  |      | 10.5.0.0/24 | Wireguard clients |
 
 ### Hardware
 ```
-                 +-------------+
-       +-----+   | eno1 server |
-ISP ===| ONT |---|   router    |
-       +-----+   |    eno2     |
-                 +-------------+
-                        |
-                 +-------------+
-                 | DELL 5424   |
-                 +-------------+
-                   |        |
-         5x TP-LINK Sw   Rest of hosts
-              |
-      Living room devices
+                   WAP
+                    |
+       +-----+   +--------------------------+     +----------------+
+ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
+       +-----+   +--------------------------+     +----------------+
+                    |        |          |                |
+                    |        |          |                |
+                 +---------------+  Rest of devices   Living room devices
+                 | eno1     eno2 |
+                 | server router |
+                 +---------------+
                    
 - 1000BASE-T
 = GPON fiber
 ```
+
+#### DELL PowerConnect 5424 switch
+Port assignents
+| port | endpoint | options |
+|------|----------|---------|
+| g2   | ONT      | VLAN access 2 |
+| g4   | server eno2 WAN | VLAN access 2 |
+| g6   | test2    | VLAN access 2 |
+| g3   | WAP      | VLAN access 5 |
+| g5   | PC       | VLAN access 4 |
+| g7   | Living R.| VLAN access 5 |
+| g9   | server eno1 DMZ+LAN | VLAN trunk 4, 5 |
+| g15  | test4    | VLAN access 4 |
+| g17  | test1    | VLAN access 1 |
+| g19  | test5    | VLAN access 5 |
+| g21  | iDRAC    | VLAN access 4 |
+| g23  | printer  | VLAN access 4 |
+
+Management
+ - interface vlan 4: 192.168.4.2/24 gw 192.168.4.1*
+
 
 ## Hosts
  - server - DELL PowerEdge R720 running Proxmox PVE - ...
@@ -76,7 +96,7 @@ ISP ===| ONT |---|   router    |
 ## Management
  - OPNSense router DMZ.1
  - DELL switch DMZ.2
- - TP-L WAP LAN.3
+ - TP-Link WAP LAN.2
  - Proxmox hypervisor DMZ.4
  - DELL server iDRAC DMZ.5
  - HP printer DMZ.7
@@ -88,9 +108,7 @@ All VMs are Debian 12 (templated) with wazuh agent
 ### proxmox DMZ.4 (hypervisor)
  - SSH
  - Proxmox management interface :8006
- - smartd*
- - SMART exporter*
- - IPMI exporter*
+ - smartmon + node exporter :9100
  - sensor exporter*
  - NUT - Network UPS TOols daemon (and proper UPS)*
 
@@ -103,6 +121,7 @@ All VMs are Debian 12 (templated) with wazuh agent
  - WireGuard
  - IPsec*
  - ntopng :3000
+ - telegraf - note: editing config via webfig breaks (timeout and unbound config)
 
 ### nas DMZ.6
 RAID attached here (with the grey stuff) (local only)
@@ -136,6 +155,7 @@ RAID attached here (with the grey stuff) (local only)
  - cgit - web frontend for git
  - phpBB - forum software
  - Jekyll - blog static site generator thing
+ - opentracker? - bittorrent tracker*
 
 | vhost | webroot/proxy | Comment |
 |-------|---------------|---------|
@@ -152,6 +172,9 @@ RAID attached here (with the grey stuff) (local only)
 | cgit.arf20.com | fastcgi:/usr/lib/cgit/cgit.cgi | |
 | blog.arf20.com | /var/www/blog.arf20.com/_site/ | |
 | forum.arf20.com | /var/www/forum.arf20.com/html/ | |
+| deb.arf20.com | /d/FTPServer/software/debian/ | |
+| | | |
+| status.yero.dev | http://yerovps.lan:3001 | |
 
 ### wazuh DMZ.10
  - SSH
@@ -176,7 +199,7 @@ RAID attached here (with the grey stuff) (local only)
  - matterbridge - bridge channels with different protocols
  - prosody - XMPP
  - coturn - TURN server for matrix and xmpp
- - asterisk - VoIP SIP PBX
+ - asterisk - VoIP SIP PBX*
 
 ### misc (Deb12 LXC) DMZ.13
  - SSH
@@ -184,12 +207,16 @@ RAID attached here (with the grey stuff) (local only)
  - bind9 - master authoritative nameserver for arf20.com zone NS1
  - OpenLDAP LDAP*
 
+ - Discord servers
+   - gDebrid
+
 ### mail (ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1
  - SSH
  - certbot
  - postfix - MTA smtpd, submission, submissions
     [config](https://github.com/ARF20NET/mail-conf)
  - dovecot - imapd
+ - majordomo? - mailing list manager*
  - bind9 - slave authoritative nameserver NS2
 
  ### proxy (ARFNET-HOSTMENOW VPS) *
