@@ -33,23 +33,6 @@ Registrar: namecheap
 | NS2 | ns2.arf20.com | 5.250.186.185 <br> 2001:ba0:210:d600::1 |
 
 ## Networking
-### Public IPs
- - AVANZA: 2.59.235.35
- - HE v6 tunnel: 2001:470:1f20:125::2
- - IONOS VPS: 5.250.186.185  2001:ba0:210:d600::1
-
-### Gateways
- - AVANZA: 2.59.235.1
- - HE v6: 2001:470:1f20:125::1 via 216.66.87.102
-
-### Networks
-| name | VLAN | net | desc |
-|------|------|-----|------|
-| WAN  | 2    |     |      |
-| DMZ  | 4    | 192.168.4.0/24 <br> 2001:470:1f21:125::/64 | Services |
-| LAN  | 5    | 192.168.5.0/24 |  Clients |
-| VPN  |      | 10.5.0.0/24 | Wireguard clients |
-
 ### Hardware
 ```
                    WAP
@@ -87,6 +70,74 @@ Port assignents
 
 Management
  - interface vlan 4: 192.168.4.2/24 gw 192.168.4.1*
+
+### Public IPs
+ - AVANZA: 2.59.235.35
+ - HE v6 tunnel: 2001:470:1f20:125::2
+ - IONOS VPS: 5.250.186.185  2001:ba0:210:d600::1
+
+### Gateways
+ - AVANZA
+   - WAN_STATIC: 2.59.235.1
+   - WAN_CGNAT: dynamic
+ - HE v6: 2001:470:1f20:125::1 via 216.66.87.102
+
+### Physical and Logical Networks
+| name | VLAN | net | desc |
+|------|------|-----|------|
+| WAN  | 2    |     |      |
+| DMZ  | 4    | 192.168.4.0/24 <br> 2001:470:1f21:125::/64 | Services |
+| LAN  | 5    | 192.168.5.0/24 |  Clients |
+| VPN  |      | 10.5.0.0/24 | Wireguard clients |
+
+
+## Firewall
+### Interface Rules
+ - WAN_CGNAT in
+    - deny *
+ - WAN_STATIC in
+    - allow from * to {services} --> NAT rules
+ - DMZ in
+    - deny from DMZ net to LAN net
+    - allow from DMZ net to firewall
+    - allow from DMZ net to * gw WAN_STATIC
+ - LAN in
+    - allow ICMP from LAN net to firewall
+    - allow IP DNS from LAN net to firewall
+    - allow from LAN net to DMZ net
+    - allow from LAN net to * gw WAN_CGNAT
+
+### IPv4 NAT Rules
+ | Service | Customer | IPProto | Ext Port | Host | Re Port |
+ |---------|----------|---------|----------|------|---------|
+ | OpenVPN | | TCP | 1195 | router | |
+ | WireGuard | | UDP | 51820 | router | |
+ | DNS NS1 | | TCP/UDP | 53 | misc | |
+ | iperf3  | | TCP     | 5201 | misc | |
+ | Web     | | TCP | 80,443 | web | |
+ | Git     | | TCP | 9418 | web | |
+ | bittorrent | | TCP/UDP | 8999 | nas | |
+ | rsync | | TCP/UDP | 873 | nas | |
+ | IRC     | | TCP | 6667 | comm | |
+ | IRCS    | | TCP | 6697 | comm | |
+ | XMPP c2s| | TCP | 5222 | comm | |
+ | XMPP s2s| | TCP | 5269 | comm | |
+ | TURN STUN| | TCP/UDP | 3478 | comm | |
+ | TURN    | | TCP/UDP | 5349 | comm | |
+ | TURN UDP relay| | TCP/UDP | 49152-50176 | comm | |
+ | mc-waterfall-proxy| | TCP | 25565 | game | 25567 |
+ | | | | | | |
+ | exo-ssh | exo | TCP | 4041 | exovps | 22 | |
+ | exo-extra | exo | TCP | 4040 | exovps | 4040 | |
+ | yero-ssh | yero | TCP | 1511 | yerovps | 22 | |
+ | yero-sql | yero | TCP | 1512 | yerovps | 3306 |
+ | FiveM SuperioresRP | yero | TCP | 30120,40120 | yerovps | |
+
+### IPv6 port rules
+ | Service | Customer | IPProto | Host | Port |
+ |---------|----------|---------|------|------|
+ | DNS NS1 | | TCP/UDP | misc | 53 |
+ | Web     | | TCP | web | 80,443 |
 
 
 ## Hosts
@@ -173,6 +224,7 @@ RAID attached here (with the grey stuff) (local only)
 | blog.arf20.com | /var/www/blog.arf20.com/_site/ | |
 | forum.arf20.com | /var/www/forum.arf20.com/html/ | |
 | deb.arf20.com | /d/FTPServer/software/debian/ | |
+| memes.arf20.com | /var/www/memes.arf20.com/, /d/FTPserver/{dcimg, dcmemes, explosionsandfire} |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 
@@ -237,36 +289,6 @@ RAID attached here (with the grey stuff) (local only)
 
 *TODO
 
-## Firewall
-### IPv4 NAT Port forwards
- | Service | Customer | IPProto | Ext Port | Host | Re Port |
- |---------|----------|---------|----------|------|---------|
- | OpenVPN | | TCP | 1195 | router | |
- | WireGuard | | UDP | 51820 | router | |
- | DNS NS1 | | TCP/UDP | 53 | misc | |
- | Web     | | TCP | 80,443 | web | |
- | Git     | | TCP | 9418 | web | |
- | bittorrent | | TCP/UDP | 8999 | nas | |
- | IRC     | | TCP | 6667 | comm | |
- | IRCS    | | TCP | 6697 | comm | |
- | XMPP c2s| | TCP | 5222 | comm | |
- | XMPP s2s| | TCP | 5269 | comm | |
- | TURN STUN| | TCP/UDP | 3478 | comm | |
- | TURN    | | TCP/UDP | 5349 | comm | |
- | TURN UDP relay| | TCP/UDP | 49152-50176 | comm | |
- | grupo4mc| | TCP | 25565 | game | |
- | rubenmc | | TCP | 25566 | game | |
- | | | | | | |
- | yero-SSH | yero | TCP | 1511 | yerovps | 22 | |
- | yero-SQL | yero | TCP | 1512 | yerovps | 3306 |
- | FiveM SuperioresRP | yero | TCP | 30120,40120 | yerovps | |
-
-### IPv6 port rules
- | Service | Customer | IPProto | Host | Port |
- |---------|----------|---------|------|------|
- | DNS NS1 | | TCP/UDP | misc | 53 |
- | Web     | | TCP | web | 80,443 |
-
 ## Internal Name and Number Assignation Table
 DMZ IPv4s and IPv6 ends in the same way
 | Addr | Name |
@@ -305,15 +327,26 @@ DMZ IPv4s and IPv6 ends in the same way
 | selector._domainkey | TXT | (DKIM) | DKIM for selector 'selector' |
 | _dmarc | TXT | (DMARC) | |
 | arf20.com | TXT | (SPF) | |
-| www | CNAME | arf20.com |
-| jellyfin | CNAME | arf20.com |
+|
 | irc | CNAME | arf20.com |
+| jellyfin | CNAME | arf20.com |
 | matrix | CNAME | arf20.com |
+| nextcloud | CNAME | arf20.com |
+| turn | CNAME | arf20.com |
+| webmail | CNAME | arf20.com |
+| www | CNAME | arf20.com |
 | xmpp | CNAME | arf20.com |
 | xmppconf | CNAME | arf20.com |
-| turn | CNAME | arf20.com |
-| nextcloud | CNAME | arf20.com |
-| webmail | CNAME | arf20.com |
+| grafana | CNAME | arf20.com |
+| git | CNAME | arf20.com |
+| cgit | CNAME | arf20.com |
+| blog | CNAME | arf20.com |
+| forum | CNAME | arf20.com |
+| deb | CNAME | arf20.com |
+| zabbix | CNAME | arf20.com |
+| memes | CNAME | arf20.com |
+| news | CNAME | arf20.com |
+| 
 | _acme-challenge.jellyfin | CNAME | (challenge) | |
 | _acme-challenge.irc | CNAME | (challenge) | |
 | _acme-challenge.matrix | CNAME | (challenge) | |
