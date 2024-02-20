@@ -69,10 +69,11 @@ Port assignents
 | g23  | printer  | VLAN access 4 |
 
 Management
- - interface vlan 4: 192.168.4.2/24 gw 192.168.4.1*
+ - interface vlan 4: 192.168.4.2/24 gw 192.168.4.1
 
 ### Public IPs
- - AVANZA: 2.59.235.35
+ - AVANZA_STATIC: 2.59.235.35
+ - AVANZA_CGNAT: dynamic
  - HE v6 tunnel: 2001:470:1f20:125::2
  - IONOS VPS: 5.250.186.185  2001:ba0:210:d600::1
 
@@ -114,6 +115,7 @@ Management
  | WireGuard | | UDP | 51820 | router | |
  | DNS NS1 | | TCP/UDP | 53 | misc | |
  | iperf3  | | TCP     | 5201 | misc | |
+ | NNTP    | | TCP | 119 | misc | |
  | Web     | | TCP | 80,443 | web | |
  | Git     | | TCP | 9418 | web | |
  | bittorrent | | TCP/UDP | 8999 | nas | |
@@ -125,7 +127,7 @@ Management
  | TURN STUN| | TCP/UDP | 3478 | comm | |
  | TURN    | | TCP/UDP | 5349 | comm | |
  | TURN UDP relay| | TCP/UDP | 49152-50176 | comm | |
- | mc-waterfall-proxy| | TCP | 25565 | game | 25567 |
+ | mc-waterfall-proxy | | TCP | 25565 | game | 25567 |
  | | | | | | |
  | exo-ssh | exo | TCP | 4041 | exovps | 22 | |
  | exo-extra | exo | TCP | 4040 | exovps | 4040 | |
