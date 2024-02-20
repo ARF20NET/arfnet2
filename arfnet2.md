@@ -1,7 +1,9 @@
 # ARFNET2 deployment
+
 After the disastrous ISP [schism](http://arf20.com/explanation.txt)
 
 ## Masterplan
+
 Stage 1: very safe
  - Close all ports
  - Nuke (or stop) all old VMs (exclude OPNSense)
@@ -15,7 +17,7 @@ Stage 2: new services
  - HE IPv6 tunnel
  - Own authoritative nameservers for domain zone
 
-Stage 3*: finally
+Stage 3\*: finally
  - Another VPS in unknown provider for
     - Tor
     - Reverse-proxying the media library
@@ -23,17 +25,22 @@ Stage 3*: finally
  - More new services
 
 ## Domain
-arf20.com <br>
+
+arf20.com
+
 Registrar: namecheap
 
 ### Name sever glue records at registrar
+
 | Nameserver | Name | IP |
 |------------|------|----|
 | NS1 | ns1.arf20.com | 2.59.235.35 <br> 2001:470:1f21:125::13 |
 | NS2 | ns2.arf20.com | 5.250.186.185 <br> 2001:ba0:210:d600::1 |
 
 ## Networking
+
 ### Hardware
+
 ```
                    WAP
                     |
@@ -52,7 +59,9 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
 ```
 
 #### DELL PowerConnect 5424 switch
+
 Port assignents
+
 | port | endpoint | options |
 |------|----------|---------|
 | g2   | ONT      | VLAN access 2 |
@@ -69,15 +78,18 @@ Port assignents
 | g23  | printer  | VLAN access 4 |
 
 Management
+
  - interface vlan 4: 192.168.4.2/24 gw 192.168.4.1
 
 ### Public IPs
+
  - AVANZA_STATIC: 2.59.235.35
  - AVANZA_CGNAT: dynamic
  - HE v6 tunnel: 2001:470:1f20:125::2
  - IONOS VPS: 5.250.186.185  2001:ba0:210:d600::1
 
 ### Gateways
+
  - AVANZA
    - WAN_STATIC: 2.59.235.1
    - WAN_CGNAT: dynamic
@@ -91,9 +103,10 @@ Management
 | LAN  | 5    | 192.168.5.0/24 |  Clients |
 | VPN  |      | 10.5.0.0/24 | Wireguard clients |
 
-
 ## Firewall
+
 ### Interface Rules
+
  - WAN_CGNAT in
     - deny *
  - WAN_STATIC in
@@ -109,6 +122,7 @@ Management
     - allow from LAN net to * gw WAN_CGNAT
 
 ### IPv4 NAT Rules
+
  | Service | Customer | IPProto | Ext Port | Host | Re Port |
  |---------|----------|---------|----------|------|---------|
  | OpenVPN | | TCP | 1195 | router | |
@@ -136,6 +150,7 @@ Management
  | FiveM SuperioresRP | yero | TCP | 30120,40120 | yerovps | |
 
 ### IPv6 port rules
+
  | Service | Customer | IPProto | Host | Port |
  |---------|----------|---------|------|------|
  | DNS NS1 | | TCP/UDP | misc | 53 |
@@ -143,10 +158,12 @@ Management
 
 
 ## Hosts
+
  - server - DELL PowerEdge R720 running Proxmox PVE - ...
  - mail -  IONOS VPS running Debian 12 - 5.250.186.185  2001:ba0:210:d600::1
 
 ## Management
+
  - OPNSense router DMZ.1
  - DELL switch DMZ.2
  - TP-Link WAP LAN.2
@@ -155,10 +172,13 @@ Management
  - HP printer DMZ.7
 
 ## server VMs and services
-server runs Proxmox PVE. 
+
+server runs Proxmox PVE.
+
 All VMs are Debian 12 (templated) with wazuh agent
 
 ### proxmox DMZ.4 (hypervisor)
+
  - SSH
  - Proxmox management interface :8006
  - smartmon + node exporter :9100
@@ -166,6 +186,7 @@ All VMs are Debian 12 (templated) with wazuh agent
  - NUT - Network UPS TOols daemon (and proper UPS)*
 
 ### router DMZ.1
+
  - (routing/firewalling)
  - SSH
  - DHCP
@@ -177,6 +198,7 @@ All VMs are Debian 12 (templated) with wazuh agent
  - telegraf - note: editing config via webfig breaks (timeout and unbound config)
 
 ### nas DMZ.6
+
 RAID attached here (with the grey stuff) (local only)
  - SSH
  - NFS
@@ -187,6 +209,7 @@ RAID attached here (with the grey stuff) (local only)
  - jellyfin
 
 ### web DMZ.9
+
  - SSH
  - cerbot
  - nginx (status at :8080)
@@ -212,18 +235,18 @@ RAID attached here (with the grey stuff) (local only)
 
 | vhost | webroot/proxy | Comment |
 |-------|---------------|---------|
-| default | <return 418 im a teapot> | |
+| default | \<return 418 im a teapot> | |
 | default:8080 | \<return nstub_status> | |
 | arf20.com | /var/www/arf20.com/html/ | |
 | www.arf20.com | <301 redirect arf20.com> | |
-| matrix.arf20.com | http://comm.lan:8008/_matrix | |
+| matrix.arf20.com | http://comm.lan:8008/\_matrix | |
 | webmail.arf20.com | /var/www/webmail.arf20.com/html/ | SquirrelMail |
 | nextcloud.arf20.com | /var/www/nextcloud.arf20.com/html/ | |
 | grafana.arf20.com | http://localhost:3000 | |
 | jellyfin.arf20.com | http://nas.lan:8096 | |
 | git.arf20.com | /srv/git/ | |
 | cgit.arf20.com | fastcgi:/usr/lib/cgit/cgit.cgi | |
-| blog.arf20.com | /var/www/blog.arf20.com/_site/ | |
+| blog.arf20.com | /var/www/blog.arf20.com/\_site/ | |
 | forum.arf20.com | /var/www/forum.arf20.com/html/ | |
 | deb.arf20.com | /d/FTPServer/software/debian/ | |
 | memes.arf20.com | /var/www/memes.arf20.com/, /d/FTPserver/{dcimg, dcmemes, explosionsandfire} |
@@ -231,10 +254,12 @@ RAID attached here (with the grey stuff) (local only)
 | status.yero.dev | http://yerovps.lan:3001 | |
 
 ### wazuh DMZ.10
+
  - SSH
  - wazuh
 
 ### game DMZ.11
+
  - SSH
  - waterfall (minecraft reverse proxy)
     - mclobby (auth)
@@ -244,6 +269,7 @@ RAID attached here (with the grey stuff) (local only)
  - csgo server*
 
 ### comm DMZ.12
+
  - SSH
  - cerbot
  - unrealircd - IRC
@@ -256,6 +282,7 @@ RAID attached here (with the grey stuff) (local only)
  - asterisk - VoIP SIP PBX*
 
 ### misc (Deb12 LXC) DMZ.13
+
  - SSH
  - iperf3
  - bind9 - master authoritative nameserver for arf20.com zone NS1
@@ -265,6 +292,7 @@ RAID attached here (with the grey stuff) (local only)
    - gDebrid
 
 ### mail (ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1
+
  - SSH
  - certbot
  - postfix - MTA smtpd, submission, submissions
@@ -274,6 +302,7 @@ RAID attached here (with the grey stuff) (local only)
  - bind9 - slave authoritative nameserver NS2
 
  ### proxy (ARFNET-HOSTMENOW VPS) *
+
  - SSH*
  - IPsec client*
  - proxy for ftp.arf20.com somehow*
@@ -281,17 +310,20 @@ RAID attached here (with the grey stuff) (local only)
 ---
 
 ### yerovps DMZ.192 (yero)
+
  - SSH
  - mariadb
  - FiveM SuperioresRP
 
 ### exovps DMZ.195 (exo)
+
  - SSH
  - netbox
 
-*TODO
+\*TODO
 
 ## Internal Name and Number Assignation Table
+
 DMZ IPv4s and IPv6 ends in the same way
 | Addr | Name |
 |------|------|
@@ -313,6 +345,7 @@ DMZ IPv4s and IPv6 ends in the same way
 | DMZ.195 | exovps | exo.lan |
 
 ## Domain DNS zone
+
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
 | arf20.com | NS | ns1.arf20.com | |
@@ -356,12 +389,15 @@ DMZ IPv4s and IPv6 ends in the same way
 | _acme-challenge.xmpp |  CNAME | (challenge) | |
 
 ## HE v6 rDNS zone
+
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
 | 2001:470:1f21:125::13 | PTR | ns1.arf20.com | |
 | 2001:470:1f21:125::9  | PTR | arf20.com | |
 
 ## IONOS rDNS zone
+
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
 | 5.250.186.185 | PTR | mail.arf20.com | |
+
