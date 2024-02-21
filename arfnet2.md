@@ -250,6 +250,7 @@ RAID attached here (with the grey stuff) (local only)
 | forum.arf20.com | /var/www/forum.arf20.com/html/ | |
 | deb.arf20.com | /d/FTPServer/software/debian/ | |
 | memes.arf20.com | /var/www/memes.arf20.com/, /d/FTPserver/{dcimg, dcmemes, explosionsandfire} |
+| news.arf20.com | Web-News NNTP newsgroups frontend* |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 
@@ -286,6 +287,7 @@ RAID attached here (with the grey stuff) (local only)
  - SSH
  - iperf3
  - bind9 - master authoritative nameserver for arf20.com zone NS1
+    - public recursive*
  - OpenLDAP LDAP*
 
  - Discord servers
