@@ -232,6 +232,7 @@ RAID attached here (with the grey stuff) (local only)
  - phpBB - forum software
  - Jekyll - blog static site generator thing
  - opentracker? - bittorrent tracker*
+ - gophernicus - gopher server*
 
 | vhost | webroot/proxy | Comment |
 |-------|---------------|---------|
