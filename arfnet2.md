@@ -290,9 +290,12 @@ RAID attached here (with the grey stuff) (local only)
  - bind9 - master authoritative nameserver for arf20.com zone NS1
     - public recursive*
  - OpenLDAP LDAP*
+ - INN2 - NNTP USENET server with SDF peering
 
  - Discord servers
    - gDebrid
+
+### pubnix?*
 
 ### mail (ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1
 
@@ -301,6 +304,7 @@ RAID attached here (with the grey stuff) (local only)
  - postfix - MTA smtpd, submission, submissions
     [config](https://github.com/ARF20NET/mail-conf)
  - dovecot - imapd
+ - opendkim
  - majordomo? - mailing list manager*
  - bind9 - slave authoritative nameserver NS2
 
