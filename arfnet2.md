@@ -200,6 +200,7 @@ All VMs are Debian 12 (templated) with wazuh agent
 ### nas DMZ.6
 
 RAID attached here (with the grey stuff) (local only)
+
  - SSH
  - NFS
  - Samba SMB*
@@ -291,9 +292,8 @@ RAID attached here (with the grey stuff) (local only)
     - public recursive*
  - OpenLDAP LDAP*
  - INN2 - NNTP USENET server with SDF peering
-
  - Discord servers
-   - gDebrid
+   - gDebrid (gookie)
 
 ### pubnix?*
 
@@ -308,7 +308,7 @@ RAID attached here (with the grey stuff) (local only)
  - majordomo? - mailing list manager*
  - bind9 - slave authoritative nameserver NS2
 
- ### proxy (ARFNET-HOSTMENOW VPS) *
+### proxy (ARFNET-HOSTMENOW VPS) *
 
  - SSH*
  - IPsec client*
@@ -332,6 +332,7 @@ RAID attached here (with the grey stuff) (local only)
 ## Internal Name and Number Assignation Table
 
 DMZ IPv4s and IPv6 ends in the same way
+
 | Addr | Name |
 |------|------|
 | DMZ.1 |  router.lan |
@@ -355,45 +356,57 @@ DMZ IPv4s and IPv6 ends in the same way
 
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
-| arf20.com | NS | ns1.arf20.com | |
-| arf20.com | NS | ns2.arf20.com | |
+| @ | NS | ns1.arf20.com | |
+| @ | NS | ns2.arf20.com | |
+|
 | ns1 | A | 2.59.235.35 | |
 | ns1 | AAAA | 2001:470:1f21:125::13 | |
 | ns2 | A | 5.250.186.185 | |
 | ns2 | AAAA | 2001:ba0:210:d600::1 | |
+|
 | arf20.com | A | 2.59.235.35 | |
 | arf20.com | AAAA | 2001:470:1f21:125::9 | |
-| arf20.com | MX | mail.arf20.com | |
-| mail | A | 5.250.186.185 | |
-| mail | AAAA | 2001:ba0:210:d600::1 | |
-| selector._domainkey | TXT | (DKIM) | DKIM for selector 'selector' |
-| _dmarc | TXT | (DMARC) | |
-| arf20.com | TXT | (SPF) | |
 |
-| irc | CNAME | arf20.com |
-| jellyfin | CNAME | arf20.com |
-| matrix | CNAME | arf20.com |
-| nextcloud | CNAME | arf20.com |
-| turn | CNAME | arf20.com |
-| webmail | CNAME | arf20.com |
-| www | CNAME | arf20.com |
-| xmpp | CNAME | arf20.com |
-| xmppconf | CNAME | arf20.com |
-| grafana | CNAME | arf20.com |
-| git | CNAME | arf20.com |
-| cgit | CNAME | arf20.com |
-| blog | CNAME | arf20.com |
-| forum | CNAME | arf20.com |
-| deb | CNAME | arf20.com |
-| zabbix | CNAME | arf20.com |
-| memes | CNAME | arf20.com |
-| news | CNAME | arf20.com |
+| mail.arf20.com  | A	   | 5.250.186.185		   | ARFNET-IONOS
+| mail.arf20.com  | AAAA	| 2001:ba0:210:d600::1	| ARFNET-IONOS
+| web.arf20.com   | A	   | 2.59.235.35
+| web.arf20.com   | AAAA	| 2001:470:1f21:125::9
+| game.arf20.com  | A	   | 2.59.235.35
+| game.arf20.com  | AAAA	| 2001:470:1f21:125::11
+| comm.arf20.com  | A	   | 2.59.235.35
+| comm.arf20.com  | AAAA	| 2001:470:1f21:125::12
+| misc.arf20.com  | A	   | 2.59.235.35
+| misc.arf20.com  | AAAA	| 2001:470:1f21:125::13
+|
+| irc.arf20.com | CNAME | comm.arf20.com |
+| jellyfin.arf20.com | CNAME | web.arf20.com |
+| matrix.arf20.com | CNAME | web.arf20.com |
+| nextcloud.arf20.com | CNAME | web.arf20.com |
+| turn.arf20.com | CNAME | comm.arf20.com |
+| webmail.arf20.com | CNAME | web.arf20.com |
+| www.arf20.com | CNAME | web.arf20.com |
+| xmpp.arf20.com | CNAME | comm.arf20.com |
+| xmppconf.arf20.com | CNAME | comm.arf20.com |
+| grafana.arf20.com | CNAME | web.arf20.com |
+| git.arf20.com | CNAME | web.arf20.com |
+| cgit.arf20.com | CNAME | web.arf20.com |
+| blog.arf20.com | CNAME | web.arf20.com |
+| forum.arf20.com | CNAME | web.arf20.com |
+| deb.arf20.com | CNAME | web.arf20.com |
+| zabbix.arf20.com | CNAME | web.arf20.com |
+| memes.arf20.com | CNAME | web.arf20.com |
+| news.arf20.com | CNAME | misc.arf20.com |
 | 
 | _acme-challenge.jellyfin | CNAME | (challenge) | |
 | _acme-challenge.irc | CNAME | (challenge) | |
 | _acme-challenge.matrix | CNAME | (challenge) | |
 | _acme-challenge.mail |  CNAME | (challenge) | |
 | _acme-challenge.xmpp |  CNAME | (challenge) | |
+| 
+| arf20.com | MX | mail.arf20.com | |
+| selector._domainkey | TXT | (DKIM) | DKIM for selector 'selector' |
+| _dmarc | TXT | (DMARC) | |
+| arf20.com | TXT | (SPF) | |
 
 ## HE v6 rDNS zone
 

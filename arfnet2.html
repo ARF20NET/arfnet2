@@ -501,8 +501,16 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   unbound config)</li>
   </ul>
   <h3 id="nas-dmz.6">nas DMZ.6</h3>
-  <p>RAID attached here (with the grey stuff) (local only) - SSH - NFS -
-  Samba SMB<em> - MiniDLNA</em> - FTP - qBittorrent-nox - jellyfin</p>
+  <p>RAID attached here (with the grey stuff) (local only)</p>
+  <ul>
+  <li>SSH</li>
+  <li>NFS</li>
+  <li>Samba SMB*</li>
+  <li>MiniDLNA*</li>
+  <li>FTP</li>
+  <li>qBittorrent-nox</li>
+  <li>jellyfin</li>
+  </ul>
   <h3 id="web-dmz.9">web DMZ.9</h3>
   <ul>
   <li>SSH</li>
@@ -670,18 +678,17 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </ul>
   <h3 id="misc-deb12-lxc-dmz.13">misc (Deb12 LXC) DMZ.13</h3>
   <ul>
-  <li><p>SSH</p></li>
-  <li><p>iperf3</p></li>
-  <li><p>bind9 - master authoritative nameserver for arf20.com zone
-  NS1</p>
+  <li>SSH</li>
+  <li>iperf3</li>
+  <li>bind9 - master authoritative nameserver for arf20.com zone NS1
   <ul>
   <li>public recursive*</li>
   </ul></li>
-  <li><p>OpenLDAP LDAP*</p></li>
-  <li><p>INN2 - NNTP USENET server with SDF peering</p></li>
-  <li><p>Discord servers</p>
+  <li>OpenLDAP LDAP*</li>
+  <li>INN2 - NNTP USENET server with SDF peering</li>
+  <li>Discord servers
   <ul>
-  <li>gDebrid</li>
+  <li>gDebrid (gookie)</li>
   </ul></li>
   </ul>
   <h3 id="pubnix">pubnix?*</h3>
@@ -697,7 +704,8 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <li>majordomo? - mailing list manager*</li>
   <li>bind9 - slave authoritative nameserver NS2</li>
   </ul>
-  <p>### proxy (ARFNET-HOSTMENOW VPS) *</p>
+  <h3 id="proxy-arfnet-hostmenow-vps">proxy (ARFNET-HOSTMENOW VPS)
+  *</h3>
   <ul>
   <li>SSH*</li>
   <li>IPsec client*</li>
@@ -718,13 +726,81 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <p>*TODO</p>
   <h2 id="internal-name-and-number-assignation-table">Internal Name and
   Number Assignation Table</h2>
-  <p>DMZ IPv4s and IPv6 ends in the same way | Addr | Name | |——|——| |
-  DMZ.1 | router.lan | | DMZ.2 | switch.lan | | DMZ.3 | wap.lan | |
-  DMZ.4 | proxmox.lan | | DMZ.5 | idrac.lan | | DMZ.6 | nas.lan | |
-  DMZ.7 | printer.lan | | DMZ.8 | desktop.lan | | DMZ.9 | web.lan | |
-  DMZ.10 | wazuh.lan | | DMZ.11 | game.lan | | DMZ.12 | comm.lan | |
-  DMZ.13 | misc.lan | | | | | | DMZ.192 | yerovps | yero.lan | | DMZ.195
-  | exovps | exo.lan |</p>
+  <p>DMZ IPv4s and IPv6 ends in the same way</p>
+  <table>
+  <thead>
+  <tr class="header">
+  <th>Addr</th>
+  <th>Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>DMZ.1</td>
+  <td>router.lan</td>
+  </tr>
+  <tr class="even">
+  <td>DMZ.2</td>
+  <td>switch.lan</td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.3</td>
+  <td>wap.lan</td>
+  </tr>
+  <tr class="even">
+  <td>DMZ.4</td>
+  <td>proxmox.lan</td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.5</td>
+  <td>idrac.lan</td>
+  </tr>
+  <tr class="even">
+  <td>DMZ.6</td>
+  <td>nas.lan</td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.7</td>
+  <td>printer.lan</td>
+  </tr>
+  <tr class="even">
+  <td>DMZ.8</td>
+  <td>desktop.lan</td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.9</td>
+  <td>web.lan</td>
+  </tr>
+  <tr class="even">
+  <td>DMZ.10</td>
+  <td>wazuh.lan</td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.11</td>
+  <td>game.lan</td>
+  </tr>
+  <tr class="even">
+  <td>DMZ.12</td>
+  <td>comm.lan</td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.13</td>
+  <td>misc.lan</td>
+  </tr>
+  <tr class="even">
+  <td></td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.192</td>
+  <td>yerovps</td>
+  </tr>
+  <tr class="even">
+  <td>DMZ.195</td>
+  <td>exovps</td>
+  </tr>
+  </tbody>
+  </table>
   <h2 id="domain-dns-zone">Domain DNS zone</h2>
   <table>
   <thead>
@@ -737,39 +813,51 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </thead>
   <tbody>
   <tr class="odd">
-  <td>arf20.com</td>
+  <td>@</td>
   <td>NS</td>
   <td>ns1.arf20.com</td>
   <td></td>
   </tr>
   <tr class="even">
-  <td>arf20.com</td>
+  <td>@</td>
   <td>NS</td>
   <td>ns2.arf20.com</td>
   <td></td>
   </tr>
   <tr class="odd">
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr class="even">
   <td>ns1</td>
   <td>A</td>
   <td>2.59.235.35</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>ns1</td>
   <td>AAAA</td>
   <td>2001:470:1f21:125::13</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>ns2</td>
   <td>A</td>
   <td>5.250.186.185</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>ns2</td>
   <td>AAAA</td>
   <td>2001:ba0:210:d600::1</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td></td>
+  <td></td>
+  <td></td>
   <td></td>
   </tr>
   <tr class="odd">
@@ -785,153 +873,69 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   </tr>
   <tr class="odd">
-  <td>arf20.com</td>
-  <td>MX</td>
-  <td>mail.arf20.com</td>
+  <td></td>
+  <td></td>
+  <td></td>
   <td></td>
   </tr>
   <tr class="even">
-  <td>mail</td>
+  <td>mail.arf20.com</td>
   <td>A</td>
   <td>5.250.186.185</td>
-  <td></td>
+  <td>ARFNET-IONOS</td>
   </tr>
   <tr class="odd">
-  <td>mail</td>
+  <td>mail.arf20.com</td>
   <td>AAAA</td>
   <td>2001:ba0:210:d600::1</td>
-  <td></td>
+  <td>ARFNET-IONOS</td>
   </tr>
   <tr class="even">
-  <td>selector._domainkey</td>
-  <td>TXT</td>
-  <td>(DKIM)</td>
-  <td>DKIM for selector ‘selector’</td>
-  </tr>
-  <tr class="odd">
-  <td>_dmarc</td>
-  <td>TXT</td>
-  <td>(DMARC)</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>arf20.com</td>
-  <td>TXT</td>
-  <td>(SPF)</td>
+  <td>web.arf20.com</td>
+  <td>A</td>
+  <td>2.59.235.35</td>
   <td></td>
   </tr>
   <tr class="odd">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>irc</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>jellyfin</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
+  <td>web.arf20.com</td>
+  <td>AAAA</td>
+  <td>2001:470:1f21:125::9</td>
   <td></td>
   </tr>
   <tr class="even">
-  <td>matrix</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
+  <td>game.arf20.com</td>
+  <td>A</td>
+  <td>2.59.235.35</td>
   <td></td>
   </tr>
   <tr class="odd">
-  <td>nextcloud</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
+  <td>game.arf20.com</td>
+  <td>AAAA</td>
+  <td>2001:470:1f21:125::11</td>
   <td></td>
   </tr>
   <tr class="even">
-  <td>turn</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
+  <td>comm.arf20.com</td>
+  <td>A</td>
+  <td>2.59.235.35</td>
   <td></td>
   </tr>
   <tr class="odd">
-  <td>webmail</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
+  <td>comm.arf20.com</td>
+  <td>AAAA</td>
+  <td>2001:470:1f21:125::12</td>
   <td></td>
   </tr>
   <tr class="even">
-  <td>www</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
+  <td>misc.arf20.com</td>
+  <td>A</td>
+  <td>2.59.235.35</td>
   <td></td>
   </tr>
   <tr class="odd">
-  <td>xmpp</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>xmppconf</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>grafana</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>git</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>cgit</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>blog</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>forum</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>deb</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>zabbix</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>memes</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>news</td>
-  <td>CNAME</td>
-  <td>arf20.com</td>
+  <td>misc.arf20.com</td>
+  <td>AAAA</td>
+  <td>2001:470:1f21:125::13</td>
   <td></td>
   </tr>
   <tr class="even">
@@ -941,33 +945,177 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   </tr>
   <tr class="odd">
+  <td>irc.arf20.com</td>
+  <td>CNAME</td>
+  <td>comm.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>jellyfin.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>matrix.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>nextcloud.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>turn.arf20.com</td>
+  <td>CNAME</td>
+  <td>comm.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>webmail.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>www.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>xmpp.arf20.com</td>
+  <td>CNAME</td>
+  <td>comm.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>xmppconf.arf20.com</td>
+  <td>CNAME</td>
+  <td>comm.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>grafana.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>git.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>cgit.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>blog.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>forum.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>deb.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>zabbix.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>memes.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>news.arf20.com</td>
+  <td>CNAME</td>
+  <td>misc.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr class="even">
   <td>_acme-challenge.jellyfin</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>_acme-challenge.irc</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>_acme-challenge.matrix</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>_acme-challenge.mail</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>_acme-challenge.xmpp</td>
   <td>CNAME</td>
   <td>(challenge)</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>arf20.com</td>
+  <td>MX</td>
+  <td>mail.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>selector._domainkey</td>
+  <td>TXT</td>
+  <td>(DKIM)</td>
+  <td>DKIM for selector ‘selector’</td>
+  </tr>
+  <tr class="even">
+  <td>_dmarc</td>
+  <td>TXT</td>
+  <td>(DMARC)</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>arf20.com</td>
+  <td>TXT</td>
+  <td>(SPF)</td>
   <td></td>
   </tr>
   </tbody>
