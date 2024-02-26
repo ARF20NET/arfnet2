@@ -85,7 +85,9 @@ Management
 
  - AVANZA_STATIC: 2.59.235.35
  - AVANZA_CGNAT: dynamic
- - HE v6 tunnel: 2001:470:1f20:125::2
+ - HE prefixes
+    - 2001:470:1f21:125::/64
+    - 2600:70ff:f039::/48
  - IONOS VPS: 5.250.186.185  2001:ba0:210:d600::1
 
 ### Gateways
@@ -93,14 +95,16 @@ Management
  - AVANZA
    - WAN_STATIC: 2.59.235.1
    - WAN_CGNAT: dynamic
- - HE v6: 2001:470:1f20:125::1 via 216.66.87.102
+  - HE v6 tunnel
+    - server: 216.66.87.102, 2001:470:1f20:125::1/64
+    - client: 2.59.235.35, 2001:470:1f20:125::2
 
 ### Physical and Logical Networks
 | name | VLAN | net | desc |
 |------|------|-----|------|
 | WAN  | 2    |     |      |
-| DMZ  | 4    | 192.168.4.0/24 <br> 2001:470:1f21:125::/64 | Services |
-| LAN  | 5    | 192.168.5.0/24 |  Clients |
+| DMZ  | 4    | 192.168.4.0/24 <br> 2600:70ff:f039:4::/64 | Services |
+| LAN  | 5    | 192.168.5.0/24 <br> 2600:70ff:f039:5::/64 | Clients  |
 | VPN  |      | 10.5.0.0/24 | Wireguard clients |
 
 ## Firewall
@@ -360,23 +364,23 @@ DMZ IPv4s and IPv6 ends in the same way
 | @ | NS | ns2.arf20.com | |
 |
 | ns1 | A | 2.59.235.35 | |
-| ns1 | AAAA | 2001:470:1f21:125::13 | |
+| ns1 | AAAA | 2600:70ff:f039:4::13 | |
 | ns2 | A | 5.250.186.185 | |
 | ns2 | AAAA | 2001:ba0:210:d600::1 | |
 |
 | arf20.com | A | 2.59.235.35 | |
-| arf20.com | AAAA | 2001:470:1f21:125::9 | |
+| arf20.com | AAAA | 2600:70ff:f039:4::9 | |
 |
 | mail.arf20.com  | A	   | 5.250.186.185		   | ARFNET-IONOS
 | mail.arf20.com  | AAAA	| 2001:ba0:210:d600::1	| ARFNET-IONOS
 | web.arf20.com   | A	   | 2.59.235.35
-| web.arf20.com   | AAAA	| 2001:470:1f21:125::9
+| web.arf20.com   | AAAA	| 
 | game.arf20.com  | A	   | 2.59.235.35
-| game.arf20.com  | AAAA	| 2001:470:1f21:125::11
+| game.arf20.com  | AAAA	| 2600:70ff:f039:4::11
 | comm.arf20.com  | A	   | 2.59.235.35
-| comm.arf20.com  | AAAA	| 2001:470:1f21:125::12
+| comm.arf20.com  | AAAA	| 2600:70ff:f039:4::12
 | misc.arf20.com  | A	   | 2.59.235.35
-| misc.arf20.com  | AAAA	| 2001:470:1f21:125::13
+| misc.arf20.com  | AAAA	| 2600:70ff:f039:4::13
 |
 | irc.arf20.com | CNAME | comm.arf20.com |
 | jellyfin.arf20.com | CNAME | web.arf20.com |
@@ -412,8 +416,10 @@ DMZ IPv4s and IPv6 ends in the same way
 
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
-| 2001:470:1f21:125::13 | PTR | ns1.arf20.com | |
-| 2001:470:1f21:125::9  | PTR | arf20.com | |
+| 2600:70ff:f039:4::13 | PTR | ns1.arf20.com | |
+| 2600:70ff:f039:4::9  | PTR | arf20.com | |
+|
+| 2600:70ff:f039:4::195 | PTR | arfnet.nexo.moe.  | |
 
 ## IONOS rDNS zone
 
