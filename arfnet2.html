@@ -182,6 +182,12 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <h3 id="physical-and-logical-networks">Physical and Logical
   Networks</h3>
   <table>
+  <colgroup>
+  <col style="width: 26%" />
+  <col style="width: 26%" />
+  <col style="width: 21%" />
+  <col style="width: 26%" />
+  </colgroup>
   <thead>
   <tr class="header">
   <th>name</th>
@@ -212,7 +218,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <tr class="even">
   <td>VPN</td>
   <td></td>
-  <td>10.5.0.0/24</td>
+  <td>192.168.6.0/24 <br> 2600:70ff:f039:5::/64</td>
   <td>Wireguard clients</td>
   </tr>
   </tbody>
@@ -226,20 +232,28 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </ul></li>
   <li>WAN_STATIC in
   <ul>
-  <li>allow from * to {services} –&gt; NAT rules</li>
+  <li>allow v4 from * to {services} –&gt; NAT rules</li>
   </ul></li>
   <li>DMZ in
   <ul>
-  <li>deny from DMZ net to LAN net</li>
-  <li>allow from DMZ net to firewall</li>
-  <li>allow from DMZ net to * gw WAN_STATIC</li>
+  <li>deny v4 to LAN net</li>
+  <li>allow v4 to firewall</li>
+  <li>allow v4 to * gw WAN_STATIC</li>
+  <li>allow v6 to * gw HE_TUNNELV6</li>
   </ul></li>
   <li>LAN in
   <ul>
-  <li>allow ICMP from LAN net to firewall</li>
-  <li>allow IP DNS from LAN net to firewall</li>
-  <li>allow from LAN net to DMZ net</li>
-  <li>allow from LAN net to * gw WAN_CGNAT</li>
+  <li>allow v4 ICMP to firewall</li>
+  <li>allow v4 IP DNS to firewall</li>
+  <li>allow v4 to DMZ net</li>
+  <li>allow v4 to * gw WAN_CGNAT</li>
+  <li>allow v6 to * gw HE_TUNNELV6</li>
+  </ul></li>
+  <li>Wireguard in
+  <ul>
+  <li>allow v4+6 to DMZ net</li>
+  <li>allow v4 to * gw WAN_CGNAT</li>
+  <li>allow v6 to * gw HE_TUNNELV6</li>
   </ul></li>
   </ul>
   <h3 id="ipv4-nat-rules">IPv4 NAT Rules</h3>
@@ -654,10 +668,11 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </tr>
   </tbody>
   </table>
-  <h3 id="wazuh-dmz.10">wazuh DMZ.10</h3>
+  <h3 id="wazuh-dmz.10---secure">wazuh DMZ.10 -&gt; secure*</h3>
   <ul>
   <li>SSH</li>
   <li>wazuh</li>
+  <li>password manager server*</li>
   </ul>
   <h3 id="game-dmz.11">game DMZ.11</h3>
   <ul>

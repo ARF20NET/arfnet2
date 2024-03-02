@@ -105,25 +105,32 @@ Management
 | WAN  | 2    |     |      |
 | DMZ  | 4    | 192.168.4.0/24 <br> 2600:70ff:f039:4::/64 | Services |
 | LAN  | 5    | 192.168.5.0/24 <br> 2600:70ff:f039:5::/64 | Clients  |
-| VPN  |      | 10.5.0.0/24 | Wireguard clients |
+| VPN  |      | 192.168.6.0/24 <br> 2600:70ff:f039:5::/64 | Wireguard clients |
 
 ## Firewall
 
 ### Interface Rules
 
- - WAN_CGNAT in
+ - WAN\_CGNAT in
     - deny *
- - WAN_STATIC in
-    - allow from * to {services} --> NAT rules
+ - WAN\_STATIC in
+    - allow v4 from * to {services} --> NAT rules
  - DMZ in
-    - deny from DMZ net to LAN net
-    - allow from DMZ net to firewall
-    - allow from DMZ net to * gw WAN_STATIC
+    - deny  v4 to LAN net
+    - allow v4 to firewall
+    - allow v4 to * gw WAN\_STATIC
+    - allow v6 to * gw HE_TUNNELV6
  - LAN in
-    - allow ICMP from LAN net to firewall
-    - allow IP DNS from LAN net to firewall
-    - allow from LAN net to DMZ net
-    - allow from LAN net to * gw WAN_CGNAT
+    - allow v4 ICMP to firewall
+    - allow v4 IP DNS to firewall
+    - allow v4 to DMZ net
+    - allow v4 to * gw WAN\_CGNAT
+    - allow v6 to * gw HE_TUNNELV6
+ - Wireguard in
+    - allow v4+6 to DMZ net
+    - allow v4   to * gw WAN\_CGNAT
+    - allow v6   to * gw HE_TUNNELV6
+
 
 ### IPv4 NAT Rules
 
@@ -260,10 +267,11 @@ RAID attached here (with the grey stuff) (local only)
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 
-### wazuh DMZ.10
+### wazuh DMZ.10 -> secure*
 
  - SSH
  - wazuh
+ - password manager server*
 
 ### game DMZ.11
 
