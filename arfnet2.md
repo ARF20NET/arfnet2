@@ -105,7 +105,7 @@ Management
 | WAN  | 2    |     |      |
 | DMZ  | 4    | 192.168.4.0/24 <br> 2600:70ff:f039:4::/64 | Services |
 | LAN  | 5    | 192.168.5.0/24 <br> 2600:70ff:f039:5::/64 | Clients  |
-| VPN  |      | 192.168.6.0/24 <br> 2600:70ff:f039:5::/64 | Wireguard clients |
+| VPN  |      | 192.168.6.0/24 <br> 2600:70ff:f039:6::/64 | Wireguard clients |
 
 ## Firewall
 
