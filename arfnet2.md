@@ -136,7 +136,6 @@ Management
 
  | Service | Customer | IPProto | Ext Port | Host | Re Port |
  |---------|----------|---------|----------|------|---------|
- | OpenVPN | | TCP | 1195 | router | |
  | WireGuard | | UDP | 51820 | router | |
  | DNS NS1 | | TCP/UDP | 53 | misc | |
  | iperf3  | | TCP     | 5201 | misc | |
@@ -144,7 +143,7 @@ Management
  | Web     | | TCP | 80,443 | web | |
  | Git     | | TCP | 9418 | web | |
  | bittorrent | | TCP/UDP | 8999 | nas | |
- | rsync | | TCP/UDP | 873 | nas | |
+ | rsync   | | TCP/UDP | 873 | nas | |
  | IRC     | | TCP | 6667 | comm | |
  | IRCS    | | TCP | 6697 | comm | |
  | XMPP c2s| | TCP | 5222 | comm | |
@@ -158,15 +157,33 @@ Management
  | exo-extra | exo | TCP | 4040 | exovps | 4040 | |
  | yero-ssh | yero | TCP | 1511 | yerovps | 22 | |
  | yero-sql | yero | TCP | 1512 | yerovps | 3306 |
- | FiveM SuperioresRP | yero | TCP | 30120,40120 | yerovps | |
+ | FiveM SuperioresRP | yero | TCP/UDP | 30120,40120 | yerovps | |
 
 ### IPv6 port rules
 
- | Service | Customer | IPProto | Host | Port |
- |---------|----------|---------|------|------|
+ | Service | Customer | IPProto | Dest Host | Dest Port |
+ |---------|----------|---------|-----------|-----------|
  | DNS NS1 | | TCP/UDP | misc | 53 |
  | Web     | | TCP | web | 80,443 |
-
+ | NNTP    | | TCP | misc | 119 |
+ | iperf3  | | TCP | misc | 5201 |
+ | Git     | | TCP | 9418 | web | |
+ | bittorrent | | TCP/UDP | 8999 | nas | |
+ | rsync   | | TCP/UDP | 873 | nas | |
+ | IRC     | | TCP | 6667 | comm | |
+ | IRCS    | | TCP | 6697 | comm | |
+ | XMPP c2s| | TCP | 5222 | comm | |
+ | XMPP s2s| | TCP | 5269 | comm | |
+ | TURN STUN| | TCP/UDP | 3478 | comm | |
+ | TURN    | | TCP/UDP | 5349 | comm | |
+ | TURN UDP relay| | TCP/UDP | 49152-50176 | comm | |
+ | mc-waterfall-proxy | | TCP | 25565 | game | 25567 |
+ | 
+ | exo-ssh | exo | TCP | 4041 | exovps | 22 | |
+ | exo-extra | exo | TCP | 4040 | exovps | 4040 | |
+ | yero-ssh | yero | TCP | 1511 | yerovps | 22 | |
+ | yero-sql | yero | TCP | 1512 | yerovps | 3306 |
+ | FiveM SuperioresRP | yero | TCP/UDP | 30120,40120 | yerovps | |
 
 ## Hosts
 
@@ -219,6 +236,11 @@ RAID attached here (with the grey stuff) (local only)
  - FTP
  - qBittorrent-nox
  - jellyfin
+ - nginx
+
+| vhost | webroot/proxy | Comment |
+|-------|---------------|---------|
+| ftp.arf20.com* | /d/FTPServer/ | Allow only VPS and private |
 
 ### web DMZ.9
 
@@ -263,7 +285,7 @@ RAID attached here (with the grey stuff) (local only)
 | forum.arf20.com | /var/www/forum.arf20.com/html/ | |
 | deb.arf20.com | /d/FTPServer/software/debian/ | |
 | memes.arf20.com | /var/www/memes.arf20.com/, /d/FTPserver/{dcimg, dcmemes, explosionsandfire} |
-| news.arf20.com | Web-News NNTP newsgroups frontend* |
+| news.arf20.com | Web-News NNTP newsgroups frontend |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 
@@ -292,6 +314,10 @@ RAID attached here (with the grey stuff) (local only)
  - postgresql - DB for synapse
  - pantalaimon - encrypt matterbridge traffic to matrix
  - matterbridge - bridge channels with different protocols
+    - discord
+    - matrix
+    - irc
+    - xmpp
  - prosody - XMPP
  - coturn - TURN server for matrix and xmpp
  - asterisk - VoIP SIP PBX*
@@ -323,8 +349,8 @@ RAID attached here (with the grey stuff) (local only)
 ### proxy (ARFNET-HOSTMENOW VPS) *
 
  - SSH*
- - IPsec client*
- - proxy for ftp.arf20.com somehow*
+ - IPsec tunnel*
+ - IP forward to nas*
 
 ---
 
