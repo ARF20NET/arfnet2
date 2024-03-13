@@ -152,6 +152,7 @@ Management
  | TURN    | | TCP/UDP | 5349 | comm | |
  | TURN UDP relay| | TCP/UDP | 49152-50176 | comm | |
  | mc-waterfall-proxy | | TCP | 25565 | game | 25567 |
+ | css-ds  | | TCP/UDP | 27015 | game | |
  | | | | | | |
  | exo-ssh | exo | TCP | 4041 | exovps | 22 | |
  | exo-extra | exo | TCP | 4040 | exovps | 4040 | |
@@ -298,12 +299,12 @@ RAID attached here (with the grey stuff) (local only)
 ### game DMZ.11
 
  - SSH
- - waterfall (minecraft reverse proxy)
+ - waterfall (minecraft reverse proxy) :25565
     - mclobby (auth)
     - mcrubenmc
     - mcgrupo4*
     - minepau*
- - csgo server*
+ - css dedicated server :27015
 
 ### comm DMZ.12
 
