@@ -34,7 +34,7 @@ Registrar: namecheap
 
 | Nameserver | Name | IP |
 |------------|------|----|
-| NS1 | ns1.arf20.com | 2.59.235.35 <br> 2001:470:1f21:125::13 |
+| NS1 | ns1.arf20.com | 2.59.235.35 <br> 2600:70ff:f039:4::13 |
 | NS2 | ns2.arf20.com | 5.250.186.185 <br> 2001:ba0:210:d600::1 |
 
 ## Networking
@@ -391,7 +391,9 @@ DMZ IPv4s and IPv6 ends in the same way
 | DMZ.192 | yerovps | yero.lan |
 | DMZ.195 | exovps | exo.lan |
 
-## Domain DNS zone
+## DNS
+
+### Domain zone
 
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
@@ -447,7 +449,7 @@ DMZ IPv4s and IPv6 ends in the same way
 | _dmarc | TXT | (DMARC) | |
 | arf20.com | TXT | (SPF) | |
 
-## HE v6 rDNS zone
+### HE v6 rDNS zone
 
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
@@ -456,9 +458,15 @@ DMZ IPv4s and IPv6 ends in the same way
 |
 | 2600:70ff:f039:4::195 | PTR | arfnet.nexo.moe.  | |
 
-## IONOS rDNS zone
+### IONOS rDNS zone
 
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
 | 5.250.186.185 | PTR | mail.arf20.com | |
+
+## Software dev ideas (all PHP likely)
+
+ - client, service, ticket and invoice management system (WIP)
+ - mailing list manager
+ - status page
 
