@@ -58,6 +58,24 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
 = GPON fiber
 ```
 
+12U rack
+```
++--------------+--------+
+| drawer       |        |
+| drawer       | PDU    |
+| patch panel  |        |
+| switch       |        |
+|              |        |
+|              |        |
+| R720         |        |
+| R720         |        |
+|              |        |
+|              |        |
+|              |        |
+|              | UPS    |
++--------------+--------+
+```
+
 #### DELL PowerConnect 5424 switch
 
 Port assignents

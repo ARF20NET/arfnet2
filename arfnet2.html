@@ -52,7 +52,7 @@
   <tr class="odd">
   <td>NS1</td>
   <td>ns1.arf20.com</td>
-  <td>2.59.235.35 <br> 2001:470:1f21:125::13</td>
+  <td>2.59.235.35 <br> 2600:70ff:f039:4::13</td>
   </tr>
   <tr class="even">
   <td>NS2</td>
@@ -270,14 +270,6 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </thead>
   <tbody>
   <tr class="odd">
-  <td>OpenVPN</td>
-  <td></td>
-  <td>TCP</td>
-  <td>1195</td>
-  <td>router</td>
-  <td></td>
-  </tr>
-  <tr class="even">
   <td>WireGuard</td>
   <td></td>
   <td>UDP</td>
@@ -285,7 +277,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>router</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>DNS NS1</td>
   <td></td>
   <td>TCP/UDP</td>
@@ -293,7 +285,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>misc</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>iperf3</td>
   <td></td>
   <td>TCP</td>
@@ -301,7 +293,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>misc</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>NNTP</td>
   <td></td>
   <td>TCP</td>
@@ -309,7 +301,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>misc</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>Web</td>
   <td></td>
   <td>TCP</td>
@@ -317,7 +309,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>web</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>Git</td>
   <td></td>
   <td>TCP</td>
@@ -325,7 +317,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>web</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>bittorrent</td>
   <td></td>
   <td>TCP/UDP</td>
@@ -333,7 +325,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>nas</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>rsync</td>
   <td></td>
   <td>TCP/UDP</td>
@@ -341,7 +333,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>nas</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>IRC</td>
   <td></td>
   <td>TCP</td>
@@ -349,7 +341,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>comm</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>IRCS</td>
   <td></td>
   <td>TCP</td>
@@ -357,7 +349,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>comm</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>XMPP c2s</td>
   <td></td>
   <td>TCP</td>
@@ -365,7 +357,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>comm</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>XMPP s2s</td>
   <td></td>
   <td>TCP</td>
@@ -373,7 +365,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>comm</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>TURN STUN</td>
   <td></td>
   <td>TCP/UDP</td>
@@ -381,7 +373,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>comm</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>TURN</td>
   <td></td>
   <td>TCP/UDP</td>
@@ -389,7 +381,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>comm</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>TURN UDP relay</td>
   <td></td>
   <td>TCP/UDP</td>
@@ -397,13 +389,21 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>comm</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>mc-waterfall-proxy</td>
   <td></td>
   <td>TCP</td>
   <td>25565</td>
   <td>game</td>
   <td>25567</td>
+  </tr>
+  <tr class="odd">
+  <td>css-ds</td>
+  <td></td>
+  <td>TCP/UDP</td>
+  <td>27015</td>
+  <td>game</td>
+  <td></td>
   </tr>
   <tr class="even">
   <td></td>
@@ -448,7 +448,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <tr class="odd">
   <td>FiveM SuperioresRP</td>
   <td>yero</td>
-  <td>TCP</td>
+  <td>TCP/UDP</td>
   <td>30120,40120</td>
   <td>yerovps</td>
   <td></td>
@@ -462,8 +462,8 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <th>Service</th>
   <th>Customer</th>
   <th>IPProto</th>
-  <th>Host</th>
-  <th>Port</th>
+  <th>Dest Host</th>
+  <th>Dest Port</th>
   </tr>
   </thead>
   <tbody>
@@ -480,6 +480,139 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>TCP</td>
   <td>web</td>
   <td>80,443</td>
+  </tr>
+  <tr class="odd">
+  <td>NNTP</td>
+  <td></td>
+  <td>TCP</td>
+  <td>misc</td>
+  <td>119</td>
+  </tr>
+  <tr class="even">
+  <td>iperf3</td>
+  <td></td>
+  <td>TCP</td>
+  <td>misc</td>
+  <td>5201</td>
+  </tr>
+  <tr class="odd">
+  <td>Git</td>
+  <td></td>
+  <td>TCP</td>
+  <td>9418</td>
+  <td>web</td>
+  </tr>
+  <tr class="even">
+  <td>bittorrent</td>
+  <td></td>
+  <td>TCP/UDP</td>
+  <td>8999</td>
+  <td>nas</td>
+  </tr>
+  <tr class="odd">
+  <td>rsync</td>
+  <td></td>
+  <td>TCP/UDP</td>
+  <td>873</td>
+  <td>nas</td>
+  </tr>
+  <tr class="even">
+  <td>IRC</td>
+  <td></td>
+  <td>TCP</td>
+  <td>6667</td>
+  <td>comm</td>
+  </tr>
+  <tr class="odd">
+  <td>IRCS</td>
+  <td></td>
+  <td>TCP</td>
+  <td>6697</td>
+  <td>comm</td>
+  </tr>
+  <tr class="even">
+  <td>XMPP c2s</td>
+  <td></td>
+  <td>TCP</td>
+  <td>5222</td>
+  <td>comm</td>
+  </tr>
+  <tr class="odd">
+  <td>XMPP s2s</td>
+  <td></td>
+  <td>TCP</td>
+  <td>5269</td>
+  <td>comm</td>
+  </tr>
+  <tr class="even">
+  <td>TURN STUN</td>
+  <td></td>
+  <td>TCP/UDP</td>
+  <td>3478</td>
+  <td>comm</td>
+  </tr>
+  <tr class="odd">
+  <td>TURN</td>
+  <td></td>
+  <td>TCP/UDP</td>
+  <td>5349</td>
+  <td>comm</td>
+  </tr>
+  <tr class="even">
+  <td>TURN UDP relay</td>
+  <td></td>
+  <td>TCP/UDP</td>
+  <td>49152-50176</td>
+  <td>comm</td>
+  </tr>
+  <tr class="odd">
+  <td>mc-waterfall-proxy</td>
+  <td></td>
+  <td>TCP</td>
+  <td>25565</td>
+  <td>game</td>
+  </tr>
+  <tr class="even">
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>exo-ssh</td>
+  <td>exo</td>
+  <td>TCP</td>
+  <td>4041</td>
+  <td>exovps</td>
+  </tr>
+  <tr class="even">
+  <td>exo-extra</td>
+  <td>exo</td>
+  <td>TCP</td>
+  <td>4040</td>
+  <td>exovps</td>
+  </tr>
+  <tr class="odd">
+  <td>yero-ssh</td>
+  <td>yero</td>
+  <td>TCP</td>
+  <td>1511</td>
+  <td>yerovps</td>
+  </tr>
+  <tr class="even">
+  <td>yero-sql</td>
+  <td>yero</td>
+  <td>TCP</td>
+  <td>1512</td>
+  <td>yerovps</td>
+  </tr>
+  <tr class="odd">
+  <td>FiveM SuperioresRP</td>
+  <td>yero</td>
+  <td>TCP/UDP</td>
+  <td>30120,40120</td>
+  <td>yerovps</td>
   </tr>
   </tbody>
   </table>
@@ -532,7 +665,24 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <li>FTP</li>
   <li>qBittorrent-nox</li>
   <li>jellyfin</li>
+  <li>nginx</li>
   </ul>
+  <table>
+  <thead>
+  <tr class="header">
+  <th>vhost</th>
+  <th>webroot/proxy</th>
+  <th>Comment</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>ftp.arf20.com*</td>
+  <td>/d/FTPServer/</td>
+  <td>Allow only VPS and private</td>
+  </tr>
+  </tbody>
+  </table>
   <h3 id="web-dmz.9">web DMZ.9</h3>
   <ul>
   <li>SSH</li>
@@ -653,7 +803,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </tr>
   <tr class="even">
   <td>news.arf20.com</td>
-  <td>Web-News NNTP newsgroups frontend*</td>
+  <td>Web-News NNTP newsgroups frontend</td>
   <td></td>
   </tr>
   <tr class="odd">
@@ -677,14 +827,14 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <h3 id="game-dmz.11">game DMZ.11</h3>
   <ul>
   <li>SSH</li>
-  <li>waterfall (minecraft reverse proxy)
+  <li>waterfall (minecraft reverse proxy) :25565
   <ul>
   <li>mclobby (auth)</li>
   <li>mcrubenmc</li>
   <li>mcgrupo4*</li>
   <li>minepau*</li>
   </ul></li>
-  <li>csgo server*</li>
+  <li>css dedicated server :27015</li>
   </ul>
   <h3 id="comm-dmz.12">comm DMZ.12</h3>
   <ul>
@@ -694,7 +844,13 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <li>synapse - matrix</li>
   <li>postgresql - DB for synapse</li>
   <li>pantalaimon - encrypt matterbridge traffic to matrix</li>
-  <li>matterbridge - bridge channels with different protocols</li>
+  <li>matterbridge - bridge channels with different protocols
+  <ul>
+  <li>discord</li>
+  <li>matrix</li>
+  <li>irc</li>
+  <li>xmpp</li>
+  </ul></li>
   <li>prosody - XMPP</li>
   <li>coturn - TURN server for matrix and xmpp</li>
   <li>asterisk - VoIP SIP PBX*</li>
@@ -731,8 +887,8 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   *</h3>
   <ul>
   <li>SSH*</li>
-  <li>IPsec client*</li>
-  <li>proxy for ftp.arf20.com somehow*</li>
+  <li>IPsec tunnel*</li>
+  <li>IP forward to nas*</li>
   </ul>
   <hr />
   <h3 id="yerovps-dmz.192-yero">yerovps DMZ.192 (yero)</h3>
@@ -824,7 +980,8 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </tr>
   </tbody>
   </table>
-  <h2 id="domain-dns-zone">Domain DNS zone</h2>
+  <h2 id="dns">DNS</h2>
+  <h3 id="domain-zone">Domain zone</h3>
   <table>
   <thead>
   <tr class="header">
@@ -1143,7 +1300,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </tr>
   </tbody>
   </table>
-  <h2 id="he-v6-rdns-zone">HE v6 rDNS zone</h2>
+  <h3 id="he-v6-rdns-zone">HE v6 rDNS zone</h3>
   <table>
   <thead>
   <tr class="header">
@@ -1180,7 +1337,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </tr>
   </tbody>
   </table>
-  <h2 id="ionos-rdns-zone">IONOS rDNS zone</h2>
+  <h3 id="ionos-rdns-zone">IONOS rDNS zone</h3>
   <table>
   <thead>
   <tr class="header">
@@ -1199,5 +1356,12 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </tr>
   </tbody>
   </table>
+  <h2 id="software-dev-ideas-all-php-likely">Software dev ideas (all PHP
+  likely)</h2>
+  <ul>
+  <li>client, service, ticket and invoice management system (WIP)</li>
+  <li>mailing list manager</li>
+  <li>status page</li>
+  </ul>
 	</body>
 </html>
