@@ -305,6 +305,7 @@ RAID attached here (with the grey stuff) (local only)
 | deb.arf20.com | /d/FTPServer/software/debian/ | |
 | memes.arf20.com | /var/www/memes.arf20.com/, /d/FTPserver/{dcimg, dcmemes, explosionsandfire} |
 | news.arf20.com | Web-News NNTP newsgroups frontend |
+| dash.arf20.com | /var/www/dash.arf20.com/html/ | CSTIMS |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 
@@ -364,6 +365,11 @@ RAID attached here (with the grey stuff) (local only)
  - opendkim
  - majordomo? - mailing list manager*
  - bind9 - slave authoritative nameserver NS2
+
+ | vhost | webroot/proxy | Comment |
+ |-------|---------------|---------|
+ | default | \<return 418 im a teapot> | |
+ | lists.arf20.com | /var/www/lists.arf20.com/html/ | MLM |
 
 ### proxy (ARFNET-HOSTMENOW VPS) *
 
