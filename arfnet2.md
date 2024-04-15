@@ -5,6 +5,7 @@ After the disastrous ISP [schism](http://arf20.com/explanation.txt)
 ## Masterplan
 
 Stage 1: very safe
+
  - Close all ports
  - Nuke (or stop) all old VMs (exclude OPNSense)
  - Make DMZ
@@ -12,12 +13,14 @@ Stage 1: very safe
  - Open basic ports
 
 Stage 2: new services
+
  - IONOS VPS for mail
  - Some new very safe services
  - HE IPv6 tunnel
  - Own authoritative nameservers for domain zone
 
 Stage 3\*: finally
+
  - Another VPS in unknown provider for
     - Tor
     - Reverse-proxying the media library
@@ -259,7 +262,7 @@ RAID attached here (with the grey stuff) (local only)
 
 | vhost | webroot/proxy | Comment |
 |-------|---------------|---------|
-| ftp.arf20.com* | /d/FTPServer/ | Allow only VPS and private |
+| dark.arf20.com* | /d/FTPServer/ | Allow only VPS and private |
 
 ### web DMZ.9
 
@@ -306,6 +309,7 @@ RAID attached here (with the grey stuff) (local only)
 | memes.arf20.com | /var/www/memes.arf20.com/, /d/FTPserver/{dcimg, dcmemes, explosionsandfire} |
 | news.arf20.com | Web-News NNTP newsgroups frontend |
 | dash.arf20.com | /var/www/dash.arf20.com/html/ | CSTIMS |
+| ftp.arf20.com | /d/FTPServer/public/ |  |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 
@@ -320,7 +324,6 @@ RAID attached here (with the grey stuff) (local only)
  - SSH
  - waterfall (minecraft reverse proxy) :25565
     - mclobby (auth)
-    - mcrubenmc
     - mcgrupo4*
     - minepau*
  - css dedicated server :27015
@@ -363,13 +366,16 @@ RAID attached here (with the grey stuff) (local only)
     [config](https://github.com/ARF20NET/mail-conf)
  - dovecot - imapd
  - opendkim
- - majordomo? - mailing list manager*
  - bind9 - slave authoritative nameserver NS2
+ - mlmmj - mailing list manager
+   - installed to /usr/local/bin/mlmmj-webarchiver.sh and
+     /etc/mlmmj-webarchiver
+ - mlmmj-webarchiver - mailing list archiver
 
  | vhost | webroot/proxy | Comment |
  |-------|---------------|---------|
  | default | \<return 418 im a teapot> | |
- | lists.arf20.com | /var/www/lists.arf20.com/html/ | MLM |
+ | lists.arf20.com | / = /var/www/lists.arf20.com/html/<br> /archive = /srv/www/htdocs/archive/ | Mailing lists |
 
 ### proxy (ARFNET-HOSTMENOW VPS) *
 
@@ -488,9 +494,7 @@ DMZ IPv4s and IPv6 ends in the same way
 |------|------|---------|---------|
 | 5.250.186.185 | PTR | mail.arf20.com | |
 
-## Software dev ideas (all PHP likely)
+## Custom ARFNET software
 
- - client, service, ticket and invoice management system (WIP)
- - mailing list manager
- - status page
-
+ - CSTIMS: client, service, ticket and invoice management system (WIP)
+ - status page (TODO)

@@ -26,15 +26,32 @@
   <p>After the disastrous ISP <a
   href="http://arf20.com/explanation.txt">schism</a></p>
   <h2 id="masterplan">Masterplan</h2>
-  <p>Stage 1: very safe - Close all ports - Nuke (or stop) all old VMs
-  (exclude OPNSense) - Make DMZ - Make new basic VMs (cloning deb12
-  template) - Open basic ports</p>
-  <p>Stage 2: new services - IONOS VPS for mail - Some new very safe
-  services - HE IPv6 tunnel - Own authoritative nameservers for domain
-  zone</p>
-  <p>Stage 3*: finally - Another VPS in unknown provider for - Tor -
-  Reverse-proxying the media library - PHP on main site with more web
-  services from scratch, hopefully secure - More new services</p>
+  <p>Stage 1: very safe</p>
+  <ul>
+  <li>Close all ports</li>
+  <li>Nuke (or stop) all old VMs (exclude OPNSense)</li>
+  <li>Make DMZ</li>
+  <li>Make new basic VMs (cloning deb12 template)</li>
+  <li>Open basic ports</li>
+  </ul>
+  <p>Stage 2: new services</p>
+  <ul>
+  <li>IONOS VPS for mail</li>
+  <li>Some new very safe services</li>
+  <li>HE IPv6 tunnel</li>
+  <li>Own authoritative nameservers for domain zone</li>
+  </ul>
+  <p>Stage 3*: finally</p>
+  <ul>
+  <li>Another VPS in unknown provider for
+  <ul>
+  <li>Tor</li>
+  <li>Reverse-proxying the media library</li>
+  </ul></li>
+  <li>PHP on main site with more web services from scratch, hopefully
+  secure</li>
+  <li>More new services</li>
+  </ul>
   <h2 id="domain">Domain</h2>
   <p>arf20.com</p>
   <p>Registrar: namecheap</p>
@@ -77,6 +94,21 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
                    
 - 1000BASE-T
 = GPON fiber</code></pre>
+  <p>12U rack</p>
+  <pre><code>+--------------+--------+
+| drawer       |        |
+| drawer       | PDU    |
+| patch panel  |        |
+| switch       |        |
+|              |        |
+|              |        |
+| R720         |        |
+| R720         |        |
+|              |        |
+|              |        |
+|              |        |
+|              | UPS    |
++--------------+--------+</code></pre>
   <h4 id="dell-powerconnect-5424-switch">DELL PowerConnect 5424
   switch</h4>
   <p>Port assignents</p>
@@ -677,7 +709,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </thead>
   <tbody>
   <tr class="odd">
-  <td>ftp.arf20.com*</td>
+  <td>dark.arf20.com*</td>
   <td>/d/FTPServer/</td>
   <td>Allow only VPS and private</td>
   </tr>
@@ -807,6 +839,16 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   </tr>
   <tr class="odd">
+  <td>dash.arf20.com</td>
+  <td>/var/www/dash.arf20.com/html/</td>
+  <td>CSTIMS</td>
+  </tr>
+  <tr class="even">
+  <td>ftp.arf20.com</td>
+  <td>/d/FTPServer/public/</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
   <td></td>
   <td></td>
   <td></td>
@@ -830,7 +872,6 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <li>waterfall (minecraft reverse proxy) :25565
   <ul>
   <li>mclobby (auth)</li>
-  <li>mcrubenmc</li>
   <li>mcgrupo4*</li>
   <li>minepau*</li>
   </ul></li>
@@ -880,9 +921,41 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   href="https://github.com/ARF20NET/mail-conf">config</a></li>
   <li>dovecot - imapd</li>
   <li>opendkim</li>
-  <li>majordomo? - mailing list manager*</li>
   <li>bind9 - slave authoritative nameserver NS2</li>
+  <li>mlmmj - mailing list manager
+  <ul>
+  <li>installed to /usr/local/bin/mlmmj-webarchiver.sh and
+  /etc/mlmmj-webarchiver</li>
+  </ul></li>
+  <li>mlmmj-webarchiver - mailing list archiver</li>
   </ul>
+  <table>
+  <colgroup>
+  <col style="width: 22%" />
+  <col style="width: 48%" />
+  <col style="width: 29%" />
+  </colgroup>
+  <thead>
+  <tr class="header">
+  <th>vhost</th>
+  <th>webroot/proxy</th>
+  <th>Comment</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>default</td>
+  <td>&lt;return 418 im a teapot&gt;</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>lists.arf20.com</td>
+  <td>/ = /var/www/lists.arf20.com/html/<br> /archive =
+  /srv/www/htdocs/archive/</td>
+  <td>Mailing lists</td>
+  </tr>
+  </tbody>
+  </table>
   <h3 id="proxy-arfnet-hostmenow-vps">proxy (ARFNET-HOSTMENOW VPS)
   *</h3>
   <ul>
@@ -1356,12 +1429,11 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </tr>
   </tbody>
   </table>
-  <h2 id="software-dev-ideas-all-php-likely">Software dev ideas (all PHP
-  likely)</h2>
+  <h2 id="custom-arfnet-software">Custom ARFNET software</h2>
   <ul>
-  <li>client, service, ticket and invoice management system (WIP)</li>
-  <li>mailing list manager</li>
-  <li>status page</li>
+  <li>CSTIMS: client, service, ticket and invoice management system
+  (WIP)</li>
+  <li>status page (TODO)</li>
   </ul>
 	</body>
 </html>
