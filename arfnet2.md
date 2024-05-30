@@ -312,6 +312,7 @@ RAID attached here (with the grey stuff) (local only)
 | ftp.arf20.com | /d/FTPServer/public/ |  |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
+| panaland.arf20.com | /var/www/panaland.arf20.com/html/ | |
 
 ### wazuh DMZ.10 -> secure*
 
@@ -324,8 +325,8 @@ RAID attached here (with the grey stuff) (local only)
  - SSH
  - waterfall (minecraft reverse proxy) :25565
     - mclobby (auth)
-    - mcgrupo4*
     - minepau*
+ - panaland mc modded :25566
  - css dedicated server :27015
 
 ### comm DMZ.12
@@ -467,6 +468,7 @@ DMZ IPv4s and IPv6 ends in the same way
 | zabbix.arf20.com | CNAME | web.arf20.com |
 | memes.arf20.com | CNAME | web.arf20.com |
 | news.arf20.com | CNAME | misc.arf20.com |
+| panaland.arf20.com | CNAME | web.arf20.com |
 | 
 | _acme-challenge.jellyfin | CNAME | (challenge) | |
 | _acme-challenge.irc | CNAME | (challenge) | |
@@ -496,5 +498,5 @@ DMZ IPv4s and IPv6 ends in the same way
 
 ## Custom ARFNET software
 
- - CSTIMS: client, service, ticket and invoice management system (WIP)
+ - [cstims](https://cgit.arf20.com/cstims): client, service, ticket and invoice management system
  - status page (TODO)

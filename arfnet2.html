@@ -858,6 +858,11 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>http://yerovps.lan:3001</td>
   <td></td>
   </tr>
+  <tr class="odd">
+  <td>panaland.arf20.com</td>
+  <td>/var/www/panaland.arf20.com/html/</td>
+  <td></td>
+  </tr>
   </tbody>
   </table>
   <h3 id="wazuh-dmz.10---secure">wazuh DMZ.10 -&gt; secure*</h3>
@@ -872,9 +877,9 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <li>waterfall (minecraft reverse proxy) :25565
   <ul>
   <li>mclobby (auth)</li>
-  <li>mcgrupo4*</li>
   <li>minepau*</li>
   </ul></li>
+  <li>panaland mc modded :25566</li>
   <li>css dedicated server :27015</li>
   </ul>
   <h3 id="comm-dmz.12">comm DMZ.12</h3>
@@ -1306,66 +1311,72 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   </tr>
   <tr class="odd">
+  <td>panaland.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
   <td></td>
   <td></td>
   <td></td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>_acme-challenge.jellyfin</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>_acme-challenge.irc</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>_acme-challenge.matrix</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>_acme-challenge.mail</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>_acme-challenge.xmpp</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td></td>
   <td></td>
   <td></td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>arf20.com</td>
   <td>MX</td>
   <td>mail.arf20.com</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>selector._domainkey</td>
   <td>TXT</td>
   <td>(DKIM)</td>
   <td>DKIM for selector ‘selector’</td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>_dmarc</td>
   <td>TXT</td>
   <td>(DMARC)</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>arf20.com</td>
   <td>TXT</td>
   <td>(SPF)</td>
@@ -1431,8 +1442,8 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </table>
   <h2 id="custom-arfnet-software">Custom ARFNET software</h2>
   <ul>
-  <li>CSTIMS: client, service, ticket and invoice management system
-  (WIP)</li>
+  <li><a href="https://cgit.arf20.com/cstims">cstims</a>: client,
+  service, ticket and invoice management system</li>
   <li>status page (TODO)</li>
   </ul>
 	</body>
