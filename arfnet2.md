@@ -289,6 +289,7 @@ RAID attached here (with the grey stuff) (local only)
  - Jekyll - blog static site generator thing
  - opentracker? - bittorrent tracker*
  - gophernicus - gopher server*
+ - photoprism
 
 | vhost | webroot/proxy | Comment |
 |-------|---------------|---------|
@@ -310,6 +311,7 @@ RAID attached here (with the grey stuff) (local only)
 | news.arf20.com | Web-News NNTP newsgroups frontend |
 | dash.arf20.com | /var/www/dash.arf20.com/html/ | CSTIMS |
 | ftp.arf20.com | /d/FTPServer/public/ |  |
+| photo.arf20.com* | [::1]:2342 | photoprism |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 | panaland.arf20.com | /var/www/panaland.arf20.com/html/ | |
@@ -468,6 +470,11 @@ DMZ IPv4s and IPv6 ends in the same way
 | zabbix.arf20.com | CNAME | web.arf20.com |
 | memes.arf20.com | CNAME | web.arf20.com |
 | news.arf20.com | CNAME | misc.arf20.com |
+| dash.arf20.com | CNAME | web.arf20.com |
+| ftp.arf20.com | CNAME | web.arf20.com |
+| photo.arf20.com | CNAME | web.arf20.com |
+| 
+| lahomosexualidadde.arf20.com | CNAME | weonpollo.xyz |
 | panaland.arf20.com | CNAME | web.arf20.com |
 | 
 | _acme-challenge.jellyfin | CNAME | (challenge) | |
