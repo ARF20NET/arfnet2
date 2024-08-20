@@ -359,7 +359,11 @@ RAID attached here (with the grey stuff) (local only)
  - Discord servers
    - gDebrid (gookie)
 
-### pubnix?*
+### t2 (T/2 SDE) DMZ.15
+
+### pubnix (OpenBSD 7.5) DMZ.16
+
+ - SSH
 
 ### mail (ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1
 
@@ -369,6 +373,7 @@ RAID attached here (with the grey stuff) (local only)
     [config](https://github.com/ARF20NET/mail-conf)
  - dovecot - imapd
  - opendkim
+ - opendmarc
  - bind9 - slave authoritative nameserver NS2
  - mlmmj - mailing list manager
    - installed to /usr/local/bin/mlmmj-webarchiver.sh and
@@ -380,24 +385,34 @@ RAID attached here (with the grey stuff) (local only)
  | default | \<return 418 im a teapot> | |
  | lists.arf20.com | / = /var/www/lists.arf20.com/html/<br> /archive = /srv/www/htdocs/archive/ | Mailing lists |
 
-### proxy (ARFNET-HOSTMENOW VPS) *
+### proxy (ARFNET-HOSTMENOW VPS) 92.60.77.4
 
- - SSH*
- - IPsec tunnel*
- - IP forward to nas*
+ - SSH
+ - IPsec tunnel
+ - nginx reverse proxy to nas
+
+ | vhost | webroot/proxy | Comment |
+ |-------|---------------|---------|
+ | default | \<return 418 im a teapot> | |
+ | jokesondmca.mooo.com | http://nas/ | Stuff |
 
 ---
 
-### yerovps DMZ.192 (yero)
+### yero-debian VPS DMZ.192 (yero)
 
  - SSH
  - mariadb
  - FiveM SuperioresRP
 
-### exovps DMZ.195 (exo)
+### exo-debian VPS DMZ.195 (exo)
 
  - SSH
  - netbox
+
+### loofa-debian VPS DMZ.196 (loofa)
+
+ - SSH
+ - ?
 
 \*TODO
 
@@ -420,9 +435,12 @@ DMZ IPv4s and IPv6 ends in the same way
 | DMZ.11 | game.lan |
 | DMZ.12 | comm.lan |
 | DMZ.13 | misc.lan |
+| DMZ.15 | (t2) |
+| DMZ.16 | pubnix |
 | | | |
-| DMZ.192 | yerovps | yero.lan |
-| DMZ.195 | exovps | exo.lan |
+| DMZ.192 | yero-debian | yero.lan |
+| DMZ.195 | exo-debian | exo.lan |
+| DMZ.196 |  loofa-debian | loofa.lan |
 
 ## DNS
 
@@ -441,16 +459,18 @@ DMZ IPv4s and IPv6 ends in the same way
 | arf20.com | A | 2.59.235.35 | |
 | arf20.com | AAAA | 2600:70ff:f039:4::9 | |
 |
-| mail.arf20.com  | A	   | 5.250.186.185		   | ARFNET-IONOS
-| mail.arf20.com  | AAAA	| 2001:ba0:210:d600::1	| ARFNET-IONOS
-| web.arf20.com   | A	   | 2.59.235.35
-| web.arf20.com   | AAAA	| 
-| game.arf20.com  | A	   | 2.59.235.35
-| game.arf20.com  | AAAA	| 2600:70ff:f039:4::11
-| comm.arf20.com  | A	   | 2.59.235.35
-| comm.arf20.com  | AAAA	| 2600:70ff:f039:4::12
-| misc.arf20.com  | A	   | 2.59.235.35
-| misc.arf20.com  | AAAA	| 2600:70ff:f039:4::13
+| mail.arf20.com   | A	   | 5.250.186.185		   | ARFNET-IONOS
+| mail.arf20.com   | AAAA	| 2001:ba0:210:d600::1	| ARFNET-IONOS
+| web.arf20.com    | A	   | 2.59.235.35
+| web.arf20.com    | AAAA	| 
+| game.arf20.com   | A	   | 2.59.235.35
+| game.arf20.com   | AAAA	| 2600:70ff:f039:4::11
+| comm.arf20.com   | A	   | 2.59.235.35
+| comm.arf20.com   | AAAA	| 2600:70ff:f039:4::12
+| misc.arf20.com   | A	   | 2.59.235.35
+| misc.arf20.com   | AAAA	| 2600:70ff:f039:4::13
+| pubnix.arf20.com | A	   | 2.59.235.35
+| pubnix.arf20.com | AAAA	| 2600:70ff:f039:4::16
 |
 | irc.arf20.com | CNAME | comm.arf20.com |
 | jellyfin.arf20.com | CNAME | web.arf20.com |

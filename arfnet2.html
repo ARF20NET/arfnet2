@@ -922,7 +922,11 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <li>gDebrid (gookie)</li>
   </ul></li>
   </ul>
-  <h3 id="pubnix">pubnix?*</h3>
+  <h3 id="t2-t2-sde-dmz.15">t2 (T/2 SDE) DMZ.15</h3>
+  <h3 id="pubnix-openbsd-7.5-dmz.16">pubnix (OpenBSD 7.5) DMZ.16</h3>
+  <ul>
+  <li>SSH</li>
+  </ul>
   <h3 id="mail-arfnet-ionos-vps-5.250.186.185-2001ba0210d6001">mail
   (ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1</h3>
   <ul>
@@ -932,6 +936,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   href="https://github.com/ARF20NET/mail-conf">config</a></li>
   <li>dovecot - imapd</li>
   <li>opendkim</li>
+  <li>opendmarc</li>
   <li>bind9 - slave authoritative nameserver NS2</li>
   <li>mlmmj - mailing list manager
   <ul>
@@ -967,24 +972,52 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </tr>
   </tbody>
   </table>
-  <h3 id="proxy-arfnet-hostmenow-vps">proxy (ARFNET-HOSTMENOW VPS)
-  *</h3>
+  <h3 id="proxy-arfnet-hostmenow-vps-92.60.77.4">proxy (ARFNET-HOSTMENOW
+  VPS) 92.60.77.4</h3>
   <ul>
-  <li>SSH*</li>
-  <li>IPsec tunnel*</li>
-  <li>IP forward to nas*</li>
+  <li>SSH</li>
+  <li>IPsec tunnel</li>
+  <li>nginx reverse proxy to nas</li>
   </ul>
+  <table>
+  <thead>
+  <tr class="header">
+  <th>vhost</th>
+  <th>webroot/proxy</th>
+  <th>Comment</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>default</td>
+  <td>&lt;return 418 im a teapot&gt;</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>jokesondmca.mooo.com</td>
+  <td>http://nas/</td>
+  <td>Stuff</td>
+  </tr>
+  </tbody>
+  </table>
   <hr />
-  <h3 id="yerovps-dmz.192-yero">yerovps DMZ.192 (yero)</h3>
+  <h3 id="yero-debian-vps-dmz.192-yero">yero-debian VPS DMZ.192
+  (yero)</h3>
   <ul>
   <li>SSH</li>
   <li>mariadb</li>
   <li>FiveM SuperioresRP</li>
   </ul>
-  <h3 id="exovps-dmz.195-exo">exovps DMZ.195 (exo)</h3>
+  <h3 id="exo-debian-vps-dmz.195-exo">exo-debian VPS DMZ.195 (exo)</h3>
   <ul>
   <li>SSH</li>
   <li>netbox</li>
+  </ul>
+  <h3 id="loofa-debian-vps-dmz.196-loofa">loofa-debian VPS DMZ.196
+  (loofa)</h3>
+  <ul>
+  <li>SSH</li>
+  <li>?</li>
   </ul>
   <p>*TODO</p>
   <h2 id="internal-name-and-number-assignation-table">Internal Name and
@@ -1051,16 +1084,28 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>misc.lan</td>
   </tr>
   <tr class="even">
+  <td>DMZ.15</td>
+  <td>(t2)</td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.16</td>
+  <td>pubnix</td>
+  </tr>
+  <tr class="even">
   <td></td>
   <td></td>
   </tr>
   <tr class="odd">
   <td>DMZ.192</td>
-  <td>yerovps</td>
+  <td>yero-debian</td>
   </tr>
   <tr class="even">
   <td>DMZ.195</td>
-  <td>exovps</td>
+  <td>exo-debian</td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.196</td>
+  <td>loofa-debian</td>
   </tr>
   </tbody>
   </table>
@@ -1200,6 +1245,18 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>misc.arf20.com</td>
   <td>AAAA</td>
   <td>2600:70ff:f039:4::13</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>pubnix.arf20.com</td>
+  <td>A</td>
+  <td>2.59.235.35</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>pubnix.arf20.com</td>
+  <td>AAAA</td>
+  <td>2600:70ff:f039:4::16</td>
   <td></td>
   </tr>
   <tr class="even">
