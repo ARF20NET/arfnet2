@@ -259,6 +259,7 @@ RAID attached here (with the grey stuff) (local only)
  - qBittorrent-nox
  - jellyfin
  - nginx
+ - mpd :8000
 
 | vhost | webroot/proxy | Comment |
 |-------|---------------|---------|
@@ -315,6 +316,7 @@ RAID attached here (with the grey stuff) (local only)
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 | panaland.arf20.com | /var/www/panaland.arf20.com/html/ | |
+| radio.arf20.com | / = /var/www/radio.arf20.com/html/; /stream = nas:8000 | |
 
 ### wazuh DMZ.10 -> secure*
 
