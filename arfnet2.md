@@ -290,7 +290,8 @@ RAID attached here (with the grey stuff) (local only)
  - Jekyll - blog static site generator thing
  - opentracker? - bittorrent tracker*
  - gophernicus - gopher server*
- - photoprism
+ - photoprism - photo shit
+ - squid - http proxy server :3128
 
 | vhost | webroot/proxy | Comment |
 |-------|---------------|---------|
