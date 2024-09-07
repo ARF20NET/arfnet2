@@ -313,11 +313,12 @@ RAID attached here (with the grey stuff) (local only)
 | news.arf20.com | Web-News NNTP newsgroups frontend |
 | dash.arf20.com | /var/www/dash.arf20.com/html/ | CSTIMS |
 | ftp.arf20.com | /d/FTPServer/public/ |  |
-| photo.arf20.com* | [::1]:2342 | photoprism |
+| photo.arf20.com | [::1]:2342 | photoprism |
+| radio.arf20.com | / = /var/www/radio.arf20.com/html/; /stream = nas:8000 | |
+| os.arf20.com | / = /d/FTPServer/OS/ | |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 | panaland.arf20.com | /var/www/panaland.arf20.com/html/ | |
-| radio.arf20.com | / = /var/www/radio.arf20.com/html/; /stream = nas:8000 | |
 
 ### wazuh DMZ.10 -> secure*
 
