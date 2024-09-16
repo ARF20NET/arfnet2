@@ -172,14 +172,15 @@ Management
  | TURN STUN| | TCP/UDP | 3478 | comm | |
  | TURN    | | TCP/UDP | 5349 | comm | |
  | TURN UDP relay| | TCP/UDP | 49152-50176 | comm | |
- | mc-waterfall-proxy | | TCP | 25565 | game | 25567 |
+ | mc waterfall proxy | | TCP | 25565 | game | 25567 | |
+ | mc bedrock geyser | | TCP | 19132 | game | 19132 | |
  | css-ds  | | TCP/UDP | 27015 | game | |
  | | | | | | |
- | exo-ssh | exo | TCP | 4041 | exovps | 22 | |
- | exo-extra | exo | TCP | 4040 | exovps | 4040 | |
- | yero-ssh | yero | TCP | 1511 | yerovps | 22 | |
- | yero-sql | yero | TCP | 1512 | yerovps | 3306 |
- | FiveM SuperioresRP | yero | TCP/UDP | 30120,40120 | yerovps | |
+ | exo ssh | exo | TCP | 4041 | exovps | 22 | |
+ | exo extra | exo | TCP | 4040 | exovps | 4040 | |
+ | yero ssh | yero | TCP | 1511 | yerovps | 22 | |
+ | yero mc | yero | TCP | 25569 | yerovps | 25565 | |
+ | yero panel | yero | TCP | 24444 | yerovps | 24444 | |
 
 ### IPv6 port rules
 
@@ -519,7 +520,7 @@ DMZ IPv4s and IPv6 ends in the same way
 | 2600:70ff:f039:4::13 | PTR | ns1.arf20.com | |
 | 2600:70ff:f039:4::9  | PTR | arf20.com | |
 |
-| 2600:70ff:f039:4::195 | PTR | arfnet.nexo.moe.  | |
+| 2600:70ff:f039:4::195 | PTR | global.dns.navy | |
 
 ### IONOS rDNS zone
 
@@ -529,5 +530,5 @@ DMZ IPv4s and IPv6 ends in the same way
 
 ## Custom ARFNET software
 
- - [cstims](https://cgit.arf20.com/cstims): client, service, ticket and invoice management system
- - status page (TODO)
+ - [cstims](https://cgit.arf20.com/arfnet2-cstims): client, service, ticket and invoice management system
+ - [lists](https://cgit.arf20.com/arfnet2-lists): mailing list browser
