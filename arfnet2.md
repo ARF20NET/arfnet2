@@ -27,6 +27,11 @@ Stage 3\*: finally
  - PHP on main site with more web services from scratch, hopefully secure
  - More new services
 
+Stage 4\*: Site B (piso)
+ - Mikrotik and DELL switch
+ - Site to Site wireguard
+ - Establish telephony
+
 ## Domain
 
 arf20.com
@@ -127,6 +132,9 @@ Management
 | DMZ  | 4    | 192.168.4.0/24 <br> 2600:70ff:f039:4::/64 | Services |
 | LAN  | 5    | 192.168.5.0/24 <br> 2600:70ff:f039:5::/64 | Clients  |
 | VPN  |      | 192.168.6.0/24 <br> 2600:70ff:f039:6::/64 | Wireguard clients |
+| dark |      | 192.168.7.0/24 <br> | dark IPsec remote subnet |
+| B:PSN | un  | 192.168.18.0/24 | Site-B:PisoNET |
+| B:SBN |     | 192.168.8.0/24  | Site-B:SiteBNET |
 
 ## Firewall
 
@@ -172,14 +180,15 @@ Management
  | TURN STUN| | TCP/UDP | 3478 | comm | |
  | TURN    | | TCP/UDP | 5349 | comm | |
  | TURN UDP relay| | TCP/UDP | 49152-50176 | comm | |
- | mc-waterfall-proxy | | TCP | 25565 | game | 25567 |
+ | mc waterfall proxy | | TCP | 25565 | game | 25567 | |
+ | mc bedrock geyser | | TCP | 19132 | game | 19132 | |
  | css-ds  | | TCP/UDP | 27015 | game | |
  | | | | | | |
- | exo-ssh | exo | TCP | 4041 | exovps | 22 | |
- | exo-extra | exo | TCP | 4040 | exovps | 4040 | |
- | yero-ssh | yero | TCP | 1511 | yerovps | 22 | |
- | yero-sql | yero | TCP | 1512 | yerovps | 3306 |
- | FiveM SuperioresRP | yero | TCP/UDP | 30120,40120 | yerovps | |
+ | exo ssh | exo | TCP | 4041 | exovps | 22 | |
+ | exo extra | exo | TCP | 4040 | exovps | 4040 | |
+ | yero ssh | yero | TCP | 1511 | yerovps | 22 | |
+ | yero mc | yero | TCP | 25569 | yerovps | 25565 | |
+ | yero panel | yero | TCP | 24444 | yerovps | 24444 | |
 
 ### IPv6 port rules
 
@@ -313,11 +322,12 @@ RAID attached here (with the grey stuff) (local only)
 | news.arf20.com | Web-News NNTP newsgroups frontend |
 | dash.arf20.com | /var/www/dash.arf20.com/html/ | CSTIMS |
 | ftp.arf20.com | /d/FTPServer/public/ |  |
-| photo.arf20.com* | [::1]:2342 | photoprism |
+| photo.arf20.com | [::1]:2342 | photoprism |
+| radio.arf20.com | / = /var/www/radio.arf20.com/html/; /stream = nas:8000 | |
+| os.arf20.com | / = /d/FTPServer/OS/ | |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 | panaland.arf20.com | /var/www/panaland.arf20.com/html/ | |
-| radio.arf20.com | / = /var/www/radio.arf20.com/html/; /stream = nas:8000 | |
 
 ### wazuh DMZ.10 -> secure*
 
@@ -445,6 +455,15 @@ DMZ IPv4s and IPv6 ends in the same way
 | DMZ.195 | exo-debian | exo.lan |
 | DMZ.196 |  loofa-debian | loofa.lan |
 
+Site-B:PiSoNet
+
+| Addr | Name |
+|------|------|
+| PSN.1 | Huawei CPE Combo Box |
+| PSN.2 | DELL switch on untagged |
+| PSN.3 | Mikrotik firewall downstream |
+| PSN.8 | desktop (when applies) |
+
 ## DNS
 
 ### Domain zone
@@ -518,7 +537,7 @@ DMZ IPv4s and IPv6 ends in the same way
 | 2600:70ff:f039:4::13 | PTR | ns1.arf20.com | |
 | 2600:70ff:f039:4::9  | PTR | arf20.com | |
 |
-| 2600:70ff:f039:4::195 | PTR | arfnet.nexo.moe.  | |
+| 2600:70ff:f039:4::195 | PTR | global.dns.navy | |
 
 ### IONOS rDNS zone
 
@@ -528,5 +547,5 @@ DMZ IPv4s and IPv6 ends in the same way
 
 ## Custom ARFNET software
 
- - [cstims](https://cgit.arf20.com/cstims): client, service, ticket and invoice management system
- - status page (TODO)
+ - [cstims](https://cgit.arf20.com/arfnet2-cstims): client, service, ticket and invoice management system
+ - [lists](https://cgit.arf20.com/arfnet2-lists): mailing list browser

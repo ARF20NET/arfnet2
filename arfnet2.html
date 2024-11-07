@@ -422,7 +422,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   </tr>
   <tr class="even">
-  <td>mc-waterfall-proxy</td>
+  <td>mc waterfall proxy</td>
   <td></td>
   <td>TCP</td>
   <td>25565</td>
@@ -430,6 +430,14 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>25567</td>
   </tr>
   <tr class="odd">
+  <td>mc bedrock geyser</td>
+  <td></td>
+  <td>TCP</td>
+  <td>19132</td>
+  <td>game</td>
+  <td>19132</td>
+  </tr>
+  <tr class="even">
   <td>css-ds</td>
   <td></td>
   <td>TCP/UDP</td>
@@ -437,7 +445,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>game</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td></td>
   <td></td>
   <td></td>
@@ -445,45 +453,45 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   <td></td>
   </tr>
-  <tr class="odd">
-  <td>exo-ssh</td>
+  <tr class="even">
+  <td>exo ssh</td>
   <td>exo</td>
   <td>TCP</td>
   <td>4041</td>
   <td>exovps</td>
   <td>22</td>
   </tr>
-  <tr class="even">
-  <td>exo-extra</td>
+  <tr class="odd">
+  <td>exo extra</td>
   <td>exo</td>
   <td>TCP</td>
   <td>4040</td>
   <td>exovps</td>
   <td>4040</td>
   </tr>
-  <tr class="odd">
-  <td>yero-ssh</td>
+  <tr class="even">
+  <td>yero ssh</td>
   <td>yero</td>
   <td>TCP</td>
   <td>1511</td>
   <td>yerovps</td>
   <td>22</td>
   </tr>
-  <tr class="even">
-  <td>yero-sql</td>
+  <tr class="odd">
+  <td>yero mc</td>
   <td>yero</td>
   <td>TCP</td>
-  <td>1512</td>
+  <td>25569</td>
   <td>yerovps</td>
-  <td>3306</td>
+  <td>25565</td>
   </tr>
-  <tr class="odd">
-  <td>FiveM SuperioresRP</td>
+  <tr class="even">
+  <td>yero panel</td>
   <td>yero</td>
-  <td>TCP/UDP</td>
-  <td>30120,40120</td>
+  <td>TCP</td>
+  <td>24444</td>
   <td>yerovps</td>
-  <td></td>
+  <td>24444</td>
   </tr>
   </tbody>
   </table>
@@ -852,9 +860,19 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   </tr>
   <tr class="odd">
-  <td>photo.arf20.com*</td>
+  <td>photo.arf20.com</td>
   <td>[::1]:2342</td>
   <td>photoprism</td>
+  </tr>
+  <tr class="even">
+  <td>radio.arf20.com</td>
+  <td>/ = /var/www/radio.arf20.com/html/; /stream = nas:8000</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>os.arf20.com</td>
+  <td>/ = /d/FTPServer/OS/</td>
+  <td></td>
   </tr>
   <tr class="even">
   <td></td>
@@ -869,11 +887,6 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <tr class="even">
   <td>panaland.arf20.com</td>
   <td>/var/www/panaland.arf20.com/html/</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>radio.arf20.com</td>
-  <td>/ = /var/www/radio.arf20.com/html/; /stream = nas:8000</td>
   <td></td>
   </tr>
   </tbody>
@@ -1516,7 +1529,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <tr class="even">
   <td>2600:70ff:f039:4::195</td>
   <td>PTR</td>
-  <td>arfnet.nexo.moe.</td>
+  <td>global.dns.navy</td>
   <td></td>
   </tr>
   </tbody>
@@ -1542,9 +1555,10 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </table>
   <h2 id="custom-arfnet-software">Custom ARFNET software</h2>
   <ul>
-  <li><a href="https://cgit.arf20.com/cstims">cstims</a>: client,
-  service, ticket and invoice management system</li>
-  <li>status page (TODO)</li>
+  <li><a href="https://cgit.arf20.com/arfnet2-cstims">cstims</a>:
+  client, service, ticket and invoice management system</li>
+  <li><a href="https://cgit.arf20.com/arfnet2-lists">lists</a>: mailing
+  list browser</li>
   </ul>
 	</body>
 </html>
