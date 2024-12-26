@@ -74,7 +74,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
 | patch panel  |        |
 | switch       |        |
 |              |        |
-|              |        |
+| ONT, ATA     |        |
 | R720         |        |
 | R720         |        |
 |              |        |
@@ -83,6 +83,11 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
 |              | UPS    |
 +--------------+--------+
 ```
+
+ - ONT: CPE Huawei GPON
+ - switch: DELL PowerConnect 5424
+ - server: DELL PowerEdge R720 @ 2x E5-2670 + 64GB + (240+120)GB SSD + (4+3x7RAID5)TB HDD
+ - ATA: Cisco/Linksys PAP2T
 
 #### DELL PowerConnect 5424 switch
 
@@ -98,6 +103,7 @@ Port assignents
 | g7   | Living R.| VLAN access 5 |
 | g9   | server eno1 DMZ+LAN | VLAN trunk 4, 5 |
 | g15  | test4    | VLAN access 4 |
+| g16  | ATA      | VLAN access 4 |
 | g17  | test1    | VLAN access 1 |
 | g19  | test5    | VLAN access 5 |
 | g21  | iDRAC    | VLAN access 4 |
@@ -220,6 +226,7 @@ Management
 
  - server - DELL PowerEdge R720 running Proxmox PVE - ...
  - mail -  IONOS VPS running Debian 12 - 5.250.186.185  2001:ba0:210:d600::1
+ - dark - HostMeNow VPS running Debian 12 - 92.60.77.4
 
 ## Management
 
@@ -229,6 +236,7 @@ Management
  - Proxmox hypervisor DMZ.4
  - DELL server iDRAC DMZ.5
  - HP printer DMZ.7
+ - Linksys ATA DMZ.18
 
 ## server VMs and services
 
@@ -433,23 +441,25 @@ RAID attached here (with the grey stuff) (local only)
 
 DMZ IPv4s and IPv6 ends in the same way
 
-| Addr | Name |
-|------|------|
-| DMZ.1 |  router.lan |
-| DMZ.2 |  switch.lan |
-| DMZ.3 |  wap.lan |
-| DMZ.4 |  proxmox.lan |
-| DMZ.5 |  idrac.lan |
-| DMZ.6 |  nas.lan |
-| DMZ.7 |  printer.lan |
-| DMZ.8 |  desktop.lan |
-| DMZ.9 |  web.lan |
-| DMZ.10 | wazuh.lan |
-| DMZ.11 | game.lan |
-| DMZ.12 | comm.lan |
-| DMZ.13 | misc.lan |
-| DMZ.15 | (t2) |
-| DMZ.16 | pubnix |
+| Addr | Name | Description |
+|------|------|-------------|
+| DMZ.1 |  router.lan | OPNSense managent |
+| DMZ.2 |  switch.lan | DELL PowerConnect 5424 management |
+| DMZ.3 |  wap.lan | TP-Link Omada AP255 |
+| DMZ.4 |  proxmox.lan | Proxmox VE management |
+| DMZ.5 |  idrac.lan | DELL R720 iDRAC7 management |
+| DMZ.6 |  nas.lan | |
+| DMZ.7 |  printer.lan | HP Officejet 8020 |
+| DMZ.8 |  desktop.lan | reserved for desktop on DMZ |
+| DMZ.9 |  web.lan | |
+| DMZ.10 | wazuh.lan | |
+| DMZ.11 | game.lan | |
+| DMZ.12 | comm.lan | |
+| DMZ.13 | misc.lan | |
+| DMZ.15 | (t2) | T/2 SDE build box |
+| DMZ.16 | pubnix | |
+| DMZ.17 | [reserved] | for future raspi |
+| DMZ.18 | ata.lan | Linksys ATA |
 | | | |
 | DMZ.192 | yero-debian | yero.lan |
 | DMZ.195 | exo-debian | exo.lan |
@@ -457,16 +467,17 @@ DMZ IPv4s and IPv6 ends in the same way
 
 Site-B:PiSoNet
 
-| Addr | Name |
-|------|------|
-| PSN.1 | Huawei CPE Combo Box |
-| PSN.2 | DELL switch on untagged |
-| PSN.3 | Mikrotik firewall downstream |
-| PSN.8 | desktop (when applies) |
+| Addr | Name | Description |
+|------|------|-------------|
+| PSN.1 | | Huawei CPE Combo Box |
+| PSN.2 | | DELL switch on untagged |
+| PSN.3 | | Mikrotik firewall downstream |
+| PSN.4 | | Grandstream ATA |
+| PSN.8 | | desktop (when applies) |
 
 ## DNS
 
-### Domain zone
+### Public domain zone
 
 | Name | Type | Content | Comment |
 |------|------|---------|---------|
