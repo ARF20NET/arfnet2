@@ -260,7 +260,7 @@ All VMs are Debian 12 (templated) with wazuh agent
  - unbound DNS
  - OpenVPN
  - WireGuard
- - IPsec*
+ - IPsec
  - ntopng :3000
  - telegraf - note: editing config via webfig breaks (timeout and unbound config)
 
@@ -280,7 +280,7 @@ RAID attached here (with the grey stuff) (local only)
 
 | vhost | webroot/proxy | Comment |
 |-------|---------------|---------|
-| dark.arf20.com* | /d/FTPServer/ | Allow only VPS and private |
+| dark.arf20.com | /d/FTPServer/ | Allow only VPS and private |
 
 ### web DMZ.9
 
@@ -333,6 +333,8 @@ RAID attached here (with the grey stuff) (local only)
 | photo.arf20.com | [::1]:2342 | photoprism |
 | radio.arf20.com | / = /var/www/radio.arf20.com/html/; /stream = nas:8000 | |
 | os.arf20.com | / = /d/FTPServer/OS/ | |
+| dark.arf20.com | / = /ar/www/dark.arf20.com/html/ | |
+| wiki.arf20.com | /usr/share/dokuwiki | |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 | panaland.arf20.com | /var/www/panaland.arf20.com/html/ | |
@@ -379,12 +381,23 @@ RAID attached here (with the grey stuff) (local only)
  - INN2 - NNTP USENET server with SDF peering
  - Discord servers
    - gDebrid (gookie)
+ - squid - HTTP proxy
+ - microsocks - SOCKS5 proxy
 
-### t2 (T/2 SDE) DMZ.15
+### t2 (T/2 SDE build box) DMZ.15
 
 ### pubnix (OpenBSD 7.5) DMZ.16
 
  - SSH
+
+### cucm (Cisco Unified Communications Manager) DMZ.19
+
+### callbox (5G gNodeB) DMZ.20
+
+ - Amarisoft Callbox
+ - Open5GC+SRSRAN / OAI
+
+---
 
 ### mail (ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1
 
@@ -460,6 +473,8 @@ DMZ IPv4s and IPv6 ends in the same way
 | DMZ.16 | pubnix | |
 | DMZ.17 | [reserved] | for future raspi |
 | DMZ.18 | ata.lan | Linksys ATA |
+| DMZ.19 | cucm.lan | Cisco CallManager |
+| DMZ.20 | callbox.lan | 5G gNodeB |
 | | | |
 | DMZ.192 | yero-debian | yero.lan |
 | DMZ.195 | exo-debian | exo.lan |
@@ -526,6 +541,10 @@ Site-B:PiSoNet
 | dash.arf20.com | CNAME | web.arf20.com |
 | ftp.arf20.com | CNAME | web.arf20.com |
 | photo.arf20.com | CNAME | web.arf20.com |
+| radio.arf20.com | CNAME | web.arf20.com |
+| os.arf20.com | CNAME | web.arf20.com |
+| dark.arf20.com | CNAME | web.arf20.com |
+| wiki.arf20.com | CNAME | web.arf20.com |
 | 
 | lahomosexualidadde.arf20.com | CNAME | weonpollo.xyz |
 | panaland.arf20.com | CNAME | web.arf20.com |

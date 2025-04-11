@@ -52,6 +52,8 @@
   secure</li>
   <li>More new services</li>
   </ul>
+  <p>Stage 4*: Site B (piso) - Mikrotik and DELL switch - Site to Site
+  wireguard - Establish telephony</p>
   <h2 id="domain">Domain</h2>
   <p>arf20.com</p>
   <p>Registrar: namecheap</p>
@@ -101,7 +103,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
 | patch panel  |        |
 | switch       |        |
 |              |        |
-|              |        |
+| ONT, ATA     |        |
 | R720         |        |
 | R720         |        |
 |              |        |
@@ -109,6 +111,13 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
 |              |        |
 |              | UPS    |
 +--------------+--------+</code></pre>
+  <ul>
+  <li>ONT: CPE Huawei GPON</li>
+  <li>switch: DELL PowerConnect 5424</li>
+  <li>server: DELL PowerEdge R720 @ 2x E5-2670 + 64GB + (240+120)GB SSD
+  + (4+3x7RAID5)TB HDD</li>
+  <li>ATA: Cisco/Linksys PAP2T</li>
+  </ul>
   <h4 id="dell-powerconnect-5424-switch">DELL PowerConnect 5424
   switch</h4>
   <p>Port assignents</p>
@@ -162,21 +171,26 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>VLAN access 4</td>
   </tr>
   <tr class="odd">
+  <td>g16</td>
+  <td>ATA</td>
+  <td>VLAN access 4</td>
+  </tr>
+  <tr class="even">
   <td>g17</td>
   <td>test1</td>
   <td>VLAN access 1</td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>g19</td>
   <td>test5</td>
   <td>VLAN access 5</td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>g21</td>
   <td>iDRAC</td>
   <td>VLAN access 4</td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>g23</td>
   <td>printer</td>
   <td>VLAN access 4</td>
@@ -252,6 +266,24 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   <td>192.168.6.0/24 <br> 2600:70ff:f039:6::/64</td>
   <td>Wireguard clients</td>
+  </tr>
+  <tr class="odd">
+  <td>dark</td>
+  <td></td>
+  <td>192.168.7.0/24 <br></td>
+  <td>dark IPsec remote subnet</td>
+  </tr>
+  <tr class="even">
+  <td>B:PSN</td>
+  <td>un</td>
+  <td>192.168.18.0/24</td>
+  <td>Site-B:PisoNET</td>
+  </tr>
+  <tr class="odd">
+  <td>B:SBN</td>
+  <td></td>
+  <td>192.168.8.0/24</td>
+  <td>Site-B:SiteBNET</td>
   </tr>
   </tbody>
   </table>
@@ -661,6 +693,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <li>server - DELL PowerEdge R720 running Proxmox PVE - …</li>
   <li>mail - IONOS VPS running Debian 12 - 5.250.186.185
   2001:ba0:210:d600::1</li>
+  <li>dark - HostMeNow VPS running Debian 12 - 92.60.77.4</li>
   </ul>
   <h2 id="management">Management</h2>
   <ul>
@@ -670,6 +703,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <li>Proxmox hypervisor DMZ.4</li>
   <li>DELL server iDRAC DMZ.5</li>
   <li>HP printer DMZ.7</li>
+  <li>Linksys ATA DMZ.18</li>
   </ul>
   <h2 id="server-vms-and-services">server VMs and services</h2>
   <p>server runs Proxmox PVE.</p>
@@ -690,7 +724,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <li>unbound DNS</li>
   <li>OpenVPN</li>
   <li>WireGuard</li>
-  <li>IPsec*</li>
+  <li>IPsec</li>
   <li>ntopng :3000</li>
   <li>telegraf - note: editing config via webfig breaks (timeout and
   unbound config)</li>
@@ -718,7 +752,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </thead>
   <tbody>
   <tr class="odd">
-  <td>dark.arf20.com*</td>
+  <td>dark.arf20.com</td>
   <td>/d/FTPServer/</td>
   <td>Allow only VPS and private</td>
   </tr>
@@ -875,6 +909,16 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   </tr>
   <tr class="even">
+  <td>dark.arf20.com</td>
+  <td>/ = /ar/www/dark.arf20.com/html/</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>wiki.arf20.com</td>
+  <td>/usr/share/dokuwiki</td>
+  <td></td>
+  </tr>
+  <tr class="even">
   <td></td>
   <td></td>
   <td></td>
@@ -941,12 +985,22 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <ul>
   <li>gDebrid (gookie)</li>
   </ul></li>
+  <li>squid - HTTP proxy</li>
+  <li>microsocks - SOCKS5 proxy</li>
   </ul>
-  <h3 id="t2-t2-sde-dmz.15">t2 (T/2 SDE) DMZ.15</h3>
+  <h3 id="t2-t2-sde-build-box-dmz.15">t2 (T/2 SDE build box) DMZ.15</h3>
   <h3 id="pubnix-openbsd-7.5-dmz.16">pubnix (OpenBSD 7.5) DMZ.16</h3>
   <ul>
   <li>SSH</li>
   </ul>
+  <h3 id="cucm-cisco-unified-communications-manager-dmz.19">cucm (Cisco
+  Unified Communications Manager) DMZ.19</h3>
+  <h3 id="callbox-5g-gnodeb-dmz.20">callbox (5G gNodeB) DMZ.20</h3>
+  <ul>
+  <li>Amarisoft Callbox</li>
+  <li>Open5GC+SRSRAN / OAI</li>
+  </ul>
+  <hr />
   <h3 id="mail-arfnet-ionos-vps-5.250.186.185-2001ba0210d6001">mail
   (ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1</h3>
   <ul>
@@ -1048,89 +1102,166 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <tr class="header">
   <th>Addr</th>
   <th>Name</th>
+  <th>Description</th>
   </tr>
   </thead>
   <tbody>
   <tr class="odd">
   <td>DMZ.1</td>
   <td>router.lan</td>
+  <td>OPNSense managent</td>
   </tr>
   <tr class="even">
   <td>DMZ.2</td>
   <td>switch.lan</td>
+  <td>DELL PowerConnect 5424 management</td>
   </tr>
   <tr class="odd">
   <td>DMZ.3</td>
   <td>wap.lan</td>
+  <td>TP-Link Omada AP255</td>
   </tr>
   <tr class="even">
   <td>DMZ.4</td>
   <td>proxmox.lan</td>
+  <td>Proxmox VE management</td>
   </tr>
   <tr class="odd">
   <td>DMZ.5</td>
   <td>idrac.lan</td>
+  <td>DELL R720 iDRAC7 management</td>
   </tr>
   <tr class="even">
   <td>DMZ.6</td>
   <td>nas.lan</td>
+  <td></td>
   </tr>
   <tr class="odd">
   <td>DMZ.7</td>
   <td>printer.lan</td>
+  <td>HP Officejet 8020</td>
   </tr>
   <tr class="even">
   <td>DMZ.8</td>
   <td>desktop.lan</td>
+  <td>reserved for desktop on DMZ</td>
   </tr>
   <tr class="odd">
   <td>DMZ.9</td>
   <td>web.lan</td>
+  <td></td>
   </tr>
   <tr class="even">
   <td>DMZ.10</td>
   <td>wazuh.lan</td>
+  <td></td>
   </tr>
   <tr class="odd">
   <td>DMZ.11</td>
   <td>game.lan</td>
+  <td></td>
   </tr>
   <tr class="even">
   <td>DMZ.12</td>
   <td>comm.lan</td>
+  <td></td>
   </tr>
   <tr class="odd">
   <td>DMZ.13</td>
   <td>misc.lan</td>
+  <td></td>
   </tr>
   <tr class="even">
   <td>DMZ.15</td>
   <td>(t2)</td>
+  <td>T/2 SDE build box</td>
   </tr>
   <tr class="odd">
   <td>DMZ.16</td>
   <td>pubnix</td>
+  <td></td>
   </tr>
   <tr class="even">
+  <td>DMZ.17</td>
+  <td>[reserved]</td>
+  <td>for future raspi</td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.18</td>
+  <td>ata.lan</td>
+  <td>Linksys ATA</td>
+  </tr>
+  <tr class="even">
+  <td>DMZ.19</td>
+  <td>cucm.lan</td>
+  <td>Cisco CallManager</td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.20</td>
+  <td>callbox.lan</td>
+  <td>5G gNodeB</td>
+  </tr>
+  <tr class="even">
+  <td></td>
   <td></td>
   <td></td>
   </tr>
   <tr class="odd">
   <td>DMZ.192</td>
   <td>yero-debian</td>
+  <td>yero.lan</td>
   </tr>
   <tr class="even">
   <td>DMZ.195</td>
   <td>exo-debian</td>
+  <td>exo.lan</td>
   </tr>
   <tr class="odd">
   <td>DMZ.196</td>
   <td>loofa-debian</td>
+  <td>loofa.lan</td>
+  </tr>
+  </tbody>
+  </table>
+  <p>Site-B:PiSoNet</p>
+  <table>
+  <thead>
+  <tr class="header">
+  <th>Addr</th>
+  <th>Name</th>
+  <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>PSN.1</td>
+  <td></td>
+  <td>Huawei CPE Combo Box</td>
+  </tr>
+  <tr class="even">
+  <td>PSN.2</td>
+  <td></td>
+  <td>DELL switch on untagged</td>
+  </tr>
+  <tr class="odd">
+  <td>PSN.3</td>
+  <td></td>
+  <td>Mikrotik firewall downstream</td>
+  </tr>
+  <tr class="even">
+  <td>PSN.4</td>
+  <td></td>
+  <td>Grandstream ATA</td>
+  </tr>
+  <tr class="odd">
+  <td>PSN.8</td>
+  <td></td>
+  <td>desktop (when applies)</td>
   </tr>
   </tbody>
   </table>
   <h2 id="dns">DNS</h2>
-  <h3 id="domain-zone">Domain zone</h3>
+  <h3 id="public-domain-zone">Public domain zone</h3>
   <table>
   <thead>
   <tr class="header">
@@ -1407,6 +1538,30 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </tr>
   <tr class="odd">
   <td>photo.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>radio.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>os.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>dark.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>wiki.arf20.com</td>
   <td>CNAME</td>
   <td>web.arf20.com</td>
   <td></td>
