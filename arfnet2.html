@@ -919,16 +919,31 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   </tr>
   <tr class="even">
+  <td>qbt.arf20.com</td>
+  <td>http://192.168.4.6:8085</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>radarr.arf20.com</td>
+  <td>http://192.168.4.6:7878</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>sonarr.arf20.com</td>
+  <td>http://192.168.4.6:8989</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
   <td></td>
   <td></td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>status.yero.dev</td>
   <td>http://yerovps.lan:3001</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>panaland.arf20.com</td>
   <td>/var/www/panaland.arf20.com/html/</td>
   <td></td>
@@ -998,7 +1013,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <h3 id="callbox-5g-gnodeb-dmz.20">callbox (5G gNodeB) DMZ.20</h3>
   <ul>
   <li>Amarisoft Callbox</li>
-  <li>Open5GC+SRSRAN / OAI</li>
+  <li>Open5GC+srsRAN / OAI</li>
   </ul>
   <hr />
   <h3 id="mail-arfnet-ionos-vps-5.250.186.185-2001ba0210d6001">mail
@@ -1567,19 +1582,19 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   </tr>
   <tr class="even">
-  <td></td>
-  <td></td>
-  <td></td>
+  <td>qbt.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
   <td></td>
   </tr>
   <tr class="odd">
-  <td>lahomosexualidadde.arf20.com</td>
+  <td>radarr.arf20.com</td>
   <td>CNAME</td>
-  <td>weonpollo.xyz</td>
+  <td>web.arf20.com</td>
   <td></td>
   </tr>
   <tr class="even">
-  <td>panaland.arf20.com</td>
+  <td>sonarr.arf20.com</td>
   <td>CNAME</td>
   <td>web.arf20.com</td>
   <td></td>
@@ -1591,60 +1606,78 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   </tr>
   <tr class="even">
+  <td>lahomosexualidadde.arf20.com</td>
+  <td>CNAME</td>
+  <td>weonpollo.xyz</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>panaland.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr class="odd">
   <td>_acme-challenge.jellyfin</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>_acme-challenge.irc</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>_acme-challenge.matrix</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>_acme-challenge.mail</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>_acme-challenge.xmpp</td>
   <td>CNAME</td>
   <td>(challenge)</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td></td>
   <td></td>
   <td></td>
   <td></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>arf20.com</td>
   <td>MX</td>
   <td>mail.arf20.com</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>selector._domainkey</td>
   <td>TXT</td>
   <td>(DKIM)</td>
   <td>DKIM for selector ‘selector’</td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>_dmarc</td>
   <td>TXT</td>
   <td>(DMARC)</td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>arf20.com</td>
   <td>TXT</td>
   <td>(SPF)</td>

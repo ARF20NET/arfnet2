@@ -335,6 +335,9 @@ RAID attached here (with the grey stuff) (local only)
 | os.arf20.com | / = /d/FTPServer/OS/ | |
 | dark.arf20.com | / = /ar/www/dark.arf20.com/html/ | |
 | wiki.arf20.com | /usr/share/dokuwiki | |
+| qbt.arf20.com | http://192.168.4.6:8085 | |
+| radarr.arf20.com | http://192.168.4.6:7878 | |
+| sonarr.arf20.com | http://192.168.4.6:8989 | |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 | panaland.arf20.com | /var/www/panaland.arf20.com/html/ | |
@@ -395,7 +398,7 @@ RAID attached here (with the grey stuff) (local only)
 ### callbox (5G gNodeB) DMZ.20
 
  - Amarisoft Callbox
- - Open5GC+SRSRAN / OAI
+ - Open5GC+srsRAN / OAI
 
 ---
 
@@ -545,6 +548,9 @@ Site-B:PiSoNet
 | os.arf20.com | CNAME | web.arf20.com |
 | dark.arf20.com | CNAME | web.arf20.com |
 | wiki.arf20.com | CNAME | web.arf20.com |
+| qbt.arf20.com | CNAME | web.arf20.com |
+| radarr.arf20.com | CNAME | web.arf20.com |
+| sonarr.arf20.com | CNAME | web.arf20.com |
 | 
 | lahomosexualidadde.arf20.com | CNAME | weonpollo.xyz |
 | panaland.arf20.com | CNAME | web.arf20.com |
