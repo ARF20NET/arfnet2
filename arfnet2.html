@@ -984,8 +984,93 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </ul></li>
   <li>prosody - XMPP</li>
   <li>coturn - TURN server for matrix and xmpp</li>
-  <li>asterisk - VoIP SIP PBX*</li>
+  <li>asterisk - VoIP SIP PBX</li>
   </ul>
+  <h4 id="dialplan">Dialplan</h4>
+  <ul>
+  <li>1xxx -&gt; users</li>
+  <li>2xxx -&gt; services</li>
+  <li>xxxxxxx -&gt; tandmx</li>
+  <li>733xxxx -&gt; SDF</li>
+  </ul>
+  <table>
+  <thead>
+  <tr class="header">
+  <th>number</th>
+  <th>description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td>2000</td>
+  <td>IVR</td>
+  </tr>
+  <tr class="even">
+  <td>2001</td>
+  <td>conference</td>
+  </tr>
+  <tr class="odd">
+  <td>2002</td>
+  <td>time</td>
+  </tr>
+  <tr class="even">
+  <td>2003</td>
+  <td>voicemail</td>
+  </tr>
+  <tr class="odd">
+  <td>2222</td>
+  <td>test hello world</td>
+  </tr>
+  <tr class="even">
+  <td>2223</td>
+  <td>test digits 10</td>
+  </tr>
+  <tr class="odd">
+  <td>2101</td>
+  <td>test echo</td>
+  </tr>
+  <tr class="even">
+  <td></td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>1000</td>
+  <td>alias for operator</td>
+  </tr>
+  <tr class="even">
+  <td>1001</td>
+  <td>Site A ATA p1</td>
+  </tr>
+  <tr class="odd">
+  <td>1002</td>
+  <td>Site A ATA p2</td>
+  </tr>
+  <tr class="even">
+  <td>1011</td>
+  <td>Site B ATA p1</td>
+  </tr>
+  <tr class="odd">
+  <td>1012</td>
+  <td>Site B ATA p2</td>
+  </tr>
+  <tr class="even">
+  <td>1021</td>
+  <td>soft phone 1</td>
+  </tr>
+  <tr class="odd">
+  <td>1022</td>
+  <td>soft phone 2</td>
+  </tr>
+  <tr class="even">
+  <td>1031</td>
+  <td>remote phone 1</td>
+  </tr>
+  <tr class="odd">
+  <td>1032</td>
+  <td>remote phone 2</td>
+  </tr>
+  </tbody>
+  </table>
   <h3 id="misc-deb12-lxc-dmz.13">misc (Deb12 LXC) DMZ.13</h3>
   <ul>
   <li>SSH</li>

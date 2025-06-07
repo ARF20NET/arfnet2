@@ -372,7 +372,34 @@ RAID attached here (with the grey stuff) (local only)
     - xmpp
  - prosody - XMPP
  - coturn - TURN server for matrix and xmpp
- - asterisk - VoIP SIP PBX*
+ - asterisk - VoIP SIP PBX
+
+#### Dialplan
+
+ - 1xxx -> users
+ - 2xxx -> services
+ - xxxxxxx -> tandmx
+ - 733xxxx -> SDF
+
+| number | description |
+|--------|-------------|
+| 2000   | IVR |
+| 2001   | conference |
+| 2002   | time |
+| 2003   | voicemail |
+| 2222   | test hello world |
+| 2223   | test digits 10 |
+| 2101   | test echo |
+| 
+| 1000   | alias for operator |
+| 1001   | Site A ATA p1 |
+| 1002   | Site A ATA p2 |
+| 1011   | Site B ATA p1 |
+| 1012   | Site B ATA p2 |
+| 1021   | soft phone 1 |
+| 1022   | soft phone 2 |
+| 1031   | remote phone 1 |
+| 1032   | remote phone 2 |
 
 ### misc (Deb12 LXC) DMZ.13
 
