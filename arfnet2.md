@@ -102,6 +102,7 @@ Port assignents
 | g5   | PC       | VLAN access 4 |
 | g7   | Living R.| VLAN access 5 |
 | g9   | server eno1 DMZ+LAN | VLAN trunk 4, 5 |
+| g12  | voip poe switch | VLAN access 9 |
 | g15  | test4    | VLAN access 4 |
 | g16  | ATA      | VLAN access 4 |
 | g17  | test1    | VLAN access 1 |
@@ -141,6 +142,7 @@ Management
 | dark |      | 192.168.7.0/24 <br> | dark IPsec remote subnet |
 | B:PSN | un  | 192.168.18.0/24 | Site-B:PisoNET |
 | B:SBN |     | 192.168.8.0/24  | Site-B:SiteBNET |
+| voip | 9    | 192.168.9.0/24  | VoIP |
 
 ## Firewall
 
@@ -400,6 +402,8 @@ RAID attached here (with the grey stuff) (local only)
 | 1022   | soft phone 2 |
 | 1031   | remote phone 1 |
 | 1032   | remote phone 2 |
+| 1051   | cisco 3911 1 |
+| 1101   | cisco 7941 |
 
 ### misc (Deb12 LXC) DMZ.13
 
@@ -425,7 +429,17 @@ RAID attached here (with the grey stuff) (local only)
 ### callbox (5G gNodeB) DMZ.20
 
  - Amarisoft Callbox
- - Open5GC+srsRAN / OAI
+
+### dn42 DMZ.21
+
+ - (ip forward)
+ - bird eBGP daemon
+
+### open5gs DMZ.22
+
+ - Open5GC
+ - srsRAN?
+ - OAI
 
 ---
 
@@ -503,8 +517,10 @@ DMZ IPv4s and IPv6 ends in the same way
 | DMZ.16 | pubnix | |
 | DMZ.17 | [reserved] | for future raspi |
 | DMZ.18 | ata.lan | Linksys ATA |
-| DMZ.19 | cucm.lan | Cisco CallManager |
+| DMZ.19 | cucmelan | Cisco CallManager |
 | DMZ.20 | callbox.lan | 5G gNodeB |
+| DMZ.21 | dn42.lan | DN42 edge router |
+| DMZ.22 | open5gs.lan | Open5GS 5G core |
 | | | |
 | DMZ.192 | yero-debian | yero.lan |
 | DMZ.195 | exo-debian | exo.lan |
@@ -582,15 +598,15 @@ Site-B:PiSoNet
 | lahomosexualidadde.arf20.com | CNAME | weonpollo.xyz |
 | panaland.arf20.com | CNAME | web.arf20.com |
 | 
-| _acme-challenge.jellyfin | CNAME | (challenge) | |
-| _acme-challenge.irc | CNAME | (challenge) | |
-| _acme-challenge.matrix | CNAME | (challenge) | |
-| _acme-challenge.mail |  CNAME | (challenge) | |
-| _acme-challenge.xmpp |  CNAME | (challenge) | |
+| \_acme-challenge.jellyfin | CNAME | (challenge) | |
+| \_acme-challenge.irc | CNAME | (challenge) | |
+| \_acme-challenge.matrix | CNAME | (challenge) | |
+| \_acme-challenge.mail |  CNAME | (challenge) | |
+| \_acme-challenge.xmpp |  CNAME | (challenge) | |
 | 
 | arf20.com | MX | mail.arf20.com | |
-| selector._domainkey | TXT | (DKIM) | DKIM for selector 'selector' |
-| _dmarc | TXT | (DMARC) | |
+| selector.\_domainkey | TXT | (DKIM) | DKIM for selector 'selector' |
+| \_dmarc | TXT | (DMARC) | |
 | arf20.com | TXT | (SPF) | |
 
 ### HE v6 rDNS zone

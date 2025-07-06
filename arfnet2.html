@@ -166,31 +166,36 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>VLAN trunk 4, 5</td>
   </tr>
   <tr class="even">
+  <td>g12</td>
+  <td>voip poe switch</td>
+  <td>VLAN access 9</td>
+  </tr>
+  <tr class="odd">
   <td>g15</td>
   <td>test4</td>
   <td>VLAN access 4</td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>g16</td>
   <td>ATA</td>
   <td>VLAN access 4</td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>g17</td>
   <td>test1</td>
   <td>VLAN access 1</td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>g19</td>
   <td>test5</td>
   <td>VLAN access 5</td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>g21</td>
   <td>iDRAC</td>
   <td>VLAN access 4</td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>g23</td>
   <td>printer</td>
   <td>VLAN access 4</td>
@@ -284,6 +289,12 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   <td>192.168.8.0/24</td>
   <td>Site-B:SiteBNET</td>
+  </tr>
+  <tr class="even">
+  <td>voip</td>
+  <td>9</td>
+  <td>192.168.9.0/24</td>
+  <td>VoIP</td>
   </tr>
   </tbody>
   </table>
@@ -1069,6 +1080,14 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>1032</td>
   <td>remote phone 2</td>
   </tr>
+  <tr class="even">
+  <td>1051</td>
+  <td>cisco 3911 1</td>
+  </tr>
+  <tr class="odd">
+  <td>1101</td>
+  <td>cisco 7941</td>
+  </tr>
   </tbody>
   </table>
   <h3 id="misc-deb12-lxc-dmz.13">misc (Deb12 LXC) DMZ.13</h3>
@@ -1098,7 +1117,17 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <h3 id="callbox-5g-gnodeb-dmz.20">callbox (5G gNodeB) DMZ.20</h3>
   <ul>
   <li>Amarisoft Callbox</li>
-  <li>Open5GC+srsRAN / OAI</li>
+  </ul>
+  <h3 id="dn42-dmz.21">dn42 DMZ.21</h3>
+  <ul>
+  <li>(ip forward)</li>
+  <li>bird eBGP daemon</li>
+  </ul>
+  <h3 id="open5gs-dmz.22">open5gs DMZ.22</h3>
+  <ul>
+  <li>Open5GC</li>
+  <li>srsRAN?</li>
+  <li>OAI</li>
   </ul>
   <hr />
   <h3 id="mail-arfnet-ionos-vps-5.250.186.185-2001ba0210d6001">mail
@@ -1293,13 +1322,23 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   </tr>
   <tr class="even">
   <td>DMZ.19</td>
-  <td>cucm.lan</td>
+  <td>cucmelan</td>
   <td>Cisco CallManager</td>
   </tr>
   <tr class="odd">
   <td>DMZ.20</td>
   <td>callbox.lan</td>
   <td>5G gNodeB</td>
+  </tr>
+  <tr class="even">
+  <td>DMZ.21</td>
+  <td>dn42.lan</td>
+  <td>DN42 edge router</td>
+  </tr>
+  <tr class="odd">
+  <td>DMZ.22</td>
+  <td>open5gs.lan</td>
+  <td>Open5GS 5G core</td>
   </tr>
   <tr class="even">
   <td></td>
