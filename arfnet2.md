@@ -21,16 +21,28 @@ Stage 2: new services
 
 Stage 3\*: finally
 
- - Another VPS in unknown provider for
-    - Tor
-    - Reverse-proxying the media library
  - PHP on main site with more web services from scratch, hopefully secure
  - More new services
 
-Stage 4\*: Site B (piso)
- - Mikrotik and DELL switch
+Stage 4: DN42
+
+ - Make DN42 router VM with bird and wg
+ - Peer with people
+ - Bring up BGP sessions
+ - Services
+
+Stage 5: Telephony
+ - Asterisk
+ - IP phones and ATAs
+ - Trunks; SDF, Tandmx, uwutel, PSTN
+
+Stage 6\*: Site B (piso)
+
+ - Firewall and switch
  - Site to Site wireguard
  - Establish telephony
+
+
 
 ## Domain
 
@@ -117,7 +129,7 @@ Management
 ### Public IPs
 
  - AVANZA_STATIC: 2.59.235.35
- - AVANZA_CGNAT: dynamic
+ - AVANZA_CGNAT: dynamic 100.x.x.x
  - HE prefixes
     - 2001:470:1f21:125::/64
     - 2600:70ff:f039::/48
@@ -143,6 +155,7 @@ Management
 | B:PSN | un  | 192.168.18.0/24 | Site-B:PisoNET |
 | B:SBN |     | 192.168.8.0/24  | Site-B:SiteBNET |
 | voip | 9    | 192.168.9.0/24  | VoIP |
+| dn42 | 42   | 172.20.196.32/27 <br> fdfd:acab:caca::/48 | DN42 ARFNET-MNT |
 
 ## Firewall
 
@@ -380,8 +393,12 @@ RAID attached here (with the grey stuff) (local only)
 
  - 1xxx -> users
  - 2xxx -> services
- - xxxxxxx -> tandmx
+ - 8xxxxxxx -> tandmx
  - 733xxxx -> SDF
+ - 0119xxxxxxx -> uwutel
+ - xxxxxx -> regional PSTN
+ - xxxxxxxxx -> national PSTN
+ - 00x! -> international PSTN
 
 | number | description |
 |--------|-------------|
@@ -389,9 +406,9 @@ RAID attached here (with the grey stuff) (local only)
 | 2001   | conference |
 | 2002   | time |
 | 2003   | voicemail |
-| 2222   | test hello world |
-| 2223   | test digits 10 |
-| 2101   | test echo |
+| 2100   | test hello world |
+| 2101   | test digits 10 |
+| 2102   | test echo |
 | 
 | 1000   | alias for operator |
 | 1001   | Site A ATA p1 |
@@ -433,13 +450,34 @@ RAID attached here (with the grey stuff) (local only)
 ### dn42 DMZ.21
 
  - (ip forward)
+ - wireguard
  - bird eBGP daemon
+ - bind9 master arfnet.dn42
+
+ | peer | asn | bgp |
+ ---------------------
+ | prefixlabs | 4242421240 | fe80::1240 |
+ | routedbits | 4242420207 | fe80::207 | 
+ | lezi | 4242423377 | fe80::3377 |
+ | carlos | 4242420034 | 172.23.34.1 |
+ | exo | 4242421112 | fe80::dead |
+
+### dn42-services DMZ.23
+
+ - bind9 slave
+ - nginx reverse proxy
+
+| vhost | webroot/proxy | comment
+-----------------------------------
+arfnet.dn42 | http://192.168.4.9 | ARFNET in DN42
 
 ### open5gs DMZ.22
 
+Remote gNodeB
+
  - Open5GC
- - srsRAN?
- - OAI
+ - Kamailio
+ - OAI?
 
 ---
 
@@ -521,6 +559,7 @@ DMZ IPv4s and IPv6 ends in the same way
 | DMZ.20 | callbox.lan | 5G gNodeB |
 | DMZ.21 | dn42.lan | DN42 edge router |
 | DMZ.22 | open5gs.lan | Open5GS 5G core |
+| DMZ.23 | dn42-services.lan | DN42 service machine |
 | | | |
 | DMZ.192 | yero-debian | yero.lan |
 | DMZ.195 | exo-debian | exo.lan |
@@ -589,11 +628,17 @@ Site-B:PiSoNet
 | photo.arf20.com | CNAME | web.arf20.com |
 | radio.arf20.com | CNAME | web.arf20.com |
 | os.arf20.com | CNAME | web.arf20.com |
+| tel.arf20.com | CNAME | comm.arf20.com |
+| netbox.arf20.com | CNAME | web.arf20.com |
 | dark.arf20.com | CNAME | web.arf20.com |
 | wiki.arf20.com | CNAME | web.arf20.com |
 | qbt.arf20.com | CNAME | web.arf20.com |
 | radarr.arf20.com | CNAME | web.arf20.com |
 | sonarr.arf20.com | CNAME | web.arf20.com |
+|
+| status.arf20.com | CNAME | mail.arf20.com |
+| lists.arf20.com | CNAME | mail.arf20.com |
+| mlmmj.arf20.com | CNAME | mail.arf20.com |
 | 
 | lahomosexualidadde.arf20.com | CNAME | weonpollo.xyz |
 | panaland.arf20.com | CNAME | web.arf20.com |
@@ -628,3 +673,4 @@ Site-B:PiSoNet
 
  - [cstims](https://cgit.arf20.com/arfnet2-cstims): client, service, ticket and invoice management system
  - [lists](https://cgit.arf20.com/arfnet2-lists): mailing list browser
+

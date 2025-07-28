@@ -43,17 +43,25 @@
   </ul>
   <p>Stage 3*: finally</p>
   <ul>
-  <li>Another VPS in unknown provider for
-  <ul>
-  <li>Tor</li>
-  <li>Reverse-proxying the media library</li>
-  </ul></li>
   <li>PHP on main site with more web services from scratch, hopefully
   secure</li>
   <li>More new services</li>
   </ul>
-  <p>Stage 4*: Site B (piso) - Mikrotik and DELL switch - Site to Site
-  wireguard - Establish telephony</p>
+  <p>Stage 4: DN42</p>
+  <ul>
+  <li>Make DN42 router VM with bird and wg</li>
+  <li>Peer with people</li>
+  <li>Bring up BGP sessions</li>
+  <li>Services</li>
+  </ul>
+  <p>Stage 5: Telephony - Asterisk - IP phones and ATAs - Trunks; SDF,
+  Tandmx, uwutel, PSTN</p>
+  <p>Stage 6*: Site B (piso)</p>
+  <ul>
+  <li>Firewall and switch</li>
+  <li>Site to Site wireguard</li>
+  <li>Establish telephony</li>
+  </ul>
   <h2 id="domain">Domain</h2>
   <p>arf20.com</p>
   <p>Registrar: namecheap</p>
@@ -209,7 +217,7 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <h3 id="public-ips">Public IPs</h3>
   <ul>
   <li>AVANZA_STATIC: 2.59.235.35</li>
-  <li>AVANZA_CGNAT: dynamic</li>
+  <li>AVANZA_CGNAT: dynamic 100.x.x.x</li>
   <li>HE prefixes
   <ul>
   <li>2001:470:1f21:125::/64</li>
@@ -295,6 +303,12 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>9</td>
   <td>192.168.9.0/24</td>
   <td>VoIP</td>
+  </tr>
+  <tr class="odd">
+  <td>dn42</td>
+  <td>42</td>
+  <td>172.20.196.32/27 <br> fdfd:acab:caca::/48</td>
+  <td>DN42 ARFNET-MNT</td>
   </tr>
   </tbody>
   </table>
@@ -1001,8 +1015,12 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <ul>
   <li>1xxx -&gt; users</li>
   <li>2xxx -&gt; services</li>
-  <li>xxxxxxx -&gt; tandmx</li>
+  <li>8xxxxxxx -&gt; tandmx</li>
   <li>733xxxx -&gt; SDF</li>
+  <li>0119xxxxxxx -&gt; uwutel</li>
+  <li>xxxxxx -&gt; regional PSTN</li>
+  <li>xxxxxxxxx -&gt; national PSTN</li>
+  <li>00x! -&gt; international PSTN</li>
   </ul>
   <table>
   <thead>
@@ -1029,15 +1047,15 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>voicemail</td>
   </tr>
   <tr class="odd">
-  <td>2222</td>
+  <td>2100</td>
   <td>test hello world</td>
   </tr>
   <tr class="even">
-  <td>2223</td>
+  <td>2101</td>
   <td>test digits 10</td>
   </tr>
   <tr class="odd">
-  <td>2101</td>
+  <td>2102</td>
   <td>test echo</td>
   </tr>
   <tr class="even">
@@ -1121,13 +1139,51 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <h3 id="dn42-dmz.21">dn42 DMZ.21</h3>
   <ul>
   <li>(ip forward)</li>
+  <li>wireguard</li>
   <li>bird eBGP daemon</li>
+  <li>bind9 master arfnet.dn42</li>
   </ul>
+  <table>
+  <thead>
+  <tr class="header">
+  <th style="text-align: left;">| peer | asn | bgp |</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="odd">
+  <td style="text-align: left;">| prefixlabs | 4242421240 | fe80::1240
+  |</td>
+  </tr>
+  <tr class="even">
+  <td style="text-align: left;">| routedbits | 4242420207 | fe80::207
+  |</td>
+  </tr>
+  <tr class="odd">
+  <td style="text-align: left;">| lezi | 4242423377 | fe80::3377 |</td>
+  </tr>
+  <tr class="even">
+  <td style="text-align: left;">| carlos | 4242420034 | 172.23.34.1
+  |</td>
+  </tr>
+  <tr class="odd">
+  <td style="text-align: left;">| exo | 4242421112 | fe80::dead |</td>
+  </tr>
+  </tbody>
+  </table>
+  <h3 id="dn42-services-dmz.23">dn42-services DMZ.23</h3>
+  <ul>
+  <li>bind9 slave</li>
+  <li>nginx reverse proxy</li>
+  </ul>
+  <h2 id="vhost-webrootproxy-comment">| vhost | webroot/proxy |
+  comment</h2>
+  <p>arfnet.dn42 | http://192.168.4.9 | ARFNET in DN42</p>
   <h3 id="open5gs-dmz.22">open5gs DMZ.22</h3>
+  <p>Remote gNodeB</p>
   <ul>
   <li>Open5GC</li>
-  <li>srsRAN?</li>
-  <li>OAI</li>
+  <li>Kamailio</li>
+  <li>OAI?</li>
   </ul>
   <hr />
   <h3 id="mail-arfnet-ionos-vps-5.250.186.185-2001ba0210d6001">mail
@@ -1341,21 +1397,26 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>Open5GS 5G core</td>
   </tr>
   <tr class="even">
+  <td>DMZ.23</td>
+  <td>dn42-services.lan</td>
+  <td>DN42 service machine</td>
+  </tr>
+  <tr class="odd">
   <td></td>
   <td></td>
   <td></td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>DMZ.192</td>
   <td>yero-debian</td>
   <td>yero.lan</td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
   <td>DMZ.195</td>
   <td>exo-debian</td>
   <td>exo.lan</td>
   </tr>
-  <tr class="odd">
+  <tr class="even">
   <td>DMZ.196</td>
   <td>loofa-debian</td>
   <td>loofa.lan</td>
@@ -1694,6 +1755,18 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td></td>
   </tr>
   <tr class="even">
+  <td>tel.arf20.com</td>
+  <td>CNAME</td>
+  <td>comm.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>netbox.arf20.com</td>
+  <td>CNAME</td>
+  <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
   <td>dark.arf20.com</td>
   <td>CNAME</td>
   <td>web.arf20.com</td>
@@ -1721,6 +1794,30 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
   <td>sonarr.arf20.com</td>
   <td>CNAME</td>
   <td>web.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>status.arf20.com</td>
+  <td>CNAME</td>
+  <td>mail.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="odd">
+  <td>lists.arf20.com</td>
+  <td>CNAME</td>
+  <td>mail.arf20.com</td>
+  <td></td>
+  </tr>
+  <tr class="even">
+  <td>mlmmj.arf20.com</td>
+  <td>CNAME</td>
+  <td>mail.arf20.com</td>
   <td></td>
   </tr>
   <tr class="odd">
