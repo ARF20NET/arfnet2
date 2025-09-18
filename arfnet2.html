@@ -23,74 +23,79 @@
 	</head>
 	<body>
 		<h1 id="arfnet2-deployment">ARFNET2 deployment</h1>
-  <p>After the disastrous ISP <a
-  href="http://arf20.com/explanation.txt">schism</a></p>
-  <h2 id="masterplan">Masterplan</h2>
-  <p>Stage 1: very safe</p>
-  <ul>
-  <li>Close all ports</li>
-  <li>Nuke (or stop) all old VMs (exclude OPNSense)</li>
-  <li>Make DMZ</li>
-  <li>Make new basic VMs (cloning deb12 template)</li>
-  <li>Open basic ports</li>
-  </ul>
-  <p>Stage 2: new services</p>
-  <ul>
-  <li>IONOS VPS for mail</li>
-  <li>Some new very safe services</li>
-  <li>HE IPv6 tunnel</li>
-  <li>Own authoritative nameservers for domain zone</li>
-  </ul>
-  <p>Stage 3*: finally</p>
-  <ul>
-  <li>PHP on main site with more web services from scratch, hopefully
-  secure</li>
-  <li>More new services</li>
-  </ul>
-  <p>Stage 4: DN42</p>
-  <ul>
-  <li>Make DN42 router VM with bird and wg</li>
-  <li>Peer with people</li>
-  <li>Bring up BGP sessions</li>
-  <li>Services</li>
-  </ul>
-  <p>Stage 5: Telephony - Asterisk - IP phones and ATAs - Trunks; SDF,
-  Tandmx, uwutel, PSTN</p>
-  <p>Stage 6*: Site B (piso)</p>
-  <ul>
-  <li>Firewall and switch</li>
-  <li>Site to Site wireguard</li>
-  <li>Establish telephony</li>
-  </ul>
-  <h2 id="domain">Domain</h2>
-  <p>arf20.com</p>
-  <p>Registrar: namecheap</p>
-  <h3 id="name-sever-glue-records-at-registrar">Name sever glue records
-  at registrar</h3>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>Nameserver</th>
-  <th>Name</th>
-  <th>IP</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>NS1</td>
-  <td>ns1.arf20.com</td>
-  <td>2.59.235.35 <br> 2600:70ff:f039:4::13</td>
-  </tr>
-  <tr class="even">
-  <td>NS2</td>
-  <td>ns2.arf20.com</td>
-  <td>5.250.186.185 <br> 2001:ba0:210:d600::1</td>
-  </tr>
-  </tbody>
-  </table>
-  <h2 id="networking">Networking</h2>
-  <h3 id="hardware">Hardware</h3>
-  <pre><code>                   WAP
+<p>After the disastrous ISP <a
+href="http://arf20.com/explanation.txt">schism</a></p>
+<h2 id="masterplan">Masterplan</h2>
+<p>Stage 1: very safe</p>
+<ul>
+<li>Close all ports</li>
+<li>Nuke (or stop) all old VMs (exclude OPNSense)</li>
+<li>Make DMZ</li>
+<li>Make new basic VMs (cloning deb12 template)</li>
+<li>Open basic ports</li>
+</ul>
+<p>Stage 2: new services</p>
+<ul>
+<li>IONOS VPS for mail</li>
+<li>Some new very safe services</li>
+<li>HE IPv6 tunnel</li>
+<li>Own authoritative nameservers for domain zone</li>
+</ul>
+<p>Stage 3*: finally</p>
+<ul>
+<li>Another VPS in unknown provider for
+<ul>
+<li>Tor</li>
+<li>Reverse-proxying the media library</li>
+</ul></li>
+<li>PHP on main site with more web services from scratch, hopefully
+secure</li>
+<li>More new services</li>
+</ul>
+<p>Stage 4: DN42</p>
+<ul>
+<li>Make DN42 router VM with bird and wg</li>
+<li>Peer with people</li>
+<li>Bring up BGP sessions</li>
+<li>Services</li>
+</ul>
+<p>Stage 5: Telephony - Asterisk - IP phones and ATAs - Trunks; SDF,
+Tandmx, uwutel, PSTN</p>
+<p>Stage 6*: Site B (piso)</p>
+<ul>
+<li>Firewall and switch</li>
+<li>Site to Site wireguard</li>
+<li>Establish telephony</li>
+</ul>
+<h2 id="domain">Domain</h2>
+<p>arf20.com</p>
+<p>Registrar: namecheap</p>
+<h3 id="name-sever-glue-records-at-registrar">Name sever glue records at
+registrar</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Nameserver</th>
+<th>Name</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NS1</td>
+<td>ns1.arf20.com</td>
+<td>2.59.235.35 <br> 2600:70ff:f039:4::13</td>
+</tr>
+<tr class="even">
+<td>NS2</td>
+<td>ns2.arf20.com</td>
+<td>5.250.186.185 <br> 2001:ba0:210:d600::1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="networking">Networking</h2>
+<h3 id="hardware">Hardware</h3>
+<pre><code>                   WAP
                     |
        +-----+   +--------------------------+     +----------------+
 ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
@@ -104,8 +109,8 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
                    
 - 1000BASE-T
 = GPON fiber</code></pre>
-  <p>12U rack</p>
-  <pre><code>+--------------+--------+
+<p>12U rack</p>
+<pre><code>+--------------+--------+
 | drawer       |        |
 | drawer       | PDU    |
 | patch panel  |        |
@@ -119,1855 +124,1875 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
 |              |        |
 |              | UPS    |
 +--------------+--------+</code></pre>
-  <ul>
-  <li>ONT: CPE Huawei GPON</li>
-  <li>switch: DELL PowerConnect 5424</li>
-  <li>server: DELL PowerEdge R720 @ 2x E5-2670 + 64GB + (240+120)GB SSD
-  + (4+3x7RAID5)TB HDD</li>
-  <li>ATA: Cisco/Linksys PAP2T</li>
-  </ul>
-  <h4 id="dell-powerconnect-5424-switch">DELL PowerConnect 5424
-  switch</h4>
-  <p>Port assignents</p>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>port</th>
-  <th>endpoint</th>
-  <th>options</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>g2</td>
-  <td>ONT</td>
-  <td>VLAN access 2</td>
-  </tr>
-  <tr class="even">
-  <td>g4</td>
-  <td>server eno2 WAN</td>
-  <td>VLAN access 2</td>
-  </tr>
-  <tr class="odd">
-  <td>g6</td>
-  <td>test2</td>
-  <td>VLAN access 2</td>
-  </tr>
-  <tr class="even">
-  <td>g3</td>
-  <td>WAP</td>
-  <td>VLAN access 5</td>
-  </tr>
-  <tr class="odd">
-  <td>g5</td>
-  <td>PC</td>
-  <td>VLAN access 4</td>
-  </tr>
-  <tr class="even">
-  <td>g7</td>
-  <td>Living R.</td>
-  <td>VLAN access 5</td>
-  </tr>
-  <tr class="odd">
-  <td>g9</td>
-  <td>server eno1 DMZ+LAN</td>
-  <td>VLAN trunk 4, 5</td>
-  </tr>
-  <tr class="even">
-  <td>g12</td>
-  <td>voip poe switch</td>
-  <td>VLAN access 9</td>
-  </tr>
-  <tr class="odd">
-  <td>g15</td>
-  <td>test4</td>
-  <td>VLAN access 4</td>
-  </tr>
-  <tr class="even">
-  <td>g16</td>
-  <td>ATA</td>
-  <td>VLAN access 4</td>
-  </tr>
-  <tr class="odd">
-  <td>g17</td>
-  <td>test1</td>
-  <td>VLAN access 1</td>
-  </tr>
-  <tr class="even">
-  <td>g19</td>
-  <td>test5</td>
-  <td>VLAN access 5</td>
-  </tr>
-  <tr class="odd">
-  <td>g21</td>
-  <td>iDRAC</td>
-  <td>VLAN access 4</td>
-  </tr>
-  <tr class="even">
-  <td>g23</td>
-  <td>printer</td>
-  <td>VLAN access 4</td>
-  </tr>
-  </tbody>
-  </table>
-  <p>Management</p>
-  <ul>
-  <li>interface vlan 4: 192.168.4.2/24 gw 192.168.4.1</li>
-  </ul>
-  <h3 id="public-ips">Public IPs</h3>
-  <ul>
-  <li>AVANZA_STATIC: 2.59.235.35</li>
-  <li>AVANZA_CGNAT: dynamic 100.x.x.x</li>
-  <li>HE prefixes
-  <ul>
-  <li>2001:470:1f21:125::/64</li>
-  <li>2600:70ff:f039::/48</li>
-  </ul></li>
-  <li>IONOS VPS: 5.250.186.185 2001:ba0:210:d600::1</li>
-  </ul>
-  <h3 id="gateways">Gateways</h3>
-  <ul>
-  <li>AVANZA
-  <ul>
-  <li>WAN_STATIC: 2.59.235.1</li>
-  <li>WAN_CGNAT: dynamic</li>
-  </ul></li>
-  <li>HE v6 tunnel
-  <ul>
-  <li>server: 216.66.87.102, 2001:470:1f20:125::1/64</li>
-  <li>client: 2.59.235.35, 2001:470:1f20:125::2</li>
-  </ul></li>
-  </ul>
-  <h3 id="physical-and-logical-networks">Physical and Logical
-  Networks</h3>
-  <table>
-  <colgroup>
-  <col style="width: 26%" />
-  <col style="width: 26%" />
-  <col style="width: 21%" />
-  <col style="width: 26%" />
-  </colgroup>
-  <thead>
-  <tr class="header">
-  <th>name</th>
-  <th>VLAN</th>
-  <th>net</th>
-  <th>desc</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>WAN</td>
-  <td>2</td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>DMZ</td>
-  <td>4</td>
-  <td>192.168.4.0/24 <br> 2600:70ff:f039:4::/64</td>
-  <td>Services</td>
-  </tr>
-  <tr class="odd">
-  <td>LAN</td>
-  <td>5</td>
-  <td>192.168.5.0/24 <br> 2600:70ff:f039:5::/64</td>
-  <td>Clients</td>
-  </tr>
-  <tr class="even">
-  <td>VPN</td>
-  <td></td>
-  <td>192.168.6.0/24 <br> 2600:70ff:f039:6::/64</td>
-  <td>Wireguard clients</td>
-  </tr>
-  <tr class="odd">
-  <td>dark</td>
-  <td></td>
-  <td>192.168.7.0/24 <br></td>
-  <td>dark IPsec remote subnet</td>
-  </tr>
-  <tr class="even">
-  <td>B:PSN</td>
-  <td>un</td>
-  <td>192.168.18.0/24</td>
-  <td>Site-B:PisoNET</td>
-  </tr>
-  <tr class="odd">
-  <td>B:SBN</td>
-  <td></td>
-  <td>192.168.8.0/24</td>
-  <td>Site-B:SiteBNET</td>
-  </tr>
-  <tr class="even">
-  <td>voip</td>
-  <td>9</td>
-  <td>192.168.9.0/24</td>
-  <td>VoIP</td>
-  </tr>
-  <tr class="odd">
-  <td>dn42</td>
-  <td>42</td>
-  <td>172.20.196.32/27 <br> fdfd:acab:caca::/48</td>
-  <td>DN42 ARFNET-MNT</td>
-  </tr>
-  </tbody>
-  </table>
-  <h2 id="firewall">Firewall</h2>
-  <h3 id="interface-rules">Interface Rules</h3>
-  <ul>
-  <li>WAN_CGNAT in
-  <ul>
-  <li>deny *</li>
-  </ul></li>
-  <li>WAN_STATIC in
-  <ul>
-  <li>allow v4 from * to {services} –&gt; NAT rules</li>
-  </ul></li>
-  <li>DMZ in
-  <ul>
-  <li>deny v4 to LAN net</li>
-  <li>allow v4 to firewall</li>
-  <li>allow v4 to * gw WAN_STATIC</li>
-  <li>allow v6 to * gw HE_TUNNELV6</li>
-  </ul></li>
-  <li>LAN in
-  <ul>
-  <li>allow v4 ICMP to firewall</li>
-  <li>allow v4 IP DNS to firewall</li>
-  <li>allow v4 to DMZ net</li>
-  <li>allow v4 to * gw WAN_CGNAT</li>
-  <li>allow v6 to * gw HE_TUNNELV6</li>
-  </ul></li>
-  <li>Wireguard in
-  <ul>
-  <li>allow v4+6 to DMZ net</li>
-  <li>allow v4 to * gw WAN_CGNAT</li>
-  <li>allow v6 to * gw HE_TUNNELV6</li>
-  </ul></li>
-  </ul>
-  <h3 id="ipv4-nat-rules">IPv4 NAT Rules</h3>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>Service</th>
-  <th>Customer</th>
-  <th>IPProto</th>
-  <th>Ext Port</th>
-  <th>Host</th>
-  <th>Re Port</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>WireGuard</td>
-  <td></td>
-  <td>UDP</td>
-  <td>51820</td>
-  <td>router</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>DNS NS1</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>53</td>
-  <td>misc</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>iperf3</td>
-  <td></td>
-  <td>TCP</td>
-  <td>5201</td>
-  <td>misc</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>NNTP</td>
-  <td></td>
-  <td>TCP</td>
-  <td>119</td>
-  <td>misc</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>Web</td>
-  <td></td>
-  <td>TCP</td>
-  <td>80,443</td>
-  <td>web</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>Git</td>
-  <td></td>
-  <td>TCP</td>
-  <td>9418</td>
-  <td>web</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>bittorrent</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>8999</td>
-  <td>nas</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>rsync</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>873</td>
-  <td>nas</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>IRC</td>
-  <td></td>
-  <td>TCP</td>
-  <td>6667</td>
-  <td>comm</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>IRCS</td>
-  <td></td>
-  <td>TCP</td>
-  <td>6697</td>
-  <td>comm</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>XMPP c2s</td>
-  <td></td>
-  <td>TCP</td>
-  <td>5222</td>
-  <td>comm</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>XMPP s2s</td>
-  <td></td>
-  <td>TCP</td>
-  <td>5269</td>
-  <td>comm</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>TURN STUN</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>3478</td>
-  <td>comm</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>TURN</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>5349</td>
-  <td>comm</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>TURN UDP relay</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>49152-50176</td>
-  <td>comm</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>mc waterfall proxy</td>
-  <td></td>
-  <td>TCP</td>
-  <td>25565</td>
-  <td>game</td>
-  <td>25567</td>
-  </tr>
-  <tr class="odd">
-  <td>mc bedrock geyser</td>
-  <td></td>
-  <td>TCP</td>
-  <td>19132</td>
-  <td>game</td>
-  <td>19132</td>
-  </tr>
-  <tr class="even">
-  <td>css-ds</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>27015</td>
-  <td>game</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>exo ssh</td>
-  <td>exo</td>
-  <td>TCP</td>
-  <td>4041</td>
-  <td>exovps</td>
-  <td>22</td>
-  </tr>
-  <tr class="odd">
-  <td>exo extra</td>
-  <td>exo</td>
-  <td>TCP</td>
-  <td>4040</td>
-  <td>exovps</td>
-  <td>4040</td>
-  </tr>
-  <tr class="even">
-  <td>yero ssh</td>
-  <td>yero</td>
-  <td>TCP</td>
-  <td>1511</td>
-  <td>yerovps</td>
-  <td>22</td>
-  </tr>
-  <tr class="odd">
-  <td>yero mc</td>
-  <td>yero</td>
-  <td>TCP</td>
-  <td>25569</td>
-  <td>yerovps</td>
-  <td>25565</td>
-  </tr>
-  <tr class="even">
-  <td>yero panel</td>
-  <td>yero</td>
-  <td>TCP</td>
-  <td>24444</td>
-  <td>yerovps</td>
-  <td>24444</td>
-  </tr>
-  </tbody>
-  </table>
-  <h3 id="ipv6-port-rules">IPv6 port rules</h3>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>Service</th>
-  <th>Customer</th>
-  <th>IPProto</th>
-  <th>Dest Host</th>
-  <th>Dest Port</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>DNS NS1</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>misc</td>
-  <td>53</td>
-  </tr>
-  <tr class="even">
-  <td>Web</td>
-  <td></td>
-  <td>TCP</td>
-  <td>web</td>
-  <td>80,443</td>
-  </tr>
-  <tr class="odd">
-  <td>NNTP</td>
-  <td></td>
-  <td>TCP</td>
-  <td>misc</td>
-  <td>119</td>
-  </tr>
-  <tr class="even">
-  <td>iperf3</td>
-  <td></td>
-  <td>TCP</td>
-  <td>misc</td>
-  <td>5201</td>
-  </tr>
-  <tr class="odd">
-  <td>Git</td>
-  <td></td>
-  <td>TCP</td>
-  <td>9418</td>
-  <td>web</td>
-  </tr>
-  <tr class="even">
-  <td>bittorrent</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>8999</td>
-  <td>nas</td>
-  </tr>
-  <tr class="odd">
-  <td>rsync</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>873</td>
-  <td>nas</td>
-  </tr>
-  <tr class="even">
-  <td>IRC</td>
-  <td></td>
-  <td>TCP</td>
-  <td>6667</td>
-  <td>comm</td>
-  </tr>
-  <tr class="odd">
-  <td>IRCS</td>
-  <td></td>
-  <td>TCP</td>
-  <td>6697</td>
-  <td>comm</td>
-  </tr>
-  <tr class="even">
-  <td>XMPP c2s</td>
-  <td></td>
-  <td>TCP</td>
-  <td>5222</td>
-  <td>comm</td>
-  </tr>
-  <tr class="odd">
-  <td>XMPP s2s</td>
-  <td></td>
-  <td>TCP</td>
-  <td>5269</td>
-  <td>comm</td>
-  </tr>
-  <tr class="even">
-  <td>TURN STUN</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>3478</td>
-  <td>comm</td>
-  </tr>
-  <tr class="odd">
-  <td>TURN</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>5349</td>
-  <td>comm</td>
-  </tr>
-  <tr class="even">
-  <td>TURN UDP relay</td>
-  <td></td>
-  <td>TCP/UDP</td>
-  <td>49152-50176</td>
-  <td>comm</td>
-  </tr>
-  <tr class="odd">
-  <td>mc-waterfall-proxy</td>
-  <td></td>
-  <td>TCP</td>
-  <td>25565</td>
-  <td>game</td>
-  </tr>
-  <tr class="even">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>exo-ssh</td>
-  <td>exo</td>
-  <td>TCP</td>
-  <td>4041</td>
-  <td>exovps</td>
-  </tr>
-  <tr class="even">
-  <td>exo-extra</td>
-  <td>exo</td>
-  <td>TCP</td>
-  <td>4040</td>
-  <td>exovps</td>
-  </tr>
-  <tr class="odd">
-  <td>yero-ssh</td>
-  <td>yero</td>
-  <td>TCP</td>
-  <td>1511</td>
-  <td>yerovps</td>
-  </tr>
-  <tr class="even">
-  <td>yero-sql</td>
-  <td>yero</td>
-  <td>TCP</td>
-  <td>1512</td>
-  <td>yerovps</td>
-  </tr>
-  <tr class="odd">
-  <td>FiveM SuperioresRP</td>
-  <td>yero</td>
-  <td>TCP/UDP</td>
-  <td>30120,40120</td>
-  <td>yerovps</td>
-  </tr>
-  </tbody>
-  </table>
-  <h2 id="hosts">Hosts</h2>
-  <ul>
-  <li>server - DELL PowerEdge R720 running Proxmox PVE - …</li>
-  <li>mail - IONOS VPS running Debian 12 - 5.250.186.185
-  2001:ba0:210:d600::1</li>
-  <li>dark - HostMeNow VPS running Debian 12 - 92.60.77.4</li>
-  </ul>
-  <h2 id="management">Management</h2>
-  <ul>
-  <li>OPNSense router DMZ.1</li>
-  <li>DELL switch DMZ.2</li>
-  <li>TP-Link WAP LAN.2</li>
-  <li>Proxmox hypervisor DMZ.4</li>
-  <li>DELL server iDRAC DMZ.5</li>
-  <li>HP printer DMZ.7</li>
-  <li>Linksys ATA DMZ.18</li>
-  </ul>
-  <h2 id="server-vms-and-services">server VMs and services</h2>
-  <p>server runs Proxmox PVE.</p>
-  <p>All VMs are Debian 12 (templated) with wazuh agent</p>
-  <h3 id="proxmox-dmz.4-hypervisor">proxmox DMZ.4 (hypervisor)</h3>
-  <ul>
-  <li>SSH</li>
-  <li>Proxmox management interface :8006</li>
-  <li>smartmon + node exporter :9100</li>
-  <li>sensor exporter*</li>
-  <li>NUT - Network UPS TOols daemon (and proper UPS)*</li>
-  </ul>
-  <h3 id="router-dmz.1">router DMZ.1</h3>
-  <ul>
-  <li>(routing/firewalling)</li>
-  <li>SSH</li>
-  <li>DHCP</li>
-  <li>unbound DNS</li>
-  <li>OpenVPN</li>
-  <li>WireGuard</li>
-  <li>IPsec</li>
-  <li>ntopng :3000</li>
-  <li>telegraf - note: editing config via webfig breaks (timeout and
-  unbound config)</li>
-  </ul>
-  <h3 id="nas-dmz.6">nas DMZ.6</h3>
-  <p>RAID attached here (with the grey stuff) (local only)</p>
-  <ul>
-  <li>SSH</li>
-  <li>NFS</li>
-  <li>Samba SMB*</li>
-  <li>MiniDLNA*</li>
-  <li>FTP</li>
-  <li>qBittorrent-nox</li>
-  <li>jellyfin</li>
-  <li>nginx</li>
-  <li>mpd :8000</li>
-  </ul>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>vhost</th>
-  <th>webroot/proxy</th>
-  <th>Comment</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>dark.arf20.com</td>
-  <td>/d/FTPServer/</td>
-  <td>Allow only VPS and private</td>
-  </tr>
-  </tbody>
-  </table>
-  <h3 id="web-dmz.9">web DMZ.9</h3>
-  <ul>
-  <li>SSH</li>
-  <li>cerbot</li>
-  <li>nginx (status at :8080)</li>
-  <li>fastcgi PHP</li>
-  <li>mariadb SQL</li>
-  <li>nginx-prometheus-exporter :9113</li>
-  <li>prometheus :9090</li>
-  <li>telegraf</li>
-  <li>influxdb :8086</li>
-  <li>grafana :3000
-  <ul>
-  <li>Proxmox</li>
-  <li>nginx</li>
-  <li>iDRAC</li>
-  </ul></li>
-  <li>zabbix*</li>
-  <li>netbox*</li>
-  <li>fcgiwrap</li>
-  <li>git-http-backend - git smart http server CGI</li>
-  <li>gitd - git daemon</li>
-  <li>cgit - web frontend for git</li>
-  <li>phpBB - forum software</li>
-  <li>Jekyll - blog static site generator thing</li>
-  <li>opentracker? - bittorrent tracker*</li>
-  <li>gophernicus - gopher server*</li>
-  <li>photoprism - photo shit</li>
-  <li>squid - http proxy server :3128</li>
-  </ul>
-  <table>
-  <colgroup>
-  <col style="width: 22%" />
-  <col style="width: 48%" />
-  <col style="width: 29%" />
-  </colgroup>
-  <thead>
-  <tr class="header">
-  <th>vhost</th>
-  <th>webroot/proxy</th>
-  <th>Comment</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>default</td>
-  <td>&lt;return 418 im a teapot&gt;</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>default:8080</td>
-  <td>&lt;return nstub_status&gt;</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>arf20.com</td>
-  <td>/var/www/arf20.com/html/</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>www.arf20.com</td>
-  <td>&lt;301 redirect arf20.com&gt;</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>matrix.arf20.com</td>
-  <td>http://comm.lan:8008/_matrix</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>webmail.arf20.com</td>
-  <td>/var/www/webmail.arf20.com/html/</td>
-  <td>SquirrelMail</td>
-  </tr>
-  <tr class="odd">
-  <td>nextcloud.arf20.com</td>
-  <td>/var/www/nextcloud.arf20.com/html/</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>grafana.arf20.com</td>
-  <td>http://localhost:3000</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>jellyfin.arf20.com</td>
-  <td>http://nas.lan:8096</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>git.arf20.com</td>
-  <td>/srv/git/</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>cgit.arf20.com</td>
-  <td>fastcgi:/usr/lib/cgit/cgit.cgi</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>blog.arf20.com</td>
-  <td>/var/www/blog.arf20.com/_site/</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>forum.arf20.com</td>
-  <td>/var/www/forum.arf20.com/html/</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>deb.arf20.com</td>
-  <td>/d/FTPServer/software/debian/</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>memes.arf20.com</td>
-  <td>/var/www/memes.arf20.com/, /d/FTPserver/{dcimg, dcmemes,
-  explosionsandfire}</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>news.arf20.com</td>
-  <td>Web-News NNTP newsgroups frontend</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>dash.arf20.com</td>
-  <td>/var/www/dash.arf20.com/html/</td>
-  <td>CSTIMS</td>
-  </tr>
-  <tr class="even">
-  <td>ftp.arf20.com</td>
-  <td>/d/FTPServer/public/</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>photo.arf20.com</td>
-  <td>[::1]:2342</td>
-  <td>photoprism</td>
-  </tr>
-  <tr class="even">
-  <td>radio.arf20.com</td>
-  <td>/ = /var/www/radio.arf20.com/html/; /stream = nas:8000</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>os.arf20.com</td>
-  <td>/ = /d/FTPServer/OS/</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>dark.arf20.com</td>
-  <td>/ = /ar/www/dark.arf20.com/html/</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>wiki.arf20.com</td>
-  <td>/usr/share/dokuwiki</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>qbt.arf20.com</td>
-  <td>http://192.168.4.6:8085</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>radarr.arf20.com</td>
-  <td>http://192.168.4.6:7878</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>sonarr.arf20.com</td>
-  <td>http://192.168.4.6:8989</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>status.yero.dev</td>
-  <td>http://yerovps.lan:3001</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>panaland.arf20.com</td>
-  <td>/var/www/panaland.arf20.com/html/</td>
-  <td></td>
-  </tr>
-  </tbody>
-  </table>
-  <h3 id="wazuh-dmz.10---secure">wazuh DMZ.10 -&gt; secure*</h3>
-  <ul>
-  <li>SSH</li>
-  <li>wazuh</li>
-  <li>password manager server*</li>
-  </ul>
-  <h3 id="game-dmz.11">game DMZ.11</h3>
-  <ul>
-  <li>SSH</li>
-  <li>waterfall (minecraft reverse proxy) :25565
-  <ul>
-  <li>mclobby (auth)</li>
-  <li>minepau*</li>
-  </ul></li>
-  <li>panaland mc modded :25566</li>
-  <li>css dedicated server :27015</li>
-  </ul>
-  <h3 id="comm-dmz.12">comm DMZ.12</h3>
-  <ul>
-  <li>SSH</li>
-  <li>cerbot</li>
-  <li>unrealircd - IRC</li>
-  <li>synapse - matrix</li>
-  <li>postgresql - DB for synapse</li>
-  <li>pantalaimon - encrypt matterbridge traffic to matrix</li>
-  <li>matterbridge - bridge channels with different protocols
-  <ul>
-  <li>discord</li>
-  <li>matrix</li>
-  <li>irc</li>
-  <li>xmpp</li>
-  </ul></li>
-  <li>prosody - XMPP</li>
-  <li>coturn - TURN server for matrix and xmpp</li>
-  <li>asterisk - VoIP SIP PBX</li>
-  </ul>
-  <h4 id="dialplan">Dialplan</h4>
-  <ul>
-  <li>1xxx -&gt; users</li>
-  <li>2xxx -&gt; services</li>
-  <li>8xxxxxxx -&gt; tandmx</li>
-  <li>733xxxx -&gt; SDF</li>
-  <li>0119xxxxxxx -&gt; uwutel</li>
-  <li>xxxxxx -&gt; regional PSTN</li>
-  <li>xxxxxxxxx -&gt; national PSTN</li>
-  <li>00x! -&gt; international PSTN</li>
-  </ul>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>number</th>
-  <th>description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>2000</td>
-  <td>IVR</td>
-  </tr>
-  <tr class="even">
-  <td>2001</td>
-  <td>conference</td>
-  </tr>
-  <tr class="odd">
-  <td>2002</td>
-  <td>time</td>
-  </tr>
-  <tr class="even">
-  <td>2003</td>
-  <td>voicemail</td>
-  </tr>
-  <tr class="odd">
-  <td>2100</td>
-  <td>test hello world</td>
-  </tr>
-  <tr class="even">
-  <td>2101</td>
-  <td>test digits 10</td>
-  </tr>
-  <tr class="odd">
-  <td>2102</td>
-  <td>test echo</td>
-  </tr>
-  <tr class="even">
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>1000</td>
-  <td>alias for operator</td>
-  </tr>
-  <tr class="even">
-  <td>1001</td>
-  <td>Site A ATA p1</td>
-  </tr>
-  <tr class="odd">
-  <td>1002</td>
-  <td>Site A ATA p2</td>
-  </tr>
-  <tr class="even">
-  <td>1011</td>
-  <td>Site B ATA p1</td>
-  </tr>
-  <tr class="odd">
-  <td>1012</td>
-  <td>Site B ATA p2</td>
-  </tr>
-  <tr class="even">
-  <td>1021</td>
-  <td>soft phone 1</td>
-  </tr>
-  <tr class="odd">
-  <td>1022</td>
-  <td>soft phone 2</td>
-  </tr>
-  <tr class="even">
-  <td>1031</td>
-  <td>remote phone 1</td>
-  </tr>
-  <tr class="odd">
-  <td>1032</td>
-  <td>remote phone 2</td>
-  </tr>
-  <tr class="even">
-  <td>1051</td>
-  <td>cisco 3911 1</td>
-  </tr>
-  <tr class="odd">
-  <td>1101</td>
-  <td>cisco 7941</td>
-  </tr>
-  </tbody>
-  </table>
-  <h3 id="misc-deb12-lxc-dmz.13">misc (Deb12 LXC) DMZ.13</h3>
-  <ul>
-  <li>SSH</li>
-  <li>iperf3</li>
-  <li>bind9 - master authoritative nameserver for arf20.com zone NS1
-  <ul>
-  <li>public recursive*</li>
-  </ul></li>
-  <li>OpenLDAP LDAP*</li>
-  <li>INN2 - NNTP USENET server with SDF peering</li>
-  <li>Discord servers
-  <ul>
-  <li>gDebrid (gookie)</li>
-  </ul></li>
-  <li>squid - HTTP proxy</li>
-  <li>microsocks - SOCKS5 proxy</li>
-  </ul>
-  <h3 id="t2-t2-sde-build-box-dmz.15">t2 (T/2 SDE build box) DMZ.15</h3>
-  <h3 id="pubnix-openbsd-7.5-dmz.16">pubnix (OpenBSD 7.5) DMZ.16</h3>
-  <ul>
-  <li>SSH</li>
-  </ul>
-  <h3 id="cucm-cisco-unified-communications-manager-dmz.19">cucm (Cisco
-  Unified Communications Manager) DMZ.19</h3>
-  <h3 id="callbox-5g-gnodeb-dmz.20">callbox (5G gNodeB) DMZ.20</h3>
-  <ul>
-  <li>Amarisoft Callbox</li>
-  </ul>
-  <h3 id="dn42-dmz.21">dn42 DMZ.21</h3>
-  <ul>
-  <li>(ip forward)</li>
-  <li>wireguard</li>
-  <li>bird eBGP daemon</li>
-  <li>bind9 master arfnet.dn42</li>
-  </ul>
-  <table>
-  <thead>
-  <tr class="header">
-  <th style="text-align: left;">| peer | asn | bgp |</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td style="text-align: left;">| prefixlabs | 4242421240 | fe80::1240
-  |</td>
-  </tr>
-  <tr class="even">
-  <td style="text-align: left;">| routedbits | 4242420207 | fe80::207
-  |</td>
-  </tr>
-  <tr class="odd">
-  <td style="text-align: left;">| lezi | 4242423377 | fe80::3377 |</td>
-  </tr>
-  <tr class="even">
-  <td style="text-align: left;">| carlos | 4242420034 | 172.23.34.1
-  |</td>
-  </tr>
-  <tr class="odd">
-  <td style="text-align: left;">| exo | 4242421112 | fe80::dead |</td>
-  </tr>
-  </tbody>
-  </table>
-  <h3 id="dn42-services-dmz.23">dn42-services DMZ.23</h3>
-  <ul>
-  <li>bind9 slave</li>
-  <li>nginx reverse proxy</li>
-  </ul>
-  <h2 id="vhost-webrootproxy-comment">| vhost | webroot/proxy |
-  comment</h2>
-  <p>arfnet.dn42 | http://192.168.4.9 | ARFNET in DN42</p>
-  <h3 id="open5gs-dmz.22">open5gs DMZ.22</h3>
-  <p>Remote gNodeB</p>
-  <ul>
-  <li>Open5GC</li>
-  <li>Kamailio</li>
-  <li>OAI?</li>
-  </ul>
-  <hr />
-  <h3 id="mail-arfnet-ionos-vps-5.250.186.185-2001ba0210d6001">mail
-  (ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1</h3>
-  <ul>
-  <li>SSH</li>
-  <li>certbot</li>
-  <li>postfix - MTA smtpd, submission, submissions <a
-  href="https://github.com/ARF20NET/mail-conf">config</a></li>
-  <li>dovecot - imapd</li>
-  <li>opendkim</li>
-  <li>opendmarc</li>
-  <li>bind9 - slave authoritative nameserver NS2</li>
-  <li>mlmmj - mailing list manager
-  <ul>
-  <li>installed to /usr/local/bin/mlmmj-webarchiver.sh and
-  /etc/mlmmj-webarchiver</li>
-  </ul></li>
-  <li>mlmmj-webarchiver - mailing list archiver</li>
-  </ul>
-  <table>
-  <colgroup>
-  <col style="width: 22%" />
-  <col style="width: 48%" />
-  <col style="width: 29%" />
-  </colgroup>
-  <thead>
-  <tr class="header">
-  <th>vhost</th>
-  <th>webroot/proxy</th>
-  <th>Comment</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>default</td>
-  <td>&lt;return 418 im a teapot&gt;</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>lists.arf20.com</td>
-  <td>/ = /var/www/lists.arf20.com/html/<br> /archive =
-  /srv/www/htdocs/archive/</td>
-  <td>Mailing lists</td>
-  </tr>
-  </tbody>
-  </table>
-  <h3 id="proxy-arfnet-hostmenow-vps-92.60.77.4">proxy (ARFNET-HOSTMENOW
-  VPS) 92.60.77.4</h3>
-  <ul>
-  <li>SSH</li>
-  <li>IPsec tunnel</li>
-  <li>nginx reverse proxy to nas</li>
-  </ul>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>vhost</th>
-  <th>webroot/proxy</th>
-  <th>Comment</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>default</td>
-  <td>&lt;return 418 im a teapot&gt;</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>jokesondmca.mooo.com</td>
-  <td>http://nas/</td>
-  <td>Stuff</td>
-  </tr>
-  </tbody>
-  </table>
-  <hr />
-  <h3 id="yero-debian-vps-dmz.192-yero">yero-debian VPS DMZ.192
-  (yero)</h3>
-  <ul>
-  <li>SSH</li>
-  <li>mariadb</li>
-  <li>FiveM SuperioresRP</li>
-  </ul>
-  <h3 id="exo-debian-vps-dmz.195-exo">exo-debian VPS DMZ.195 (exo)</h3>
-  <ul>
-  <li>SSH</li>
-  <li>netbox</li>
-  </ul>
-  <h3 id="loofa-debian-vps-dmz.196-loofa">loofa-debian VPS DMZ.196
-  (loofa)</h3>
-  <ul>
-  <li>SSH</li>
-  <li>?</li>
-  </ul>
-  <p>*TODO</p>
-  <h2 id="internal-name-and-number-assignation-table">Internal Name and
-  Number Assignation Table</h2>
-  <p>DMZ IPv4s and IPv6 ends in the same way</p>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>Addr</th>
-  <th>Name</th>
-  <th>Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>DMZ.1</td>
-  <td>router.lan</td>
-  <td>OPNSense managent</td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.2</td>
-  <td>switch.lan</td>
-  <td>DELL PowerConnect 5424 management</td>
-  </tr>
-  <tr class="odd">
-  <td>DMZ.3</td>
-  <td>wap.lan</td>
-  <td>TP-Link Omada AP255</td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.4</td>
-  <td>proxmox.lan</td>
-  <td>Proxmox VE management</td>
-  </tr>
-  <tr class="odd">
-  <td>DMZ.5</td>
-  <td>idrac.lan</td>
-  <td>DELL R720 iDRAC7 management</td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.6</td>
-  <td>nas.lan</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>DMZ.7</td>
-  <td>printer.lan</td>
-  <td>HP Officejet 8020</td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.8</td>
-  <td>desktop.lan</td>
-  <td>reserved for desktop on DMZ</td>
-  </tr>
-  <tr class="odd">
-  <td>DMZ.9</td>
-  <td>web.lan</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.10</td>
-  <td>wazuh.lan</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>DMZ.11</td>
-  <td>game.lan</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.12</td>
-  <td>comm.lan</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>DMZ.13</td>
-  <td>misc.lan</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.15</td>
-  <td>(t2)</td>
-  <td>T/2 SDE build box</td>
-  </tr>
-  <tr class="odd">
-  <td>DMZ.16</td>
-  <td>pubnix</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.17</td>
-  <td>[reserved]</td>
-  <td>for future raspi</td>
-  </tr>
-  <tr class="odd">
-  <td>DMZ.18</td>
-  <td>ata.lan</td>
-  <td>Linksys ATA</td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.19</td>
-  <td>cucmelan</td>
-  <td>Cisco CallManager</td>
-  </tr>
-  <tr class="odd">
-  <td>DMZ.20</td>
-  <td>callbox.lan</td>
-  <td>5G gNodeB</td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.21</td>
-  <td>dn42.lan</td>
-  <td>DN42 edge router</td>
-  </tr>
-  <tr class="odd">
-  <td>DMZ.22</td>
-  <td>open5gs.lan</td>
-  <td>Open5GS 5G core</td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.23</td>
-  <td>dn42-services.lan</td>
-  <td>DN42 service machine</td>
-  </tr>
-  <tr class="odd">
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.192</td>
-  <td>yero-debian</td>
-  <td>yero.lan</td>
-  </tr>
-  <tr class="odd">
-  <td>DMZ.195</td>
-  <td>exo-debian</td>
-  <td>exo.lan</td>
-  </tr>
-  <tr class="even">
-  <td>DMZ.196</td>
-  <td>loofa-debian</td>
-  <td>loofa.lan</td>
-  </tr>
-  </tbody>
-  </table>
-  <p>Site-B:PiSoNet</p>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>Addr</th>
-  <th>Name</th>
-  <th>Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>PSN.1</td>
-  <td></td>
-  <td>Huawei CPE Combo Box</td>
-  </tr>
-  <tr class="even">
-  <td>PSN.2</td>
-  <td></td>
-  <td>DELL switch on untagged</td>
-  </tr>
-  <tr class="odd">
-  <td>PSN.3</td>
-  <td></td>
-  <td>Mikrotik firewall downstream</td>
-  </tr>
-  <tr class="even">
-  <td>PSN.4</td>
-  <td></td>
-  <td>Grandstream ATA</td>
-  </tr>
-  <tr class="odd">
-  <td>PSN.8</td>
-  <td></td>
-  <td>desktop (when applies)</td>
-  </tr>
-  </tbody>
-  </table>
-  <h2 id="dns">DNS</h2>
-  <h3 id="public-domain-zone">Public domain zone</h3>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>Name</th>
-  <th>Type</th>
-  <th>Content</th>
-  <th>Comment</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>@</td>
-  <td>NS</td>
-  <td>ns1.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>@</td>
-  <td>NS</td>
-  <td>ns2.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>ns1</td>
-  <td>A</td>
-  <td>2.59.235.35</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>ns1</td>
-  <td>AAAA</td>
-  <td>2600:70ff:f039:4::13</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>ns2</td>
-  <td>A</td>
-  <td>5.250.186.185</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>ns2</td>
-  <td>AAAA</td>
-  <td>2001:ba0:210:d600::1</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>arf20.com</td>
-  <td>A</td>
-  <td>2.59.235.35</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>arf20.com</td>
-  <td>AAAA</td>
-  <td>2600:70ff:f039:4::9</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>mail.arf20.com</td>
-  <td>A</td>
-  <td>5.250.186.185</td>
-  <td>ARFNET-IONOS</td>
-  </tr>
-  <tr class="odd">
-  <td>mail.arf20.com</td>
-  <td>AAAA</td>
-  <td>2001:ba0:210:d600::1</td>
-  <td>ARFNET-IONOS</td>
-  </tr>
-  <tr class="even">
-  <td>web.arf20.com</td>
-  <td>A</td>
-  <td>2.59.235.35</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>web.arf20.com</td>
-  <td>AAAA</td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>game.arf20.com</td>
-  <td>A</td>
-  <td>2.59.235.35</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>game.arf20.com</td>
-  <td>AAAA</td>
-  <td>2600:70ff:f039:4::11</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>comm.arf20.com</td>
-  <td>A</td>
-  <td>2.59.235.35</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>comm.arf20.com</td>
-  <td>AAAA</td>
-  <td>2600:70ff:f039:4::12</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>misc.arf20.com</td>
-  <td>A</td>
-  <td>2.59.235.35</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>misc.arf20.com</td>
-  <td>AAAA</td>
-  <td>2600:70ff:f039:4::13</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>pubnix.arf20.com</td>
-  <td>A</td>
-  <td>2.59.235.35</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>pubnix.arf20.com</td>
-  <td>AAAA</td>
-  <td>2600:70ff:f039:4::16</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>irc.arf20.com</td>
-  <td>CNAME</td>
-  <td>comm.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>jellyfin.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>matrix.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>nextcloud.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>turn.arf20.com</td>
-  <td>CNAME</td>
-  <td>comm.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>webmail.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>www.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>xmpp.arf20.com</td>
-  <td>CNAME</td>
-  <td>comm.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>xmppconf.arf20.com</td>
-  <td>CNAME</td>
-  <td>comm.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>grafana.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>git.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>cgit.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>blog.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>forum.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>deb.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>zabbix.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>memes.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>news.arf20.com</td>
-  <td>CNAME</td>
-  <td>misc.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>dash.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>ftp.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>photo.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>radio.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>os.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>tel.arf20.com</td>
-  <td>CNAME</td>
-  <td>comm.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>netbox.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>dark.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>wiki.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>qbt.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>radarr.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>sonarr.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>status.arf20.com</td>
-  <td>CNAME</td>
-  <td>mail.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>lists.arf20.com</td>
-  <td>CNAME</td>
-  <td>mail.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>mlmmj.arf20.com</td>
-  <td>CNAME</td>
-  <td>mail.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>lahomosexualidadde.arf20.com</td>
-  <td>CNAME</td>
-  <td>weonpollo.xyz</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>panaland.arf20.com</td>
-  <td>CNAME</td>
-  <td>web.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>_acme-challenge.jellyfin</td>
-  <td>CNAME</td>
-  <td>(challenge)</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>_acme-challenge.irc</td>
-  <td>CNAME</td>
-  <td>(challenge)</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>_acme-challenge.matrix</td>
-  <td>CNAME</td>
-  <td>(challenge)</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>_acme-challenge.mail</td>
-  <td>CNAME</td>
-  <td>(challenge)</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>_acme-challenge.xmpp</td>
-  <td>CNAME</td>
-  <td>(challenge)</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td>arf20.com</td>
-  <td>MX</td>
-  <td>mail.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>selector._domainkey</td>
-  <td>TXT</td>
-  <td>(DKIM)</td>
-  <td>DKIM for selector ‘selector’</td>
-  </tr>
-  <tr class="odd">
-  <td>_dmarc</td>
-  <td>TXT</td>
-  <td>(DMARC)</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>arf20.com</td>
-  <td>TXT</td>
-  <td>(SPF)</td>
-  <td></td>
-  </tr>
-  </tbody>
-  </table>
-  <h3 id="he-v6-rdns-zone">HE v6 rDNS zone</h3>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>Name</th>
-  <th>Type</th>
-  <th>Content</th>
-  <th>Comment</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>2600:70ff:f039:4::13</td>
-  <td>PTR</td>
-  <td>ns1.arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>2600:70ff:f039:4::9</td>
-  <td>PTR</td>
-  <td>arf20.com</td>
-  <td></td>
-  </tr>
-  <tr class="odd">
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  </tr>
-  <tr class="even">
-  <td>2600:70ff:f039:4::195</td>
-  <td>PTR</td>
-  <td>global.dns.navy</td>
-  <td></td>
-  </tr>
-  </tbody>
-  </table>
-  <h3 id="ionos-rdns-zone">IONOS rDNS zone</h3>
-  <table>
-  <thead>
-  <tr class="header">
-  <th>Name</th>
-  <th>Type</th>
-  <th>Content</th>
-  <th>Comment</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="odd">
-  <td>5.250.186.185</td>
-  <td>PTR</td>
-  <td>mail.arf20.com</td>
-  <td></td>
-  </tr>
-  </tbody>
-  </table>
-  <h2 id="custom-arfnet-software">Custom ARFNET software</h2>
-  <ul>
-  <li><a href="https://cgit.arf20.com/arfnet2-cstims">cstims</a>:
-  client, service, ticket and invoice management system</li>
-  <li><a href="https://cgit.arf20.com/arfnet2-lists">lists</a>: mailing
-  list browser</li>
-  </ul>
+<ul>
+<li>ONT: CPE Huawei GPON</li>
+<li>switch: DELL PowerConnect 5424</li>
+<li>server: DELL PowerEdge R720 @ 2x E5-2670 + 64GB + (240+120)GB SSD +
+(4+3x7RAID5)TB HDD</li>
+<li>ATA: Cisco/Linksys PAP2T</li>
+</ul>
+<h4 id="dell-powerconnect-5424-switch">DELL PowerConnect 5424
+switch</h4>
+<p>Port assignents</p>
+<table>
+<thead>
+<tr class="header">
+<th>port</th>
+<th>endpoint</th>
+<th>options</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>g2</td>
+<td>ONT</td>
+<td>VLAN access 2</td>
+</tr>
+<tr class="even">
+<td>g4</td>
+<td>server eno2 WAN</td>
+<td>VLAN access 2</td>
+</tr>
+<tr class="odd">
+<td>g6</td>
+<td>test2</td>
+<td>VLAN access 2</td>
+</tr>
+<tr class="even">
+<td>g3</td>
+<td>WAP</td>
+<td>VLAN access 5</td>
+</tr>
+<tr class="odd">
+<td>g5</td>
+<td>PC</td>
+<td>VLAN access 4</td>
+</tr>
+<tr class="even">
+<td>g7</td>
+<td>Living R.</td>
+<td>VLAN access 5</td>
+</tr>
+<tr class="odd">
+<td>g9</td>
+<td>server eno1 DMZ+LAN</td>
+<td>VLAN trunk 4, 5</td>
+</tr>
+<tr class="even">
+<td>g12</td>
+<td>voip poe switch</td>
+<td>VLAN access 9</td>
+</tr>
+<tr class="odd">
+<td>g15</td>
+<td>test4</td>
+<td>VLAN access 4</td>
+</tr>
+<tr class="even">
+<td>g16</td>
+<td>ATA</td>
+<td>VLAN access 4</td>
+</tr>
+<tr class="odd">
+<td>g17</td>
+<td>test1</td>
+<td>VLAN access 1</td>
+</tr>
+<tr class="even">
+<td>g19</td>
+<td>test5</td>
+<td>VLAN access 5</td>
+</tr>
+<tr class="odd">
+<td>g21</td>
+<td>iDRAC</td>
+<td>VLAN access 4</td>
+</tr>
+<tr class="even">
+<td>g23</td>
+<td>printer</td>
+<td>VLAN access 4</td>
+</tr>
+</tbody>
+</table>
+<p>Management</p>
+<ul>
+<li>interface vlan 4: 192.168.4.2/24 gw 192.168.4.1</li>
+</ul>
+<h3 id="public-ips">Public IPs</h3>
+<ul>
+<li>AVANZA_STATIC: 2.59.235.35</li>
+<li>AVANZA_CGNAT: dynamic 100.x.x.x</li>
+<li>HE prefixes
+<ul>
+<li>2001:470:1f21:125::/64</li>
+<li>2600:70ff:f039::/48</li>
+</ul></li>
+<li>IONOS VPS: 5.250.186.185 2001:ba0:210:d600::1</li>
+</ul>
+<h3 id="gateways">Gateways</h3>
+<ul>
+<li>AVANZA
+<ul>
+<li>WAN_STATIC: 2.59.235.1</li>
+<li>WAN_CGNAT: dynamic</li>
+</ul></li>
+<li>HE v6 tunnel
+<ul>
+<li>server: 216.66.87.102, 2001:470:1f20:125::1/64</li>
+<li>client: 2.59.235.35, 2001:470:1f20:125::2</li>
+</ul></li>
+</ul>
+<h3 id="physical-and-logical-networks">Physical and Logical
+Networks</h3>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 21%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>name</th>
+<th>VLAN</th>
+<th>net</th>
+<th>desc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>WAN</td>
+<td>2</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>DMZ</td>
+<td>4</td>
+<td>192.168.4.0/24 <br> 2600:70ff:f039:4::/64</td>
+<td>Services</td>
+</tr>
+<tr class="odd">
+<td>LAN</td>
+<td>5</td>
+<td>192.168.5.0/24 <br> 2600:70ff:f039:5::/64</td>
+<td>Clients</td>
+</tr>
+<tr class="even">
+<td>VPN</td>
+<td></td>
+<td>192.168.6.0/24 <br> 2600:70ff:f039:6::/64</td>
+<td>Wireguard clients</td>
+</tr>
+<tr class="odd">
+<td>dark</td>
+<td></td>
+<td>192.168.7.0/24 <br></td>
+<td>dark IPsec remote subnet</td>
+</tr>
+<tr class="even">
+<td>B:PSN</td>
+<td>un</td>
+<td>192.168.18.0/24</td>
+<td>Site-B:PisoNET</td>
+</tr>
+<tr class="odd">
+<td>B:SBN</td>
+<td></td>
+<td>192.168.8.0/24</td>
+<td>Site-B:SiteBNET</td>
+</tr>
+<tr class="even">
+<td>voip</td>
+<td>9</td>
+<td>192.168.9.0/24</td>
+<td>VoIP</td>
+</tr>
+<tr class="odd">
+<td>dn42</td>
+<td>42</td>
+<td>172.20.196.32/27 <br> fdfd:acab:caca::/48</td>
+<td>DN42 ARFNET-MNT</td>
+</tr>
+</tbody>
+</table>
+<h2 id="firewall">Firewall</h2>
+<h3 id="interface-rules">Interface Rules</h3>
+<ul>
+<li>WAN_CGNAT in
+<ul>
+<li>deny *</li>
+</ul></li>
+<li>WAN_STATIC in
+<ul>
+<li>allow v4 from * to {services} –&gt; NAT rules</li>
+</ul></li>
+<li>DMZ in
+<ul>
+<li>deny v4 to LAN net</li>
+<li>allow v4 to firewall</li>
+<li>allow v4 to * gw WAN_STATIC</li>
+<li>allow v6 to * gw HE_TUNNELV6</li>
+</ul></li>
+<li>LAN in
+<ul>
+<li>allow v4 ICMP to firewall</li>
+<li>allow v4 IP DNS to firewall</li>
+<li>allow v4 to DMZ net</li>
+<li>allow v4 to * gw WAN_CGNAT</li>
+<li>allow v6 to * gw HE_TUNNELV6</li>
+</ul></li>
+<li>Wireguard in
+<ul>
+<li>allow v4+6 to DMZ net</li>
+<li>allow v4 to * gw WAN_CGNAT</li>
+<li>allow v6 to * gw HE_TUNNELV6</li>
+</ul></li>
+</ul>
+<h3 id="ipv4-nat-rules">IPv4 NAT Rules</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Service</th>
+<th>Customer</th>
+<th>IPProto</th>
+<th>Ext Port</th>
+<th>Host</th>
+<th>Re Port</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>WireGuard</td>
+<td></td>
+<td>UDP</td>
+<td>51820</td>
+<td>router</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>DNS NS1</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>53</td>
+<td>misc</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>iperf3</td>
+<td></td>
+<td>TCP</td>
+<td>5201</td>
+<td>misc</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>NNTP</td>
+<td></td>
+<td>TCP</td>
+<td>119</td>
+<td>misc</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Web</td>
+<td></td>
+<td>TCP</td>
+<td>80,443</td>
+<td>web</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Git</td>
+<td></td>
+<td>TCP</td>
+<td>9418</td>
+<td>web</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>bittorrent</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>8999</td>
+<td>nas</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>rsync</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>873</td>
+<td>nas</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>IRC</td>
+<td></td>
+<td>TCP</td>
+<td>6667</td>
+<td>comm</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>IRCS</td>
+<td></td>
+<td>TCP</td>
+<td>6697</td>
+<td>comm</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>XMPP c2s</td>
+<td></td>
+<td>TCP</td>
+<td>5222</td>
+<td>comm</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>XMPP s2s</td>
+<td></td>
+<td>TCP</td>
+<td>5269</td>
+<td>comm</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>TURN STUN</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>3478</td>
+<td>comm</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>TURN</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>5349</td>
+<td>comm</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>TURN UDP relay</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>49152-50176</td>
+<td>comm</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>mc waterfall proxy</td>
+<td></td>
+<td>TCP</td>
+<td>25565</td>
+<td>game</td>
+<td>25567</td>
+</tr>
+<tr class="odd">
+<td>mc bedrock geyser</td>
+<td></td>
+<td>TCP</td>
+<td>19132</td>
+<td>game</td>
+<td>19132</td>
+</tr>
+<tr class="even">
+<td>css-ds</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>27015</td>
+<td>game</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>exo ssh</td>
+<td>exo</td>
+<td>TCP</td>
+<td>4041</td>
+<td>exovps</td>
+<td>22</td>
+</tr>
+<tr class="odd">
+<td>exo extra</td>
+<td>exo</td>
+<td>TCP</td>
+<td>4040</td>
+<td>exovps</td>
+<td>4040</td>
+</tr>
+<tr class="even">
+<td>yero ssh</td>
+<td>yero</td>
+<td>TCP</td>
+<td>1511</td>
+<td>yerovps</td>
+<td>22</td>
+</tr>
+<tr class="odd">
+<td>yero mc</td>
+<td>yero</td>
+<td>TCP</td>
+<td>25569</td>
+<td>yerovps</td>
+<td>25565</td>
+</tr>
+<tr class="even">
+<td>yero panel</td>
+<td>yero</td>
+<td>TCP</td>
+<td>24444</td>
+<td>yerovps</td>
+<td>24444</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ipv6-port-rules">IPv6 port rules</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Service</th>
+<th>Customer</th>
+<th>IPProto</th>
+<th>Dest Host</th>
+<th>Dest Port</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DNS NS1</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>misc</td>
+<td>53</td>
+</tr>
+<tr class="even">
+<td>Web</td>
+<td></td>
+<td>TCP</td>
+<td>web</td>
+<td>80,443</td>
+</tr>
+<tr class="odd">
+<td>NNTP</td>
+<td></td>
+<td>TCP</td>
+<td>misc</td>
+<td>119</td>
+</tr>
+<tr class="even">
+<td>iperf3</td>
+<td></td>
+<td>TCP</td>
+<td>misc</td>
+<td>5201</td>
+</tr>
+<tr class="odd">
+<td>Git</td>
+<td></td>
+<td>TCP</td>
+<td>9418</td>
+<td>web</td>
+</tr>
+<tr class="even">
+<td>bittorrent</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>8999</td>
+<td>nas</td>
+</tr>
+<tr class="odd">
+<td>rsync</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>873</td>
+<td>nas</td>
+</tr>
+<tr class="even">
+<td>IRC</td>
+<td></td>
+<td>TCP</td>
+<td>6667</td>
+<td>comm</td>
+</tr>
+<tr class="odd">
+<td>IRCS</td>
+<td></td>
+<td>TCP</td>
+<td>6697</td>
+<td>comm</td>
+</tr>
+<tr class="even">
+<td>XMPP c2s</td>
+<td></td>
+<td>TCP</td>
+<td>5222</td>
+<td>comm</td>
+</tr>
+<tr class="odd">
+<td>XMPP s2s</td>
+<td></td>
+<td>TCP</td>
+<td>5269</td>
+<td>comm</td>
+</tr>
+<tr class="even">
+<td>TURN STUN</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>3478</td>
+<td>comm</td>
+</tr>
+<tr class="odd">
+<td>TURN</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>5349</td>
+<td>comm</td>
+</tr>
+<tr class="even">
+<td>TURN UDP relay</td>
+<td></td>
+<td>TCP/UDP</td>
+<td>49152-50176</td>
+<td>comm</td>
+</tr>
+<tr class="odd">
+<td>mc-waterfall-proxy</td>
+<td></td>
+<td>TCP</td>
+<td>25565</td>
+<td>game</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>exo-ssh</td>
+<td>exo</td>
+<td>TCP</td>
+<td>4041</td>
+<td>exovps</td>
+</tr>
+<tr class="even">
+<td>exo-extra</td>
+<td>exo</td>
+<td>TCP</td>
+<td>4040</td>
+<td>exovps</td>
+</tr>
+<tr class="odd">
+<td>yero-ssh</td>
+<td>yero</td>
+<td>TCP</td>
+<td>1511</td>
+<td>yerovps</td>
+</tr>
+<tr class="even">
+<td>yero-sql</td>
+<td>yero</td>
+<td>TCP</td>
+<td>1512</td>
+<td>yerovps</td>
+</tr>
+<tr class="odd">
+<td>FiveM SuperioresRP</td>
+<td>yero</td>
+<td>TCP/UDP</td>
+<td>30120,40120</td>
+<td>yerovps</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hosts">Hosts</h2>
+<ul>
+<li>server - DELL PowerEdge R720 running Proxmox PVE - …</li>
+<li>mail - IONOS VPS running Debian 12 - 5.250.186.185
+2001:ba0:210:d600::1</li>
+<li>dark - HostMeNow VPS running Debian 12 - 92.60.77.4</li>
+</ul>
+<h2 id="management">Management</h2>
+<ul>
+<li>OPNSense router DMZ.1</li>
+<li>DELL switch DMZ.2</li>
+<li>TP-Link WAP LAN.2</li>
+<li>Proxmox hypervisor DMZ.4</li>
+<li>DELL server iDRAC DMZ.5</li>
+<li>HP printer DMZ.7</li>
+<li>Linksys ATA DMZ.18</li>
+</ul>
+<h2 id="server-vms-and-services">server VMs and services</h2>
+<p>server runs Proxmox PVE.</p>
+<p>All VMs are Debian 12 (templated) with wazuh agent</p>
+<h3 id="proxmox-dmz.4-hypervisor">proxmox DMZ.4 (hypervisor)</h3>
+<ul>
+<li>SSH</li>
+<li>Proxmox management interface :8006</li>
+<li>smartmon + node exporter :9100</li>
+<li>sensor exporter*</li>
+<li>NUT - Network UPS TOols daemon (and proper UPS)*</li>
+</ul>
+<h3 id="router-dmz.1">router DMZ.1</h3>
+<ul>
+<li>(routing/firewalling)</li>
+<li>SSH</li>
+<li>DHCP</li>
+<li>unbound DNS</li>
+<li>OpenVPN</li>
+<li>WireGuard</li>
+<li>IPsec</li>
+<li>ntopng :3000</li>
+<li>telegraf - note: editing config via webfig breaks (timeout and
+unbound config)</li>
+</ul>
+<h3 id="nas-dmz.6">nas DMZ.6</h3>
+<p>RAID attached here (with the grey stuff) (local only)</p>
+<ul>
+<li>SSH</li>
+<li>NFS</li>
+<li>Samba SMB*</li>
+<li>MiniDLNA*</li>
+<li>FTP</li>
+<li>qBittorrent-nox</li>
+<li>jellyfin</li>
+<li>nginx</li>
+<li>mpd :8000</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>vhost</th>
+<th>webroot/proxy</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>dark.arf20.com</td>
+<td>/d/FTPServer/</td>
+<td>Allow only VPS and private</td>
+</tr>
+</tbody>
+</table>
+<h3 id="web-dmz.9">web DMZ.9</h3>
+<ul>
+<li>SSH</li>
+<li>cerbot</li>
+<li>nginx (status at :8080)</li>
+<li>fastcgi PHP</li>
+<li>mariadb SQL</li>
+<li>nginx-prometheus-exporter :9113</li>
+<li>prometheus :9090</li>
+<li>telegraf</li>
+<li>influxdb :8086</li>
+<li>grafana :3000
+<ul>
+<li>Proxmox</li>
+<li>nginx</li>
+<li>iDRAC</li>
+</ul></li>
+<li>zabbix*</li>
+<li>netbox*</li>
+<li>fcgiwrap</li>
+<li>git-http-backend - git smart http server CGI</li>
+<li>gitd - git daemon</li>
+<li>cgit - web frontend for git</li>
+<li>phpBB - forum software</li>
+<li>Jekyll - blog static site generator thing</li>
+<li>opentracker? - bittorrent tracker*</li>
+<li>gophernicus - gopher server*</li>
+<li>photoprism - photo shit</li>
+<li>squid - http proxy server :3128</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 48%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>vhost</th>
+<th>webroot/proxy</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>default</td>
+<td>&lt;return 418 im a teapot&gt;</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>default:8080</td>
+<td>&lt;return nstub_status&gt;</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>arf20.com</td>
+<td>/var/www/arf20.com/html/</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>www.arf20.com</td>
+<td>&lt;301 redirect arf20.com&gt;</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>matrix.arf20.com</td>
+<td>http://comm.lan:8008/_matrix</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>webmail.arf20.com</td>
+<td>/var/www/webmail.arf20.com/html/</td>
+<td>SquirrelMail</td>
+</tr>
+<tr class="odd">
+<td>nextcloud.arf20.com</td>
+<td>/var/www/nextcloud.arf20.com/html/</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>grafana.arf20.com</td>
+<td>http://localhost:3000</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>jellyfin.arf20.com</td>
+<td>http://nas.lan:8096</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>git.arf20.com</td>
+<td>/srv/git/</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>cgit.arf20.com</td>
+<td>fastcgi:/usr/lib/cgit/cgit.cgi</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>blog.arf20.com</td>
+<td>/var/www/blog.arf20.com/_site/</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>forum.arf20.com</td>
+<td>/var/www/forum.arf20.com/html/</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>deb.arf20.com</td>
+<td>/d/FTPServer/software/debian/</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>memes.arf20.com</td>
+<td>/var/www/memes.arf20.com/, /d/FTPserver/{dcimg, dcmemes,
+explosionsandfire}</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>news.arf20.com</td>
+<td>Web-News NNTP newsgroups frontend</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>dash.arf20.com</td>
+<td>/var/www/dash.arf20.com/html/</td>
+<td>CSTIMS</td>
+</tr>
+<tr class="even">
+<td>ftp.arf20.com</td>
+<td>/d/FTPServer/public/</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>photo.arf20.com</td>
+<td>[::1]:2342</td>
+<td>photoprism</td>
+</tr>
+<tr class="even">
+<td>radio.arf20.com</td>
+<td>/ = /var/www/radio.arf20.com/html/; /stream = nas:8000</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>os.arf20.com</td>
+<td>/ = /d/FTPServer/OS/</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>dark.arf20.com</td>
+<td>/ = /var/www/dark.arf20.com/html/</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>wiki.arf20.com</td>
+<td>/usr/share/dokuwiki</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>qbt.arf20.com</td>
+<td>http://192.168.4.6:8085</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>radarr.arf20.com</td>
+<td>http://192.168.4.6:7878</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>sonarr.arf20.com</td>
+<td>http://192.168.4.6:8989</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>kanboard.arf20.com</td>
+<td>/ = /var/www/kanboard.arf20.com/html/</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>vw.arf20.com</td>
+<td>http://192.168.4.10:8000</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>status.yero.dev</td>
+<td>http://yerovps.lan:3001</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>panaland.arf20.com</td>
+<td>/var/www/panaland.arf20.com/html/</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="secure-dmz.10">secure DMZ.10</h3>
+<ul>
+<li>SSH</li>
+<li>wazuh*</li>
+<li>vaultwarden :8000</li>
+</ul>
+<h3 id="game-dmz.11">game DMZ.11</h3>
+<ul>
+<li>SSH</li>
+<li>waterfall (minecraft reverse proxy) :25565
+<ul>
+<li>mclobby (auth)</li>
+<li>minepau*</li>
+</ul></li>
+<li>panaland mc modded :25566</li>
+<li>css dedicated server :27015</li>
+</ul>
+<h3 id="comm-dmz.12">comm DMZ.12</h3>
+<ul>
+<li>SSH</li>
+<li>cerbot</li>
+<li>unrealircd - IRC</li>
+<li>synapse - matrix</li>
+<li>postgresql - DB for synapse</li>
+<li>pantalaimon - encrypt matterbridge traffic to matrix</li>
+<li>matterbridge - bridge channels with different protocols
+<ul>
+<li>discord</li>
+<li>matrix</li>
+<li>irc</li>
+<li>xmpp</li>
+</ul></li>
+<li>prosody - XMPP</li>
+<li>coturn - TURN server for matrix and xmpp</li>
+<li>asterisk - VoIP SIP PBX</li>
+</ul>
+<h4 id="dialplan">Dialplan</h4>
+<ul>
+<li>1xxx -&gt; users</li>
+<li>2xxx -&gt; services</li>
+<li>8xxxxxxx -&gt; tandmx</li>
+<li>733xxxx -&gt; SDF</li>
+<li>0119xxxxxxx -&gt; uwutel</li>
+<li>xxxxxx -&gt; regional PSTN</li>
+<li>xxxxxxxxx -&gt; national PSTN</li>
+<li>00x! -&gt; international PSTN</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>number</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2000</td>
+<td>IVR</td>
+</tr>
+<tr class="even">
+<td>2001</td>
+<td>conference</td>
+</tr>
+<tr class="odd">
+<td>2002</td>
+<td>time</td>
+</tr>
+<tr class="even">
+<td>2003</td>
+<td>voicemail</td>
+</tr>
+<tr class="odd">
+<td>2100</td>
+<td>test hello world</td>
+</tr>
+<tr class="even">
+<td>2101</td>
+<td>test digits 10</td>
+</tr>
+<tr class="odd">
+<td>2102</td>
+<td>test echo</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>1000</td>
+<td>alias for operator</td>
+</tr>
+<tr class="even">
+<td>1001</td>
+<td>Site A ATA p1</td>
+</tr>
+<tr class="odd">
+<td>1002</td>
+<td>Site A ATA p2</td>
+</tr>
+<tr class="even">
+<td>1011</td>
+<td>Site B ATA p1</td>
+</tr>
+<tr class="odd">
+<td>1012</td>
+<td>Site B ATA p2</td>
+</tr>
+<tr class="even">
+<td>1021</td>
+<td>soft phone 1</td>
+</tr>
+<tr class="odd">
+<td>1022</td>
+<td>soft phone 2</td>
+</tr>
+<tr class="even">
+<td>1031</td>
+<td>remote phone 1</td>
+</tr>
+<tr class="odd">
+<td>1032</td>
+<td>remote phone 2</td>
+</tr>
+<tr class="even">
+<td>1051</td>
+<td>cisco 3911 1</td>
+</tr>
+<tr class="odd">
+<td>1101</td>
+<td>cisco 7941</td>
+</tr>
+</tbody>
+</table>
+<h3 id="misc-deb12-lxc-dmz.13">misc (Deb12 LXC) DMZ.13</h3>
+<ul>
+<li>SSH</li>
+<li>iperf3</li>
+<li>bind9 - master authoritative nameserver for arf20.com zone NS1
+<ul>
+<li>public recursive*</li>
+</ul></li>
+<li>INN2 - NNTP USENET server with SDF peering</li>
+<li>Discord servers
+<ul>
+<li>gDebrid (gookie)</li>
+</ul></li>
+<li>squid - HTTP proxy</li>
+<li>microsocks - SOCKS5 proxy</li>
+</ul>
+<h3 id="t2-t2-sde-build-box-dmz.15">t2 (T/2 SDE build box) DMZ.15</h3>
+<h3 id="pubnix-openbsd-7.5-dmz.16">pubnix (OpenBSD 7.5) DMZ.16</h3>
+<ul>
+<li>SSH</li>
+</ul>
+<h3 id="cucm-cisco-unified-communications-manager-dmz.19">cucm (Cisco
+Unified Communications Manager) DMZ.19</h3>
+<h3 id="callbox-dmz.20">callbox DMZ.20</h3>
+<ul>
+<li>Amarisoft Callbox</li>
+</ul>
+<h3 id="dn42-dmz.21">dn42 DMZ.21</h3>
+<ul>
+<li>(ip forward)</li>
+<li>wireguard</li>
+<li>bird eBGP daemon</li>
+<li>bind9 master arfnet.dn42</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">| peer | asn | bgp |</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">| prefixlabs | 4242421240 | fe80::1240
+|</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">| routedbits | 4242420207 | fe80::207
+|</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">| lezi | 4242423377 | fe80::3377 |</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">| carlos | 4242420034 | 172.23.34.1 |</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">| exo | 4242421112 | fe80::dead |</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dn42-services-dmz.23">dn42-services DMZ.23</h3>
+<ul>
+<li>bind9 slave</li>
+<li>nginx reverse proxy</li>
+</ul>
+<h2 id="vhost-webrootproxy-comment">| vhost | webroot/proxy |
+comment</h2>
+<p>arfnet.dn42 | http://192.168.4.9 | ARFNET in DN42</p>
+<h3 id="open5gs-dmz.22">open5gs DMZ.22</h3>
+<p>Remote gNodeB</p>
+<ul>
+<li>Open5GC</li>
+<li>Kamailio</li>
+<li>OAI?</li>
+</ul>
+<hr />
+<h3 id="mail-arfnet-ionos-vps-5.250.186.185-2001ba0210d6001">mail
+(ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1</h3>
+<ul>
+<li>SSH</li>
+<li>certbot</li>
+<li>postfix - MTA smtpd, submission, submissions <a
+href="https://github.com/ARF20NET/mail-conf">config</a></li>
+<li>dovecot - imapd</li>
+<li>opendkim</li>
+<li>opendmarc</li>
+<li>bind9 - slave authoritative nameserver NS2</li>
+<li>mlmmj - mailing list manager
+<ul>
+<li>installed to /usr/local/bin/mlmmj-webarchiver.sh and
+/etc/mlmmj-webarchiver</li>
+</ul></li>
+<li>mlmmj-webarchiver - mailing list archiver</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 48%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>vhost</th>
+<th>webroot/proxy</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>default</td>
+<td>&lt;return 418 im a teapot&gt;</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>lists.arf20.com</td>
+<td>/ = /var/www/lists.arf20.com/html/<br> /archive =
+/srv/www/htdocs/archive/</td>
+<td>Mailing lists</td>
+</tr>
+</tbody>
+</table>
+<h3 id="proxy-arfnet-hostmenow-vps-92.60.77.4">proxy (ARFNET-HOSTMENOW
+VPS) 92.60.77.4</h3>
+<ul>
+<li>SSH</li>
+<li>IPsec tunnel</li>
+<li>nginx reverse proxy to nas</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>vhost</th>
+<th>webroot/proxy</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>default</td>
+<td>&lt;return 418 im a teapot&gt;</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>jokesondmca.mooo.com</td>
+<td>http://nas/</td>
+<td>Stuff</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="yero-debian-vps-dmz.192-yero">yero-debian VPS DMZ.192
+(yero)</h3>
+<ul>
+<li>SSH</li>
+<li>mariadb</li>
+<li>FiveM SuperioresRP</li>
+</ul>
+<h3 id="exo-debian-vps-dmz.195-exo">exo-debian VPS DMZ.195 (exo)</h3>
+<ul>
+<li>SSH</li>
+<li>netbox</li>
+</ul>
+<h3 id="loofa-debian-vps-dmz.196-loofa">loofa-debian VPS DMZ.196
+(loofa)</h3>
+<ul>
+<li>SSH</li>
+<li>?</li>
+</ul>
+<p>*TODO</p>
+<h2 id="internal-name-and-number-assignation-table">Internal Name and
+Number Assignation Table</h2>
+<p>DMZ IPv4s and IPv6 ends in the same way</p>
+<table>
+<thead>
+<tr class="header">
+<th>Addr</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DMZ.1</td>
+<td>router.lan</td>
+<td>OPNSense managent</td>
+</tr>
+<tr class="even">
+<td>DMZ.2</td>
+<td>switch.lan</td>
+<td>DELL PowerConnect 5424 management</td>
+</tr>
+<tr class="odd">
+<td>DMZ.3</td>
+<td>wap.lan</td>
+<td>TP-Link Omada AP255</td>
+</tr>
+<tr class="even">
+<td>DMZ.4</td>
+<td>proxmox.lan</td>
+<td>Proxmox VE management</td>
+</tr>
+<tr class="odd">
+<td>DMZ.5</td>
+<td>idrac.lan</td>
+<td>DELL R720 iDRAC7 management</td>
+</tr>
+<tr class="even">
+<td>DMZ.6</td>
+<td>nas.lan</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>DMZ.7</td>
+<td>printer.lan</td>
+<td>HP Officejet 8020</td>
+</tr>
+<tr class="even">
+<td>DMZ.8</td>
+<td>desktop.lan</td>
+<td>reserved for desktop on DMZ</td>
+</tr>
+<tr class="odd">
+<td>DMZ.9</td>
+<td>web.lan</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>DMZ.10</td>
+<td>wazuh.lan</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>DMZ.11</td>
+<td>game.lan</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>DMZ.12</td>
+<td>comm.lan</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>DMZ.13</td>
+<td>misc.lan</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>DMZ.15</td>
+<td>(t2)</td>
+<td>T/2 SDE build box</td>
+</tr>
+<tr class="odd">
+<td>DMZ.16</td>
+<td>pubnix</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>DMZ.17</td>
+<td>[reserved]</td>
+<td>for future raspi</td>
+</tr>
+<tr class="odd">
+<td>DMZ.18</td>
+<td>ata.lan</td>
+<td>Linksys ATA</td>
+</tr>
+<tr class="even">
+<td>DMZ.19</td>
+<td>cucmelan</td>
+<td>Cisco CallManager</td>
+</tr>
+<tr class="odd">
+<td>DMZ.20</td>
+<td>callbox.lan</td>
+<td>5G gNodeB</td>
+</tr>
+<tr class="even">
+<td>DMZ.21</td>
+<td>dn42.lan</td>
+<td>DN42 edge router</td>
+</tr>
+<tr class="odd">
+<td>DMZ.22</td>
+<td>open5gs.lan</td>
+<td>Open5GS 5G core</td>
+</tr>
+<tr class="even">
+<td>DMZ.23</td>
+<td>dn42-services.lan</td>
+<td>DN42 service machine</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>DMZ.192</td>
+<td>yero-debian</td>
+<td>yero.lan</td>
+</tr>
+<tr class="odd">
+<td>DMZ.195</td>
+<td>exo-debian</td>
+<td>exo.lan</td>
+</tr>
+<tr class="even">
+<td>DMZ.196</td>
+<td>loofa-debian</td>
+<td>loofa.lan</td>
+</tr>
+</tbody>
+</table>
+<p>Site-B:PiSoNet</p>
+<table>
+<thead>
+<tr class="header">
+<th>Addr</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PSN.1</td>
+<td></td>
+<td>Huawei CPE Combo Box</td>
+</tr>
+<tr class="even">
+<td>PSN.2</td>
+<td></td>
+<td>DELL switch on untagged</td>
+</tr>
+<tr class="odd">
+<td>PSN.3</td>
+<td></td>
+<td>Mikrotik firewall downstream</td>
+</tr>
+<tr class="even">
+<td>PSN.4</td>
+<td></td>
+<td>Grandstream ATA</td>
+</tr>
+<tr class="odd">
+<td>PSN.8</td>
+<td></td>
+<td>desktop (when applies)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dns">DNS</h2>
+<h3 id="public-domain-zone">Public domain zone</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Content</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>@</td>
+<td>NS</td>
+<td>ns1.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>@</td>
+<td>NS</td>
+<td>ns2.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>ns1</td>
+<td>A</td>
+<td>2.59.235.35</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>ns1</td>
+<td>AAAA</td>
+<td>2600:70ff:f039:4::13</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>ns2</td>
+<td>A</td>
+<td>5.250.186.185</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>ns2</td>
+<td>AAAA</td>
+<td>2001:ba0:210:d600::1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>arf20.com</td>
+<td>A</td>
+<td>2.59.235.35</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>arf20.com</td>
+<td>AAAA</td>
+<td>2600:70ff:f039:4::9</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>mail.arf20.com</td>
+<td>A</td>
+<td>5.250.186.185</td>
+<td>ARFNET-IONOS</td>
+</tr>
+<tr class="odd">
+<td>mail.arf20.com</td>
+<td>AAAA</td>
+<td>2001:ba0:210:d600::1</td>
+<td>ARFNET-IONOS</td>
+</tr>
+<tr class="even">
+<td>web.arf20.com</td>
+<td>A</td>
+<td>2.59.235.35</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>web.arf20.com</td>
+<td>AAAA</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>game.arf20.com</td>
+<td>A</td>
+<td>2.59.235.35</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>game.arf20.com</td>
+<td>AAAA</td>
+<td>2600:70ff:f039:4::11</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>comm.arf20.com</td>
+<td>A</td>
+<td>2.59.235.35</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>comm.arf20.com</td>
+<td>AAAA</td>
+<td>2600:70ff:f039:4::12</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>misc.arf20.com</td>
+<td>A</td>
+<td>2.59.235.35</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>misc.arf20.com</td>
+<td>AAAA</td>
+<td>2600:70ff:f039:4::13</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>pubnix.arf20.com</td>
+<td>A</td>
+<td>2.59.235.35</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>pubnix.arf20.com</td>
+<td>AAAA</td>
+<td>2600:70ff:f039:4::16</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>irc.arf20.com</td>
+<td>CNAME</td>
+<td>comm.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>jellyfin.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>matrix.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>nextcloud.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>turn.arf20.com</td>
+<td>CNAME</td>
+<td>comm.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>webmail.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>www.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>xmpp.arf20.com</td>
+<td>CNAME</td>
+<td>comm.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>xmppconf.arf20.com</td>
+<td>CNAME</td>
+<td>comm.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>grafana.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>git.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>cgit.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>blog.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>forum.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>deb.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>zabbix.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>memes.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>news.arf20.com</td>
+<td>CNAME</td>
+<td>misc.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>dash.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>ftp.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>photo.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>radio.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>os.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>tel.arf20.com</td>
+<td>CNAME</td>
+<td>comm.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>netbox.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>dark.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>wiki.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>qbt.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>radarr.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>sonarr.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>kanboard.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>vw.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>status.arf20.com</td>
+<td>CNAME</td>
+<td>mail.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>lists.arf20.com</td>
+<td>CNAME</td>
+<td>mail.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>mlmmj.arf20.com</td>
+<td>CNAME</td>
+<td>mail.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>lahomosexualidadde.arf20.com</td>
+<td>CNAME</td>
+<td>weonpollo.xyz</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>panaland.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>_acme-challenge.jellyfin</td>
+<td>CNAME</td>
+<td>(challenge)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>_acme-challenge.irc</td>
+<td>CNAME</td>
+<td>(challenge)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>_acme-challenge.matrix</td>
+<td>CNAME</td>
+<td>(challenge)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>_acme-challenge.mail</td>
+<td>CNAME</td>
+<td>(challenge)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>_acme-challenge.xmpp</td>
+<td>CNAME</td>
+<td>(challenge)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>arf20.com</td>
+<td>MX</td>
+<td>mail.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>selector._domainkey</td>
+<td>TXT</td>
+<td>(DKIM)</td>
+<td>DKIM for selector ‘selector’</td>
+</tr>
+<tr class="odd">
+<td>_dmarc</td>
+<td>TXT</td>
+<td>(DMARC)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>arf20.com</td>
+<td>TXT</td>
+<td>(SPF)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="he-v6-rdns-zone">HE v6 rDNS zone</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Content</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2600:70ff:f039:4::13</td>
+<td>PTR</td>
+<td>ns1.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2600:70ff:f039:4::9</td>
+<td>PTR</td>
+<td>arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2600:70ff:f039:4::195</td>
+<td>PTR</td>
+<td>global.dns.navy</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ionos-rdns-zone">IONOS rDNS zone</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Content</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>5.250.186.185</td>
+<td>PTR</td>
+<td>mail.arf20.com</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="custom-arfnet-software">Custom ARFNET software</h2>
+<ul>
+<li><a href="https://cgit.arf20.com/arfnet2-cstims">cstims</a>: client,
+service, ticket and invoice management system</li>
+<li><a href="https://cgit.arf20.com/arfnet2-lists">lists</a>: mailing
+list browser</li>
+</ul>
 	</body>
 </html>

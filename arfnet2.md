@@ -21,6 +21,9 @@ Stage 2: new services
 
 Stage 3\*: finally
 
+- Another VPS in unknown provider for
+    - Tor
+    - Reverse-proxying the media library
  - PHP on main site with more web services from scratch, hopefully secure
  - More new services
 
@@ -348,20 +351,22 @@ RAID attached here (with the grey stuff) (local only)
 | photo.arf20.com | [::1]:2342 | photoprism |
 | radio.arf20.com | / = /var/www/radio.arf20.com/html/; /stream = nas:8000 | |
 | os.arf20.com | / = /d/FTPServer/OS/ | |
-| dark.arf20.com | / = /ar/www/dark.arf20.com/html/ | |
+| dark.arf20.com | / = /var/www/dark.arf20.com/html/ | |
 | wiki.arf20.com | /usr/share/dokuwiki | |
 | qbt.arf20.com | http://192.168.4.6:8085 | |
 | radarr.arf20.com | http://192.168.4.6:7878 | |
 | sonarr.arf20.com | http://192.168.4.6:8989 | |
+| kanboard.arf20.com | / = /var/www/kanboard.arf20.com/html/ | |
+| vw.arf20.com | http://192.168.4.10:8000 | |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 | panaland.arf20.com | /var/www/panaland.arf20.com/html/ | |
 
-### wazuh DMZ.10 -> secure*
+### secure DMZ.10
 
  - SSH
- - wazuh
- - password manager server*
+ - wazuh*
+ - vaultwarden :8000
 
 ### game DMZ.11
 
@@ -428,7 +433,6 @@ RAID attached here (with the grey stuff) (local only)
  - iperf3
  - bind9 - master authoritative nameserver for arf20.com zone NS1
     - public recursive*
- - OpenLDAP LDAP*
  - INN2 - NNTP USENET server with SDF peering
  - Discord servers
    - gDebrid (gookie)
@@ -443,7 +447,7 @@ RAID attached here (with the grey stuff) (local only)
 
 ### cucm (Cisco Unified Communications Manager) DMZ.19
 
-### callbox (5G gNodeB) DMZ.20
+### callbox DMZ.20
 
  - Amarisoft Callbox
 
@@ -635,6 +639,8 @@ Site-B:PiSoNet
 | qbt.arf20.com | CNAME | web.arf20.com |
 | radarr.arf20.com | CNAME | web.arf20.com |
 | sonarr.arf20.com | CNAME | web.arf20.com |
+| kanboard.arf20.com | CNAME | web.arf20.com |
+| vw.arf20.com | CNAME | web.arf20.com |
 |
 | status.arf20.com | CNAME | mail.arf20.com |
 | lists.arf20.com | CNAME | mail.arf20.com |
