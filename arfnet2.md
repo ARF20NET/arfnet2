@@ -207,6 +207,8 @@ Management
  | mc waterfall proxy | | TCP | 25565 | game | 25567 | |
  | mc bedrock geyser | | TCP | 19132 | game | 19132 | |
  | css-ds  | | TCP/UDP | 27015 | game | |
+ | hblink | | TCP | 54000 | comm | |
+ | hbmon websocket | | TCP | 54000 | comm | |
  | | | | | | |
  | exo ssh | exo | TCP | 4041 | exovps | 22 | |
  | exo extra | exo | TCP | 4040 | exovps | 4040 | |
@@ -358,6 +360,7 @@ RAID attached here (with the grey stuff) (local only)
 | sonarr.arf20.com | http://192.168.4.6:8989 | |
 | kanboard.arf20.com | / = /var/www/kanboard.arf20.com/html/ | |
 | vw.arf20.com | http://192.168.4.10:8000 | |
+| raip.arf20.com | / = /var/www/raip.arf20.com/html<br>/status = http://comm.lan:8080 | |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 | panaland.arf20.com | /var/www/panaland.arf20.com/html/ | |
@@ -393,6 +396,8 @@ RAID attached here (with the grey stuff) (local only)
  - prosody - XMPP
  - coturn - TURN server for matrix and xmpp
  - asterisk - VoIP SIP PBX
+ - hblink :54000
+ - hbmon :8080 :9000 wesocket
 
 #### Dialplan
 
@@ -641,6 +646,8 @@ Site-B:PiSoNet
 | sonarr.arf20.com | CNAME | web.arf20.com |
 | kanboard.arf20.com | CNAME | web.arf20.com |
 | vw.arf20.com | CNAME | web.arf20.com |
+| raip.arf20.com | CNAME | web.arf20.com |
+| dmr.arf20.com | CNAME | comm.arf20.com |
 |
 | status.arf20.com | CNAME | mail.arf20.com |
 | lists.arf20.com | CNAME | mail.arf20.com |

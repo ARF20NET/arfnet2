@@ -508,6 +508,22 @@ Networks</h3>
 <td></td>
 </tr>
 <tr class="odd">
+<td>hblink</td>
+<td></td>
+<td>TCP</td>
+<td>54000</td>
+<td>comm</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>hbmon websocket</td>
+<td></td>
+<td>TCP</td>
+<td>54000</td>
+<td>comm</td>
+<td></td>
+</tr>
+<tr class="odd">
 <td></td>
 <td></td>
 <td></td>
@@ -974,16 +990,22 @@ explosionsandfire}</td>
 <td></td>
 </tr>
 <tr class="odd">
+<td>raip.arf20.com</td>
+<td>/ = /var/www/raip.arf20.com/html<br>/status =
+http://comm.lan:8080</td>
+<td></td>
+</tr>
+<tr class="even">
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>status.yero.dev</td>
 <td>http://yerovps.lan:3001</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>panaland.arf20.com</td>
 <td>/var/www/panaland.arf20.com/html/</td>
 <td></td>
@@ -1025,6 +1047,8 @@ explosionsandfire}</td>
 <li>prosody - XMPP</li>
 <li>coturn - TURN server for matrix and xmpp</li>
 <li>asterisk - VoIP SIP PBX</li>
+<li>hblink :54000</li>
+<li>hbmon :8080 :9000 wesocket</li>
 </ul>
 <h4 id="dialplan">Dialplan</h4>
 <ul>
@@ -1819,6 +1843,18 @@ Number Assignation Table</h2>
 <td>vw.arf20.com</td>
 <td>CNAME</td>
 <td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>raip.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>dmr.arf20.com</td>
+<td>CNAME</td>
+<td>comm.arf20.com</td>
 <td></td>
 </tr>
 <tr class="odd">
