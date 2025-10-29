@@ -368,8 +368,16 @@ RAID attached here (with the grey stuff) (local only)
 ### secure DMZ.10
 
  - SSH
+ - nginx
+ - php-fpm8.4
  - wazuh*
  - vaultwarden :8000
+ - OpenLDAP slapd :389
+ - ldap-account-manager :8389
+
+| vhost | webroot/proxy | Comment |
+|-------|---------------|---------|
+| :8389 | / = /usr/share/ldap-account-manager | |
 
 ### game DMZ.11
 

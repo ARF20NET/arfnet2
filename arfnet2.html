@@ -1015,9 +1015,29 @@ http://comm.lan:8080</td>
 <h3 id="secure-dmz.10">secure DMZ.10</h3>
 <ul>
 <li>SSH</li>
+<li>nginx</li>
+<li>php-fpm8.4</li>
 <li>wazuh*</li>
 <li>vaultwarden :8000</li>
+<li>OpenLDAP slapd :389</li>
+<li>ldap-account-manager :8389</li>
 </ul>
+<table>
+<thead>
+<tr class="header">
+<th>vhost</th>
+<th>webroot/proxy</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>:8389</td>
+<td>/ = /usr/share/ldap-account-manager</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="game-dmz.11">game DMZ.11</h3>
 <ul>
 <li>SSH</li>
