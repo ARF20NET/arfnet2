@@ -387,6 +387,7 @@ RAID attached here (with the grey stuff) (local only)
 | vw.arf20.com | http://192.168.4.10:8000 | |
 | raip.arf20.com | / = /var/www/raip.arf20.com/html<br>/status = http://comm.lan:8080 | |
 | pki.arf20.com | / = /var/www/pki.arf20.com/html<br>/download/ = http://ca.lan:80 | |
+| testcert.arf20.com | / = /var/www/testcert.arf20.com/html/ | |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 | panaland.arf20.com | /var/www/panaland.arf20.com/html/ | |
