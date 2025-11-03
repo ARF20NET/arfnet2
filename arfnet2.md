@@ -173,6 +173,7 @@ Management
     - client: 2.59.235.35, 2001:470:1f20:125::2
 
 ### Physical and Logical Networks
+
 | name | VLAN | net | desc |
 |------|------|-----|------|
 | WAN  | 2    |     |      |
@@ -499,7 +500,7 @@ RAID attached here (with the grey stuff) (local only)
  - bind9 master arfnet.dn42
 
  | peer | asn | bgp |
- ---------------------
+ |------|-----|-----|
  | prefixlabs | 4242421240 | fe80::1240 |
  | routedbits | 4242420207 | fe80::207 | 
  | lezi | 4242423377 | fe80::3377 |
@@ -511,8 +512,8 @@ RAID attached here (with the grey stuff) (local only)
  - bind9 slave
  - nginx reverse proxy
 
-| vhost | webroot/proxy | comment
------------------------------------
+| vhost | webroot/proxy | comment |
+|-------|---------------|---------|
 arfnet.dn42 | http://192.168.4.9 | ARFNET in DN42
 
 ### open5gs DMZ.22
