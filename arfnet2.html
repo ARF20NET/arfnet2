@@ -26,7 +26,7 @@
 <p>After the disastrous ISP <a
 href="http://arf20.com/explanation.txt">schism</a></p>
 <h2 id="masterplan">Masterplan</h2>
-<p>Stage 1: very safe</p>
+<h3 id="stage-1-very-safe">Stage 1: very safe</h3>
 <ul>
 <li>Close all ports</li>
 <li>Nuke (or stop) all old VMs (exclude OPNSense)</li>
@@ -34,14 +34,14 @@ href="http://arf20.com/explanation.txt">schism</a></p>
 <li>Make new basic VMs (cloning deb12 template)</li>
 <li>Open basic ports</li>
 </ul>
-<p>Stage 2: new services</p>
+<h3 id="stage-2-new-services">Stage 2: new services</h3>
 <ul>
 <li>IONOS VPS for mail</li>
 <li>Some new very safe services</li>
 <li>HE IPv6 tunnel</li>
 <li>Own authoritative nameservers for domain zone</li>
 </ul>
-<p>Stage 3*: finally</p>
+<h3 id="stage-3-finally">*Stage 3: finally</h3>
 <ul>
 <li>Another VPS in unknown provider for
 <ul>
@@ -52,20 +52,39 @@ href="http://arf20.com/explanation.txt">schism</a></p>
 secure</li>
 <li>More new services</li>
 </ul>
-<p>Stage 4: DN42</p>
+<h3 id="stage-4-dn42">Stage 4: DN42</h3>
 <ul>
 <li>Make DN42 router VM with bird and wg</li>
 <li>Peer with people</li>
 <li>Bring up BGP sessions</li>
 <li>Services</li>
 </ul>
-<p>Stage 5: Telephony - Asterisk - IP phones and ATAs - Trunks; SDF,
-Tandmx, uwutel, PSTN</p>
-<p>Stage 6*: Site B (piso)</p>
+<h3 id="stage-5-telephony">Stage 5: Telephony</h3>
+<ul>
+<li>Asterisk</li>
+<li>IP phones and ATAs</li>
+<li>Trunks; SDF, Tandmx, uwutel, PSTN</li>
+</ul>
+<h3 id="stage-6-site-b-piso">*Stage 6: Site B (piso)</h3>
 <ul>
 <li>Firewall and switch</li>
 <li>Site to Site wireguard</li>
 <li>Establish telephony</li>
+</ul>
+<h3 id="stage-7-ca-pki-ldap-and-sso">*Stage 7: CA, PKI, LDAP and
+SSO</h3>
+<ul>
+<li>Unify all logins</li>
+<li>Single authentication and authorization LDAP store</li>
+<li>SSO on as many services as possible</li>
+<li>Private CA PKI server certs for private endpoint security</li>
+<li>User certificates for extra secure endpoints</li>
+</ul>
+<h3 id="stage-8-internal-dns">*Stage 8: Internal DNS</h3>
+<ul>
+<li>Drop OPNsense unbound, use BIND</li>
+<li>Use .local.arf20.com zone or something</li>
+<li>PiHole</li>
 </ul>
 <h2 id="domain">Domain</h2>
 <p>arf20.com</p>
@@ -95,6 +114,7 @@ registrar</h3>
 </table>
 <h2 id="networking">Networking</h2>
 <h3 id="hardware">Hardware</h3>
+<p>Physical network</p>
 <pre><code>                   WAP
                     |
        +-----+   +--------------------------+     +----------------+
@@ -131,6 +151,13 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
 (4+3x7RAID5)TB HDD</li>
 <li>ATA: Cisco/Linksys PAP2T</li>
 </ul>
+<p>Logical network</p>
+<pre><code>                    +---------+
+           +--------+         |
+   internet| router |   DMZ   |
+           +--------++        |
+                     +--------+
+</code></pre>
 <h4 id="dell-powerconnect-5424-switch">DELL PowerConnect 5424
 switch</h4>
 <p>Port assignents</p>
@@ -996,16 +1023,22 @@ http://comm.lan:8080</td>
 <td></td>
 </tr>
 <tr class="even">
+<td>pki.arf20.com</td>
+<td>/ = /var/www/pki.arf20.com/html<br>/download/ =
+http://ca.lan:80</td>
+<td></td>
+</tr>
+<tr class="odd">
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>status.yero.dev</td>
 <td>http://yerovps.lan:3001</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>panaland.arf20.com</td>
 <td>/var/www/panaland.arf20.com/html/</td>
 <td></td>
@@ -1242,6 +1275,18 @@ comment</h2>
 <li>Kamailio</li>
 <li>OAI?</li>
 </ul>
+<h3 id="arfnet2-ca-dmz.24-debian-12-ct">arfnet2-ca DMZ.24 Debian 12
+CT</h3>
+<p>Certificate Authority PKI</p>
+<ul>
+<li>clca</li>
+<li>OpenXPKI
+<ul>
+<li>serverd</li>
+<li>clientd</li>
+</ul></li>
+<li>apache2 :80</li>
+</ul>
 <hr />
 <h3 id="mail-arfnet-ionos-vps-5.250.186.185-2001ba0210d6001">mail
 (ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1</h3>
@@ -1395,7 +1440,7 @@ Number Assignation Table</h2>
 </tr>
 <tr class="even">
 <td>DMZ.10</td>
-<td>wazuh.lan</td>
+<td>secure.lan</td>
 <td></td>
 </tr>
 <tr class="odd">
@@ -1459,21 +1504,26 @@ Number Assignation Table</h2>
 <td>DN42 service machine</td>
 </tr>
 <tr class="odd">
+<td>DMZ.24</td>
+<td>ca.lan</td>
+<td>Certificate Authority</td>
+</tr>
+<tr class="even">
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>DMZ.192</td>
 <td>yero-debian</td>
 <td>yero.lan</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>DMZ.195</td>
 <td>exo-debian</td>
 <td>exo.lan</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>DMZ.196</td>
 <td>loofa-debian</td>
 <td>loofa.lan</td>
@@ -1878,43 +1928,7 @@ Number Assignation Table</h2>
 <td></td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>status.arf20.com</td>
-<td>CNAME</td>
-<td>mail.arf20.com</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>lists.arf20.com</td>
-<td>CNAME</td>
-<td>mail.arf20.com</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>mlmmj.arf20.com</td>
-<td>CNAME</td>
-<td>mail.arf20.com</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>lahomosexualidadde.arf20.com</td>
-<td>CNAME</td>
-<td>weonpollo.xyz</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>panaland.arf20.com</td>
+<td>pki.arf20.com</td>
 <td>CNAME</td>
 <td>web.arf20.com</td>
 <td></td>
@@ -1926,60 +1940,102 @@ Number Assignation Table</h2>
 <td></td>
 </tr>
 <tr class="odd">
+<td>status.arf20.com</td>
+<td>CNAME</td>
+<td>mail.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>lists.arf20.com</td>
+<td>CNAME</td>
+<td>mail.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>mlmmj.arf20.com</td>
+<td>CNAME</td>
+<td>mail.arf20.com</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>lahomosexualidadde.arf20.com</td>
+<td>CNAME</td>
+<td>weonpollo.xyz</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>panaland.arf20.com</td>
+<td>CNAME</td>
+<td>web.arf20.com</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
 <td>_acme-challenge.jellyfin</td>
 <td>CNAME</td>
 <td>(challenge)</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>_acme-challenge.irc</td>
 <td>CNAME</td>
 <td>(challenge)</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>_acme-challenge.matrix</td>
 <td>CNAME</td>
 <td>(challenge)</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>_acme-challenge.mail</td>
 <td>CNAME</td>
 <td>(challenge)</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>_acme-challenge.xmpp</td>
 <td>CNAME</td>
 <td>(challenge)</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>arf20.com</td>
 <td>MX</td>
 <td>mail.arf20.com</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>selector._domainkey</td>
 <td>TXT</td>
 <td>(DKIM)</td>
 <td>DKIM for selector ‘selector’</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>_dmarc</td>
 <td>TXT</td>
 <td>(DMARC)</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>arf20.com</td>
 <td>TXT</td>
 <td>(SPF)</td>

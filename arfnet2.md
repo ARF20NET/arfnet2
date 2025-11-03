@@ -4,7 +4,7 @@ After the disastrous ISP [schism](http://arf20.com/explanation.txt)
 
 ## Masterplan
 
-Stage 1: very safe
+### Stage 1: very safe
 
  - Close all ports
  - Nuke (or stop) all old VMs (exclude OPNSense)
@@ -12,40 +12,52 @@ Stage 1: very safe
  - Make new basic VMs (cloning deb12 template)
  - Open basic ports
 
-Stage 2: new services
+### Stage 2: new services
 
  - IONOS VPS for mail
  - Some new very safe services
  - HE IPv6 tunnel
  - Own authoritative nameservers for domain zone
 
-Stage 3\*: finally
+### \*Stage 3: finally
 
-- Another VPS in unknown provider for
+ - Another VPS in unknown provider for
     - Tor
     - Reverse-proxying the media library
  - PHP on main site with more web services from scratch, hopefully secure
  - More new services
 
-Stage 4: DN42
+### Stage 4: DN42
 
  - Make DN42 router VM with bird and wg
  - Peer with people
  - Bring up BGP sessions
  - Services
 
-Stage 5: Telephony
+### Stage 5: Telephony
  - Asterisk
  - IP phones and ATAs
  - Trunks; SDF, Tandmx, uwutel, PSTN
 
-Stage 6\*: Site B (piso)
+### \*Stage 6: Site B (piso)
 
  - Firewall and switch
  - Site to Site wireguard
  - Establish telephony
 
+### \*Stage 7: CA, PKI, LDAP and SSO
 
+ - Unify all logins
+ - Single authentication and authorization LDAP store
+ - SSO on as many services as possible
+ - Private CA PKI server certs for private endpoint security
+ - User certificates for extra secure endpoints
+
+### \*Stage 8: Internal DNS
+
+ - Drop OPNsense unbound, use BIND
+ - Use .local.arf20.com zone or something
+ - PiHole
 
 ## Domain
 
@@ -63,6 +75,8 @@ Registrar: namecheap
 ## Networking
 
 ### Hardware
+
+Physical network
 
 ```
                    WAP
@@ -103,6 +117,17 @@ ISP ===| ONT |---| DELL switch              |-----| TP-Link switch |
  - switch: DELL PowerConnect 5424
  - server: DELL PowerEdge R720 @ 2x E5-2670 + 64GB + (240+120)GB SSD + (4+3x7RAID5)TB HDD
  - ATA: Cisco/Linksys PAP2T
+
+Logical network
+
+```
+                    +---------+
+           +--------+         |
+   internet| router |   DMZ   |
+           +--------++        |
+                     +--------+
+
+```
 
 #### DELL PowerConnect 5424 switch
 
@@ -361,6 +386,7 @@ RAID attached here (with the grey stuff) (local only)
 | kanboard.arf20.com | / = /var/www/kanboard.arf20.com/html/ | |
 | vw.arf20.com | http://192.168.4.10:8000 | |
 | raip.arf20.com | / = /var/www/raip.arf20.com/html<br>/status = http://comm.lan:8080 | |
+| pki.arf20.com | / = /var/www/pki.arf20.com/html<br>/download/ = http://ca.lan:80 | |
 | | | |
 | status.yero.dev | http://yerovps.lan:3001 | |
 | panaland.arf20.com | /var/www/panaland.arf20.com/html/ | |
@@ -496,6 +522,16 @@ Remote gNodeB
  - Kamailio
  - OAI?
 
+### arfnet2-ca DMZ.24 Debian 12 CT
+
+Certificate Authority PKI
+
+ - clca
+ - OpenXPKI
+   - serverd
+   - clientd
+ - apache2 :80
+
 ---
 
 ### mail (ARFNET-IONOS VPS) 5.250.186.185 2001:ba0:210:d600::1
@@ -564,7 +600,7 @@ DMZ IPv4s and IPv6 ends in the same way
 | DMZ.7 |  printer.lan | HP Officejet 8020 |
 | DMZ.8 |  desktop.lan | reserved for desktop on DMZ |
 | DMZ.9 |  web.lan | |
-| DMZ.10 | wazuh.lan | |
+| DMZ.10 | secure.lan | |
 | DMZ.11 | game.lan | |
 | DMZ.12 | comm.lan | |
 | DMZ.13 | misc.lan | |
@@ -577,6 +613,7 @@ DMZ IPv4s and IPv6 ends in the same way
 | DMZ.21 | dn42.lan | DN42 edge router |
 | DMZ.22 | open5gs.lan | Open5GS 5G core |
 | DMZ.23 | dn42-services.lan | DN42 service machine |
+| DMZ.24 | ca.lan | Certificate Authority |
 | | | |
 | DMZ.192 | yero-debian | yero.lan |
 | DMZ.195 | exo-debian | exo.lan |
@@ -656,6 +693,7 @@ Site-B:PiSoNet
 | vw.arf20.com | CNAME | web.arf20.com |
 | raip.arf20.com | CNAME | web.arf20.com |
 | dmr.arf20.com | CNAME | comm.arf20.com |
+| pki.arf20.com | CNAME | web.arf20.com |
 |
 | status.arf20.com | CNAME | mail.arf20.com |
 | lists.arf20.com | CNAME | mail.arf20.com |
